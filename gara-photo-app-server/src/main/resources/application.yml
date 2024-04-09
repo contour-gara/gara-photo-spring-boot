@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: gara-photo-spring-boot
+  lifecycle:
+    timeout-per-shutdown-phase: 15s
+
+  server:
+    shutdown: graceful

@@ -1,5 +1,29 @@
 version: "3"
 services:
+  app-server:
+    build:
+      context: ./gara-photo-app-server
+      dockerfile: Dockerfile
+#    depends_on:
+#      postgres:
+#        condition: service_healthy
+    ports:
+      - "8080:8080"
+      - "5005:5005"
+    networks:
+      - gara-photo-nw
+    healthcheck:
+      test: "curl -f http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    environment:
+#      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sample
+#      SPRING_DATASOURCE_USERNAME: user
+#      SPRING_DATASOURCE_PASSWORD: password
+      JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+
   sonarqube:
     image: sonarqube:10.4.1-community
     ports:
