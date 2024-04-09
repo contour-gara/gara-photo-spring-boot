@@ -1,4 +1,15 @@
 spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/sample
+    username: user
+    password: password
+    driver-class-name: org.postgresql.Driver
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      minimum-idle: 2
+      maximum-pool-size: 5
+  flyway:
+    enabled: true
   application:
     name: gara-photo-spring-boot
   lifecycle:

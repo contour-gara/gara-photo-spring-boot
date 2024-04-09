@@ -1,8 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.sonarqube.gradle.SonarQubePlugin
-import org.sonarqube.gradle.SonarTask
 
 val versions by extra {
     mapOf(
@@ -10,6 +8,7 @@ val versions by extra {
         "kotlin" to "1.9.23",
         "springBoot" to "3.2.4",
         "restAssured" to "5.4.0",
+        "mybatis" to "3.0.3",
     )
 }
 
@@ -43,6 +42,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${versions["mybatis"]}")
+    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("org.flywaydb:flyway-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
