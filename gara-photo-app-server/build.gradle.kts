@@ -1,6 +1,8 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.sonarqube.gradle.SonarQubePlugin
+import org.sonarqube.gradle.SonarTask
 
 val versions by extra {
     mapOf(
@@ -16,6 +18,8 @@ plugins {
     id("io.spring.dependency-management") version "1.1.4"
     kotlin("jvm") version "1.9.23"
     kotlin("plugin.spring") version "1.9.23"
+    id("org.sonarqube") version "5.0.0.4638"
+    id("jacoco")
 }
 
 group = "org.contourgara"
@@ -67,4 +71,20 @@ tasks.withType<Test> {
         showCauses = true
         showStackTraces = true
     }
+}
+
+jacoco {
+    toolVersion = "0.8.8"
+}
+
+tasks.jacocoTestReport {
+    reports {
+        xml.required.set(true)
+        csv.required.set(false)
+        html.required.set(false)
+    }
+}
+
+plugins.withType<JacocoPlugin> {
+    tasks["test"].finalizedBy("jacocoTestReport")
 }
