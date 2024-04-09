@@ -73,6 +73,12 @@ tasks.withType<Test> {
     }
 }
 
+sonar {
+    properties {
+        property("sonar.exclusions", "src/main/kotlin/org/contourgara/garaphotospringboot/GaraPhotoSpringBootApplication.kt")
+    }
+}
+
 jacoco {
     toolVersion = "0.8.8"
 }
