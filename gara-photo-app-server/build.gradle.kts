@@ -9,6 +9,7 @@ val versions by extra {
         "springBoot" to "3.2.4",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
+        "jackson-module-kotlin" to "2.17.0",
         "h2" to "2.2.224",
     )
 }
@@ -44,6 +45,7 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${versions["mybatis"]}")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${versions["jackson-module-kotlin"]}")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")

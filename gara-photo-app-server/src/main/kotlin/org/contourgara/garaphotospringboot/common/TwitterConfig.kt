@@ -14,4 +14,12 @@ class TwitterConfig {
   var clientSecret: String = ""
   var redirectUri: String = ""
   var uploadBaseUrl: String = ""
+  var codeChallenge: String = createChallenge()
+
+  private fun createChallenge(): String {
+    val chars = ('a'..'z') + (1..9)
+    return (1..12).map {
+      chars.random()
+    }.joinToString("")
+  }
 }
