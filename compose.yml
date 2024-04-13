@@ -19,10 +19,18 @@ services:
       retries: 3
       start_period: 30s
     environment:
+      SPRING_PROFILES_ACTIVE: prd
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/sample
       SPRING_DATASOURCE_USERNAME: user
       SPRING_DATASOURCE_PASSWORD: password
       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+      TWITTER_OAUTH1_ACCESS_TOKEN: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN:-oauth1-access-token-dummy}
+      TWITTER_OAUTH1_ACCESS_TOKEN_SECRET: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN_SECRET:-oauth1-access-token-secret-dummy}
+      TWITTER_API_KEY: ${GARA_PHOTO_API_KEY:-api-key-dummy}
+      TWITTER_API_KEY_SECRET: ${GARA_PHOTO_API_KEY_SECRET:-api-key-secret-dummy}
+      TWITTER_CLIENT_ID: ${GARA_PHOTO_CLIENT_ID:-client-id-dummy}
+      TWITTER_CLIENT_SECRET: ${GARA_PHOTO_CLIENT_SECRET:-client-secret-dummy}
+      TWITTER_REDIRECT_URI: ${GARA_PHOTO_REDIRECT_URI:-http://localhost/dummy}
 
   postgres:
     image: postgres:16.2

@@ -9,6 +9,7 @@ val versions by extra {
         "springBoot" to "3.2.4",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
+        "h2" to "2.2.224",
     )
 }
 
@@ -48,6 +49,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
+    testImplementation("com.h2database:h2:${versions["h2"]}")
 }
 
 tasks.withType<KotlinCompile> {

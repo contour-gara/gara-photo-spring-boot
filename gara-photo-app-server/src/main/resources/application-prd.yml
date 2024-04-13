@@ -1,0 +1,9 @@
+twitter:
+  oauth1-access-token: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN:oauth1-access-token-dummy}
+  oauth1-access-token-secret: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN_SECRET:oauth1-access-token-secret-dummy}
+  api-key: ${GARA_PHOTO_API_KEY:api-key-dummy}
+  api-key-secret: ${GARA_PHOTO_API_KEY_SECRET:api-key-secret-dummy}
+  client-id: ${GARA_PHOTO_CLIENT_ID:client-id-dummy}
+  client-secret: ${GARA_PHOTO_CLIENT_SECRET:client-secret-dummy}
+  redirect-uri: ${GARA_PHOTO_REDIRECT_URI:http://localhost/dummy}
+  upload-base-url: https://upload.twitter.com/1.1/
