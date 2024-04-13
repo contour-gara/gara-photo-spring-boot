@@ -5,8 +5,11 @@ import org.contourgara.garaphotospringboot.domain.infrastructure.AccessTokenRepo
 import org.springframework.stereotype.Repository
 
 @Repository
-class AccessTokenRepositoryImpl: AccessTokenRepository {
+class TokenRepositoryImpl(
+  private val tokenMapper: TokenMapper
+): AccessTokenRepository {
   override fun insert(token: Token) {
-    TODO("Not yet implemented")
+    println(TokenEntity.of(token).dateTime)
+    tokenMapper.insert(TokenEntity.of(token))
   }
 }

@@ -13,6 +13,8 @@ import org.mockito.kotlin.*
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 
 class FetchTokenUseCaseTest() {
   @InjectMocks
@@ -33,7 +35,7 @@ class FetchTokenUseCaseTest() {
   @Test
   fun `トークンを取得し、リポジトリに保存できる`() {
     // setup
-    val token = Token("accessToken", "refreshToken", "clientId", LocalDateTime.of(2024, 4, 14, 4, 10, 30))
+    val token = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 4, 10, 30), ZoneId.systemDefault()))
 
     doReturn("clientId").whenever(twitterConfig).clientId
     doReturn("redirectUri").whenever(twitterConfig).redirectUri

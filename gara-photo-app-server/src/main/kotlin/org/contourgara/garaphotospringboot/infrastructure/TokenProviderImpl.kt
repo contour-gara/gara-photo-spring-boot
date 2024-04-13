@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component
 import twitter4j.OAuth2TokenProvider
 import twitter4j.conf.ConfigurationBuilder
 import java.time.LocalDateTime
+import java.time.ZonedDateTime
 
 @Component
 class TokenProviderImpl: TokenProvider {
@@ -27,6 +28,6 @@ class TokenProviderImpl: TokenProvider {
       authorization.code,
       authorization.codeChallenge) ?:throw RuntimeException()
 
-    return Token(result.accessToken, result.refreshToken, authorization.clientId, LocalDateTime.now())
+    return Token(result.accessToken, result.refreshToken, authorization.clientId, ZonedDateTime.now())
   }
 }
