@@ -1,14 +1,30 @@
 package org.contourgara.garaphotospringboot.infrastructure
 
 import org.assertj.core.api.Assertions.*
+import org.contourgara.garaphotospringboot.common.TwitterConfig
 import org.contourgara.garaphotospringboot.domain.AuthorizationSetting
+import org.contourgara.garaphotospringboot.domain.infrastructure.TokenProvider
+import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
+import org.mockito.InjectMocks
+import org.mockito.Mock
+import org.mockito.MockitoAnnotations
 
 class TokenProviderImplTest {
+  @InjectMocks
+  lateinit var sut: TokenProviderImpl
+
+  @Mock
+  lateinit var twitterConfig: TwitterConfig
+
+  @BeforeEach
+  fun setUp() {
+    MockitoAnnotations.openMocks(this)
+  }
+
   @Test
   fun `認可 URL が生成できる`() {
     // setup
-    val sut = TokenProviderImpl()
     val authorizationSetting = AuthorizationSetting("client-id-dummy", "http://localhost/dummy", listOf("dummy", "dummy"), "challenge")
 
     // execute

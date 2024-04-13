@@ -6,7 +6,7 @@ RUN jlink \
     --strip-java-debug-attributes \
     --no-header-files \
     --no-man-pages \
-    --add-modules java.base,java.desktop,java.instrument,java.net.http,java.prefs,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.compiler,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.localedata,java.compiler,java.naming \
+    --add-modules java.base,java.desktop,java.instrument,java.net.http,java.prefs,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.compiler,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.localedata,java.compiler,java.naming,java.rmi,jdk.crypto.ec \
     --output jre-min
 
 FROM amazonlinux:2023.3.20240219.0
@@ -14,6 +14,7 @@ WORKDIR /deployments
 COPY --from=build /jlink/jre-min /opt/jre-min
 ENV JAVA_HOME=/opt/jre-min
 ENV PATH $JAVA_HOME/bin:$PATH
+ENV LANG C.UTF-8
 ARG JAR_FILE=build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]

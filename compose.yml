@@ -30,6 +30,7 @@ services:
       TWITTER_CLIENT_ID: ${GARA_PHOTO_CLIENT_ID:-client-id-dummy}
       TWITTER_CLIENT_SECRET: ${GARA_PHOTO_CLIENT_SECRET:-client-secret-dummy}
       TWITTER_REDIRECT_URI: ${GARA_PHOTO_REDIRECT_URI:-http://localhost/dummy}
+      TZ: Asia/Tokyo
 
   postgres:
     image: postgres:16.2

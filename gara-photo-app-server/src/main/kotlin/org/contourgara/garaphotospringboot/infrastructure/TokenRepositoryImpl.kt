@@ -9,7 +9,6 @@ class TokenRepositoryImpl(
   private val tokenMapper: TokenMapper
 ): AccessTokenRepository {
   override fun insert(token: Token) {
-    println(TokenEntity.of(token).dateTime)
     tokenMapper.insert(TokenEntity.of(token))
   }
 }
