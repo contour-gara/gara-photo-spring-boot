@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component
 class TwitterConfig {
   var oauth1AccessToken: String = ""
   var oauth1AccessTokenSecret: String = ""
+  var oauth2AccessToken: String = ""
+  var oauth2RefreshToken: String = ""
   var apiKey: String = ""
   var apiKeySecret: String = ""
   var clientId: String = ""

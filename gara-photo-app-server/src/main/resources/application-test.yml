@@ -1,6 +1,8 @@
 twitter:
   oauth1-access-token: oauth1-access-token-dummy
   oauth1-access-token-secret: oauth1-access-token-secret-dummy
+  oauth2-access-token: oauth2-access-token-dummy
+  oauth2-refresh-token: oauth2-refresh-token-dummy
   api-key: api-key-dummy
   api-key-secret: api-key-secret-dummy
   client-id: client-id-dummy
