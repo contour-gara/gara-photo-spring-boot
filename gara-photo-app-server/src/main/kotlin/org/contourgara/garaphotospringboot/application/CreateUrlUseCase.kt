@@ -17,7 +17,7 @@ class CreateUrlUseCase(
     val url = tokenProvider.createUrl(AuthorizationSetting(
       twitterConfig.clientId,
       twitterConfig.redirectUri,
-      "tweet.read%20users.read%20tweet.write%20offline.access",
+      listOf("tweet.read", "users.read", "tweet.write", "offline.access"),
       codeChallenge))
 
     return CreateUrlDto(url, codeChallenge)

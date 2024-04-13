@@ -10,6 +10,8 @@ val versions by extra {
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
         "jackson-module-kotlin" to "2.17.0",
+        "twitter4j-core" to "4.0.7",
+        "twitter4j-v2" to "1.4.3",
         "h2" to "2.2.224",
         "mockito-kotlin" to "5.3.1",
     )
@@ -47,6 +49,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${versions["mybatis"]}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${versions["jackson-module-kotlin"]}")
+    implementation("org.twitter4j:twitter4j-core:${versions["twitter4j-core"]}")
+    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
