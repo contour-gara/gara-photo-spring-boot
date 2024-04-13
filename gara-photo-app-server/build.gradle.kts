@@ -11,6 +11,7 @@ val versions by extra {
         "mybatis" to "3.0.3",
         "jackson-module-kotlin" to "2.17.0",
         "h2" to "2.2.224",
+        "mockito-kotlin" to "5.3.1",
     )
 }
 
@@ -52,6 +53,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
     testImplementation("com.h2database:h2:${versions["h2"]}")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
 }
 
 tasks.withType<KotlinCompile> {
