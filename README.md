@@ -29,6 +29,7 @@
 |:------|:-------------------------------------|:-------------------------|
 | OAuth | Create authorization end point       | GET /v1/oauth/url        |
 |       | Fetch access token and refresh token | POST /v1/oauth/token     |
+|       | Find access token                    | GET /v1/oauth/token      |
 | Tweet | Tweet yesterday series               | POST /v1/tweet/yesterday |
 
 ## API 詳細
@@ -43,7 +44,7 @@
 GET /v1/oauth/url
 ```
 
-### レスポンス形式
+#### レスポンス形式
 
 - Header
 
@@ -54,10 +55,10 @@ GET /v1/oauth/url
 - body
 
   ```json
-      {
+  {
     "url": "https://hogehoge",
-        "codeChallenge": "hogehoge"
-    }
+    "codeChallenge": "hogehoge"
+  }
     ```
 
 ### POST /v1/oauth/token
@@ -79,11 +80,37 @@ POST /v1/oauth/token
     }
     ```
 
-### レスポンス形式
+#### レスポンス形式
 
 - Header
     ```
     HTTP/1.1 204
+    ```
+
+### GET /v1/oauth/token
+
+アクセストークンを取得します。アクセストークンの期限が切れている場合は、再取得して返します。
+
+#### リクエスト形式
+
+```
+GET /v1/oauth/token
+```
+
+#### レスポンス形式
+
+- Header
+
+    ```
+    HTTP/1.1 200
+    ```
+
+- body
+
+  ```json
+  {
+    "accessToken": "piyopiyp"
+  }
     ```
 
 ### POST /v1/tweet/yesterday
@@ -96,7 +123,7 @@ yesterday シリーズを投稿します。
 POST /v1/tweet/yesterday
 ```
 
-### レスポンス形式
+#### レスポンス形式
 
 - Header
     ```
