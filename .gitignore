@@ -44,4 +44,3 @@ out/
 
 ### app ###
 gara-photo-app-server/src/main/resources/photo
-gara-photo-app-server/src/main/resources/twitter4j.properties
