@@ -1,14 +1,6 @@
-CREATE TABLE books (
+CREATE TABLE token (
     id integer PRIMARY KEY,
-    title varchar(100),
-    author varchar(100),
-    publisher varchar(100),
-    price integer
+    access_token varchar(100),
+    refresh_token varchar(100),
+    date_time varchar(100)
 );
-
-CREATE SEQUENCE IF NOT EXISTS BOOK_ID_SEQ
-    INCREMENT BY 1
-    MAXVALUE 9999999999
-    MINVALUE 1
-    START WITH 1
-;
