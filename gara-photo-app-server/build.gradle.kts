@@ -14,6 +14,7 @@ val versions by extra {
         "twitter4j-v2" to "1.4.3",
         "h2" to "2.2.224",
         "mockito-kotlin" to "5.3.1",
+        "rider-junit5" to "1.42.0",
     )
 }
 
@@ -58,6 +59,7 @@ dependencies {
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
     testImplementation("com.h2database:h2:${versions["h2"]}")
     testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
+    testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
 }
 
 tasks.withType<KotlinCompile> {
