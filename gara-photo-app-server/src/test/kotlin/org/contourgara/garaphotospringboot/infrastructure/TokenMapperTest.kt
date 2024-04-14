@@ -43,11 +43,34 @@ class TokenMapperTest {
   @DataSet(value = ["datasets/setup/1-token.yml"])
   @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
   @Test
-  fun `すでにデータがある場合、例外が返る`() {
+  fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
     // setup
     val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34.000+09:00")
 
-    // execute
+    // execute & assert
     assertThatThrownBy { sut.insert(tokenEntity) }.isInstanceOf(DuplicateKeyException::class.java)
+  }
+
+  @DataSet(value = ["datasets/setup/1-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+  @Test
+  fun `トークン情報を取得できる`() {
+    // execute
+    val actual = sut.find()
+
+    // assert
+    val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34.000+09:00")
+    assertThat(actual).isEqualTo(expected)
+  }
+
+  @DataSet(value = ["datasets/setup/0-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
+  @Test
+  fun `トークン情報を取得でレコードが無い場合、null が返る`() {
+    // execute
+    val actual = sut.find()
+
+    // assert
+    assertThat(actual).isNull()
   }
 }
