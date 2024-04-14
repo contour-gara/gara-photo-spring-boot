@@ -17,6 +17,8 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+    volumes:
+      - ./photo:/opt/photo
     environment:
       SPRING_PROFILES_ACTIVE: prd
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/gara_photo

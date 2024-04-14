@@ -82,6 +82,6 @@ class TokenMapperTest {
     val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34.000+09:00[Asia/Tokyo]")
 
     // execute
-    val actual = sut.update(tokenEntity)
+    sut.update(tokenEntity)
   }
 }

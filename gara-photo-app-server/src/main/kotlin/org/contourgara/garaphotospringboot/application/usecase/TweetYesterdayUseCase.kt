@@ -17,7 +17,7 @@ class TweetYesterdayUseCase(
   ) {
   fun execute(accessToken: String): TweetYesterdayDto {
     val media: Media = photoRepository.findForYesterday(
-      "/opt/photo/${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).toLocalDateTime().format(DateTimeFormatter.BASIC_ISO_DATE)}"
+      "file:///opt/photo/${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).toLocalDateTime().format(DateTimeFormatter.BASIC_ISO_DATE)}"
     )
     val tweetId: Long = twitterClient.tweet(Tweet("yesterday", media), accessToken)
     return TweetYesterdayDto(tweetId.toString())

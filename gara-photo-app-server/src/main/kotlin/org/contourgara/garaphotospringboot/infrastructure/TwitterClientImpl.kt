@@ -23,6 +23,6 @@ class TwitterClientImpl(private val twitterConfig: TwitterConfig): TwitterClient
 
     val mediaIds = tweet.media.files.map { twitter.uploadMedia(it).mediaId }
 
-    return twitter.v2.createTweet(tweet.text, mediaIds = mediaIds.toTypedArray()).id
+    return twitter.v2.createTweet(text = tweet.text, mediaIds = mediaIds.toTypedArray()).id
   }
 }
