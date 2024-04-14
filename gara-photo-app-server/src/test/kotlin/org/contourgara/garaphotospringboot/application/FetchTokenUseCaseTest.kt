@@ -4,7 +4,7 @@ import org.contourgara.garaphotospringboot.application.param.FetchTokenParam
 import org.contourgara.garaphotospringboot.common.TwitterConfig
 import org.contourgara.garaphotospringboot.domain.Authorization
 import org.contourgara.garaphotospringboot.domain.Token
-import org.contourgara.garaphotospringboot.domain.infrastructure.AccessTokenRepository
+import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenProvider
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -25,7 +25,7 @@ class FetchTokenUseCaseTest() {
   @Mock
   lateinit var tokenProvider: TokenProvider
   @Mock
-  lateinit var accessTokenRepository: AccessTokenRepository
+  lateinit var tokenRepository: TokenRepository
 
   @BeforeEach
   fun setUp() {
@@ -47,6 +47,6 @@ class FetchTokenUseCaseTest() {
     sut.execute(fetchTokenParam)
 
     // assert
-    verify(accessTokenRepository, times(1)).insert(token)
+    verify(tokenRepository, times(1)).insert(token)
   }
 }

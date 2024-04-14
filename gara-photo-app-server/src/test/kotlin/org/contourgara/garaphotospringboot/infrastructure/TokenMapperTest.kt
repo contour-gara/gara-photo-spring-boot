@@ -34,7 +34,7 @@ class TokenMapperTest {
   @Test
   fun `トークン情報をテーブルに保存できる`() {
     // setup
-    val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34.000+09:00")
+    val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34.000+09:00[Asia/Tokyo]")
 
     // execute
     sut.insert(tokenEntity)
@@ -45,7 +45,7 @@ class TokenMapperTest {
   @Test
   fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
     // setup
-    val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34.000+09:00")
+    val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34.000+09:00[Asia/Tokyo]")
 
     // execute & assert
     assertThatThrownBy { sut.insert(tokenEntity) }.isInstanceOf(DuplicateKeyException::class.java)
@@ -59,7 +59,7 @@ class TokenMapperTest {
     val actual = sut.find()
 
     // assert
-    val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34.000+09:00")
+    val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34.000+09:00[Asia/Tokyo]")
     assertThat(actual).isEqualTo(expected)
   }
 
