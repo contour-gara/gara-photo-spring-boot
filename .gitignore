@@ -44,3 +44,4 @@ out/
 
 ### app ###
 photo
+gara-photo-app-server/*.hprof
