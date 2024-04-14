@@ -43,5 +43,4 @@ out/
 .DS_Store
 
 ### app ###
-photo
 gara-photo-app-server/*.hprof
