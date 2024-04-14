@@ -7,6 +7,7 @@ import org.contourgara.garaphotospringboot.domain.Tweet
 import org.contourgara.garaphotospringboot.domain.infrastructure.PhotoRepository
 import org.contourgara.garaphotospringboot.domain.infrastructure.TwitterClient
 import org.springframework.stereotype.Service
+import java.time.format.DateTimeFormatter
 
 @Service
 class TweetYesterdayUseCase(
@@ -15,7 +16,9 @@ class TweetYesterdayUseCase(
   private val twitterClient: TwitterClient,
   ) {
   fun execute(accessToken: String): TweetYesterdayDto {
-    val media: Media = photoRepository.findForYesterday(garaPhotoEnvironment.getCurrentDateTime())
+    val media: Media = photoRepository.findForYesterday(
+      "/opt/photo/${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).toLocalDateTime().format(DateTimeFormatter.BASIC_ISO_DATE)}"
+    )
     val tweetId: Long = twitterClient.tweet(Tweet("yesterday", media), accessToken)
     return TweetYesterdayDto(tweetId.toString())
   }
