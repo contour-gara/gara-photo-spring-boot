@@ -8,12 +8,12 @@ class ResourceUtilsTest {
   @Test
   fun `ファイルが存在する場合、例外が投げられない`() {
     // execute & assert
-    assertThatCode { ResourceUtils.getFile("photo/20230422/1.jpg") }.doesNotThrowAnyException()
+    assertThatCode { ResourceUtils.getFile("photo/test/1.jpg") }.doesNotThrowAnyException()
   }
 
   @Test
   fun `ファイルが存在しない場合、例外が投げられる`() {
     // execute & assert
-    assertThatThrownBy { ResourceUtils.getFile("photo/20230422/0.jpg") }.isInstanceOf(IOException::class.java)
+    assertThatThrownBy { ResourceUtils.getFile("photo/test/0.jpg") }.isInstanceOf(IOException::class.java)
   }
 }

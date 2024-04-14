@@ -9,10 +9,10 @@ class MediaTest {
   fun `4 個の画像リストでインスタンスを生成できる`() {
     // setup
     val files = listOf(
-      ResourceUtils.getFile("photo/20230422/1.jpg"),
-      ResourceUtils.getFile("photo/20230422/2.jpg"),
-      ResourceUtils.getFile("photo/20230422/3.jpg"),
-      ResourceUtils.getFile("photo/20230422/4.jpg"),
+      ResourceUtils.getFile("photo/test/1.jpg"),
+      ResourceUtils.getFile("photo/test/2.jpg"),
+      ResourceUtils.getFile("photo/test/3.jpg"),
+      ResourceUtils.getFile("photo/test/4.jpg"),
       )
 
     // execute & assert
@@ -23,11 +23,11 @@ class MediaTest {
   fun `5 個の画像リストの場合、例外が飛ぶ`() {
     // setup
     val files = listOf(
-      ResourceUtils.getFile("photo/20230422/1.jpg"),
-      ResourceUtils.getFile("photo/20230422/2.jpg"),
-      ResourceUtils.getFile("photo/20230422/3.jpg"),
-      ResourceUtils.getFile("photo/20230422/4.jpg"),
-      ResourceUtils.getFile("photo/20230422/5.jpg"),
+      ResourceUtils.getFile("photo/test/1.jpg"),
+      ResourceUtils.getFile("photo/test/2.jpg"),
+      ResourceUtils.getFile("photo/test/3.jpg"),
+      ResourceUtils.getFile("photo/test/4.jpg"),
+      ResourceUtils.getFile("photo/test/5.jpg"),
     )
 
     // execute & assert
