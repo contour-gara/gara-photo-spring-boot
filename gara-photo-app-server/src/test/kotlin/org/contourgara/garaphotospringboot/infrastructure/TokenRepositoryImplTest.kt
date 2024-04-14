@@ -62,4 +62,16 @@ class TokenRepositoryImplTest {
     // assert
     assertThat(actual).isNull()
   }
+
+  @Test
+  fun `トークンを更新するためにマッパーを呼び出す`() {
+    // setup
+    val token = Token("accessToken2", "refreshToken2", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault()))
+
+    // execute
+    sut.update(token)
+
+    // assert
+    verify(tokenMapper, times(1)).update(any())
+  }
 }

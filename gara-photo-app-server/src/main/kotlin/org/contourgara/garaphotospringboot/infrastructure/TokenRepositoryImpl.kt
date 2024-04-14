@@ -16,4 +16,8 @@ class TokenRepositoryImpl(
   override fun find(clientId: String): Token? {
     return tokenMapper.find()?.convertToModel(clientId)
   }
+
+  override fun update(token: Token) {
+    tokenMapper.update(TokenEntity.of(token))
+  }
 }

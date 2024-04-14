@@ -7,4 +7,5 @@ import org.contourgara.garaphotospringboot.domain.Token
 interface TokenProvider {
   fun createUrl(authorizationSetting: AuthorizationSetting): String
   fun fetchToken(authorization: Authorization): Token
+  fun fetchTokenByRefreshToken(token: Token): Token
 }

@@ -73,4 +73,15 @@ class TokenMapperTest {
     // assert
     assertThat(actual).isNull()
   }
+
+  @DataSet(value = ["datasets/setup/1-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token-update.yml"])
+  @Test
+  fun `トークン情報を更新できる`() {
+    // setup
+    val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34.000+09:00[Asia/Tokyo]")
+
+    // execute
+    val actual = sut.update(tokenEntity)
+  }
 }

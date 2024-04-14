@@ -37,4 +37,19 @@ class TokenProviderImpl(private val twitterConfig: TwitterConfig): TokenProvider
 
     return Token(result.accessToken, result.refreshToken, authorization.clientId, ZonedDateTime.now())
   }
+
+  override fun fetchTokenByRefreshToken(token: Token): Token {
+    val conf = ConfigurationBuilder()
+      .setOAuthAccessToken(twitterConfig.oauth1AccessToken)
+      .setOAuthAccessTokenSecret(twitterConfig.oauth1AccessTokenSecret)
+      .setOAuthConsumerKey(twitterConfig.clientId)
+      .setOAuthConsumerSecret(twitterConfig.clientSecret)
+      .build()
+
+    val result: OAuth2TokenProvider.Result = OAuth2TokenProvider(conf).refreshToken(
+      token.clientId,
+      token.refreshToken) ?:throw RuntimeException()
+
+    return Token(result.accessToken, result.refreshToken, token.clientId, ZonedDateTime.now())
+  }
 }
