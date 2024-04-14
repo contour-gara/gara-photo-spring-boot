@@ -6,6 +6,7 @@ import org.contourgara.garaphotospringboot.application.usecase.FetchTokenUseCase
 import org.contourgara.garaphotospringboot.application.usecase.FindTokenUseCase
 import org.contourgara.garaphotospringboot.application.dto.CreateUrlDto
 import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
+import org.contourgara.garaphotospringboot.application.scenario.TweetYesterdayScenario
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -29,6 +30,9 @@ class OAuthControllerTest {
   @MockBean
   lateinit var findTokenUseCase: FindTokenUseCase
 
+  @MockBean
+  lateinit var tweetYesterdayScenario: TweetYesterdayScenario
+
   @BeforeEach
   fun setUp() {
     mockMvc(mockMvc)
@@ -45,7 +49,7 @@ class OAuthControllerTest {
   }
 
   @Test
-  fun `URL 発行エンドポイントに GET した場合、レスポンスコード 200 が返り、と URL と code_challenge を取得できる`() {
+  fun `URL 発行エンドポイントに GET した場合、レスポンスコード 200 が返り、URL と code_challenge を取得できる`() {
     // setup
     doReturn(CreateUrlDto("url", "challenge")).whenever(createUrlUseCase).execute()
 
@@ -74,7 +78,7 @@ class OAuthControllerTest {
   }
 
   @Test
-  fun `トークン取得エンドポイントに GET した場合、レスポンスコード 200 が返り、とアクセストークンを取得できる`() {
+  fun `トークン取得エンドポイントに GET した場合、レスポンスコード 200 が返り、アクセストークンを取得できる`() {
     // setup
     doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
 

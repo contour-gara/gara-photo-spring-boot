@@ -21,7 +21,6 @@ class OAuthController(
   private val fetchTokenUseCase: FetchTokenUseCase,
   private val findTokenUseCase: FindTokenUseCase,
 ) {
-
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
   fun root() {
