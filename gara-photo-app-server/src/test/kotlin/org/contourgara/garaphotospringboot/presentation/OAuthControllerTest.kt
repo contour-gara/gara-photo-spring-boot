@@ -3,7 +3,9 @@ package org.contourgara.garaphotospringboot.presentation
 import io.restassured.module.mockmvc.RestAssuredMockMvc.*
 import org.contourgara.garaphotospringboot.application.CreateUrlUseCase
 import org.contourgara.garaphotospringboot.application.FetchTokenUseCase
+import org.contourgara.garaphotospringboot.application.FindTokenUseCase
 import org.contourgara.garaphotospringboot.application.dto.CreateUrlDto
+import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,6 +26,8 @@ class OAuthControllerTest {
   lateinit var createUrlUseCase: CreateUrlUseCase
   @MockBean
   lateinit var fetchTokenUseCase: FetchTokenUseCase
+  @MockBean
+  lateinit var findTokenUseCase: FindTokenUseCase
 
   @BeforeEach
   fun setUp() {
@@ -67,5 +71,19 @@ class OAuthControllerTest {
       .status(HttpStatus.NO_CONTENT)
 
     verify(fetchTokenUseCase, times(1)).execute(any())
+  }
+
+  @Test
+  fun `トークン取得エンドポイントに GET した場合、レスポンスコード 200 が返り、とアクセストークンを取得できる`() {
+    // setup
+    doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
+
+    // execute & assert
+    given()
+      .`when`()
+      .get("/v1/oauth/token")
+      .then()
+      .status(HttpStatus.OK)
+      .body("accessToken", equalTo("accessToken"))
   }
 }
