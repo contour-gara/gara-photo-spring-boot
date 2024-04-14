@@ -50,4 +50,16 @@ class TokenRepositoryImplTest {
     val expected = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault()))
     assertThat(actual).isEqualTo(expected)
   }
+
+  @Test
+  fun `トークン取得でトークンがなかった場合、null が返る`() {
+    // setup
+    doReturn(null).whenever(tokenMapper).find()
+
+    // execute
+    val actual = sut.find("clientId")
+
+    // assert
+    assertThat(actual).isNull()
+  }
 }
