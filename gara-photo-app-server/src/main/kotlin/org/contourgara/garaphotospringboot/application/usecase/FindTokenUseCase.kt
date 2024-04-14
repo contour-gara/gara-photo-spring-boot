@@ -1,4 +1,4 @@
-package org.contourgara.garaphotospringboot.application
+package org.contourgara.garaphotospringboot.application.usecase
 
 import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
 import org.contourgara.garaphotospringboot.application.exception.TokenNotFoundException

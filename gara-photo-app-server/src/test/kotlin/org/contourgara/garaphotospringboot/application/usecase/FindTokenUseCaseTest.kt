@@ -1,4 +1,4 @@
-package org.contourgara.garaphotospringboot.application
+package org.contourgara.garaphotospringboot.application.usecase
 
 import org.assertj.core.api.Assertions.*
 import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
