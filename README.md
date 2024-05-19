@@ -23,6 +23,35 @@
     curl -X POST http://localhost:8080/v1/oauth/token -H 'Content-Type: application/json' -d '{"code": "", "codeChallenge": ""}'
     ```
 
+## yesterday シリーズ投稿
+
+1. photo ディレクトリ配下に年月日のディレクトリ (yyyymmdd) を作成し、その配下に写真を配置します。
+1. `/v1/tweet/yesterday` エンドポイントを POST します。
+
+## 今後の開発予定
+
+### Ktor 移行
+
+業務でなれている Spring Boot を採用したが、軽量フレームワークである Ktor にもトライしたいと思う。
+
+### Twitter Client のテスト
+
+twitter4j-v2 は、エンドポイントを変更できないため、テストできていない。
+ライブラリをフォークし、テスト可能なようにエンドポイントを外から変更できるようにしたい。
+
+### yesterday シリーズの画像アップロード画面の作成
+
+yesterday シリーズを投稿するための画像をアップロードするための画面を作成したい。
+現状は、Dropbox に画像をおいて、rclone を使用し yesterday シリーズを投稿する前に photo ディレクトリを同期している。
+
+### 任意のテキストで画像投稿する機能の作成
+
+事前に写真をアップロードすることができず、yesterday シリーズの定時実行に遅れた場合でもツイートできるように、任意のテキストで画像つきツイートができる画面と API を作成したい。
+
+### tweet に失敗した場合の通知
+
+tweet に失敗した場合、どこかに通知したい。
+
 ## API 一覧
 
 |       |                                      | End point                |
@@ -83,6 +112,7 @@ POST /v1/oauth/token
 #### レスポンス形式
 
 - Header
+
     ```
     HTTP/1.1 204
     ```
@@ -126,8 +156,17 @@ POST /v1/tweet/yesterday
 #### レスポンス形式
 
 - Header
+
     ```
     HTTP/1.1 201
+    ```
+
+- body
+
+  ```json
+  {
+    "tweetId": "puyopuyo"
+  }
     ```
 
 ## 開発
