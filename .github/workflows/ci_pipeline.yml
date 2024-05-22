@@ -5,6 +5,9 @@ on:
     branches:
       - '**'
 
+env:
+  TZ: 'Asia/Tokyo'
+
 jobs:
   unit_test:
     runs-on: ubuntu-latest
