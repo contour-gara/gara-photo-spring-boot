@@ -19,7 +19,7 @@ class TweetYesterdayUseCase(
     val media: Media = photoRepository.findForYesterday(
       "file:///opt/photo/${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).toLocalDateTime().format(DateTimeFormatter.BASIC_ISO_DATE)}"
     )
-    val tweetId: Long = twitterClient.tweet(Tweet("yesterday", media), accessToken)
+    val tweetId: Long = twitterClient.tweetWithMedia(Tweet("yesterday", media), accessToken)
     return TweetYesterdayDto(tweetId.toString())
   }
 }

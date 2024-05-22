@@ -19,6 +19,7 @@ class TwitterConfig {
   var clientSecret: String = ""
   var redirectUri: String = ""
   var uploadBaseUrl: String = ""
+  var oauth2RestBaseUrl: String = ""
   var codeChallenge: String = createChallenge()
 
   private fun createChallenge(): String {

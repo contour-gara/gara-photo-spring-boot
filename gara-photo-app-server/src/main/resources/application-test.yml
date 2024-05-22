@@ -9,4 +9,5 @@ twitter:
   client-secret: client-secret-dummy
   redirect-uri: http://localhost/dummy
   upload-base-url: http://localhost:28080/
+  oauth2-rest-base-url: http://localhost:28080/
   code_challenge: challenge

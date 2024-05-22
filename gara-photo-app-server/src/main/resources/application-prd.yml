@@ -9,3 +9,4 @@ twitter:
   client-secret: ${GARA_PHOTO_CLIENT_SECRET:client-secret-dummy}
   redirect-uri: ${GARA_PHOTO_REDIRECT_URI:http://localhost/dummy}
   upload-base-url: https://upload.twitter.com/1.1/
+  oauth2-rest-base-url: https://api.twitter.com/2/

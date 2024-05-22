@@ -15,6 +15,7 @@ val versions by extra {
         "h2" to "2.2.224",
         "mockito-kotlin" to "5.3.1",
         "rider-junit5" to "1.42.0",
+        "wiremock" to "3.5.4",
     )
 }
 
@@ -51,7 +52,8 @@ dependencies {
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${versions["mybatis"]}")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${versions["jackson-module-kotlin"]}")
     implementation("org.twitter4j:twitter4j-core:${versions["twitter4j-core"]}")
-    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
+//    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
+    implementation(fileTree("lib"))
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
@@ -60,6 +62,7 @@ dependencies {
     testImplementation("com.h2database:h2:${versions["h2"]}")
     testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
+    testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
 }
 
 tasks.withType<KotlinCompile> {

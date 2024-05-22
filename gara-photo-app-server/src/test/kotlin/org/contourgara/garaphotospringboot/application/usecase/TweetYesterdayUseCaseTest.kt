@@ -42,7 +42,7 @@ class TweetYesterdayUseCaseTest {
 
     doReturn(dateTime).whenever(garaPhotoEnvironment).getCurrentDateTime()
     doReturn(media).whenever(photoRepository).findForYesterday("file:///opt/photo/20240422")
-    doReturn(1L).whenever(twitterClient).tweet(Tweet("yesterday", media), "accessToken")
+    doReturn(1L).whenever(twitterClient).tweetWithMedia(Tweet("yesterday", media), "accessToken")
 
     // execute
     val actual = sut.execute("accessToken")
