@@ -70,9 +70,10 @@ sourceSets {
 }
 
 dockerCompose {
+    isRequiredBy(integrationTest)
     useComposeFiles = listOf("../compose.yml", "../compose.it.yml")
     composeAdditionalArgs = listOf("--compatibility")
-    isRequiredBy(integrationTest)
+    environment.put("GARA_PHOTO_DB_PASSWORD", "test")
 }
 
 tasks.withType<KotlinCompile> {
