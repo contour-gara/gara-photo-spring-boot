@@ -1,0 +1,11 @@
+services:
+  app-server:
+    environment:
+      SPRING_PROFILES_ACTIVE: test
+      TWITTER_OAUTH1_ACCESS_TOKEN: oauth1-access-token-dummy
+      TWITTER_OAUTH1_ACCESS_TOKEN_SECRET: oauth1-access-token-secret-dummy
+      TWITTER_API_KEY: api-key-dummy
+      TWITTER_API_KEY_SECRET: api-key-secret-dummy
+      TWITTER_CLIENT_ID: client-id-dummy
+      TWITTER_CLIENT_SECRET: client-secret-dummy
+      TWITTER_REDIRECT_URI: http://localhost/dummy

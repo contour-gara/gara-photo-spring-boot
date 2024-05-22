@@ -1,3 +1,7 @@
+spring:
+  flyway:
+    target: 1
+
 twitter:
   oauth1-access-token: oauth1-access-token-dummy
   oauth1-access-token-secret: oauth1-access-token-secret-dummy
