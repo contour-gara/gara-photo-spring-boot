@@ -2,6 +2,8 @@ services:
   app-server:
     extra_hosts:
       - "host.docker.internal:host-gateway"
+    volumes:
+      - ./gara-photo-app-server/src/test/resources/photo:/opt/photo
     environment:
       SPRING_PROFILES_ACTIVE: test
       SPRING_DATASOURCE_PASSWORD: password
