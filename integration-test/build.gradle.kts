@@ -4,7 +4,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val versions by extra {
     mapOf(
-        "java" to "17",
+        "java" to "21",
         "kotlin" to "1.9.23",
         "springBoot" to "3.2.5",
         "restAssured" to "5.4.0",
@@ -25,7 +25,7 @@ group = "org.contourgara"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_17
+    sourceCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {

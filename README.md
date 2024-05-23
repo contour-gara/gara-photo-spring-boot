@@ -189,7 +189,7 @@ docker compose --profile local up -d sonarqube
 ```shell
 cd gara-photo-app-server
 gradle build -x test
-./jdeps-spring-boot.sh build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar 17
+./jdeps-spring-boot.sh build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar 21
 cd ..
 ```
 出力内容を基に Dockerfile を変更します。
