@@ -5,19 +5,19 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val versions by extra {
     mapOf(
         "java" to "21",
-        "kotlin" to "1.9.23",
+        "kotlin" to "1.9.24",
         "springBoot" to "3.2.5",
         "restAssured" to "5.4.0",
         "rider-junit5" to "1.42.0",
-        "wiremock" to "3.5.4",
+        "wiremock" to "3.6.0",
     )
 }
 
 plugins {
-    id("org.springframework.boot") version "3.2.4"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.23"
-    kotlin("plugin.spring") version "1.9.23"
+    id("org.springframework.boot") version "3.2.5"
+    id("io.spring.dependency-management") version "1.1.5"
+    kotlin("jvm") version "1.9.24"
+    kotlin("plugin.spring") version "1.9.24"
     id("com.avast.gradle.docker-compose") version "0.17.6"
 }
 
