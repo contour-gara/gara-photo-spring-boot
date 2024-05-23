@@ -6,7 +6,7 @@ RUN jlink \
     --strip-java-debug-attributes \
     --no-header-files \
     --no-man-pages \
-    --add-modules java.base,java.desktop,java.instrument,java.net.http,java.prefs,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.compiler,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.localedata,java.compiler,java.naming,java.rmi,jdk.crypto.ec \
+    --add-modules java.base,java.compiler,java.desktop,java.instrument,java.net.http,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.crypto.ec \
     --output jre-min
 
 FROM amazonlinux:2023.3.20240219.0
