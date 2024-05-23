@@ -1,0 +1,5 @@
+token:
+  - id: 1
+    access_token: access-token
+    refresh_token: refresh-token
+    date_time: "2024-04-23T00:00:00+09:00[Asia/Tokyo]"

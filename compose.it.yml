@@ -1,7 +1,10 @@
 services:
   app-server:
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
     environment:
       SPRING_PROFILES_ACTIVE: test
+      SPRING_DATASOURCE_PASSWORD: password
       TWITTER_OAUTH1_ACCESS_TOKEN: oauth1-access-token-dummy
       TWITTER_OAUTH1_ACCESS_TOKEN_SECRET: oauth1-access-token-secret-dummy
       TWITTER_API_KEY: api-key-dummy
@@ -9,3 +12,9 @@ services:
       TWITTER_CLIENT_ID: client-id-dummy
       TWITTER_CLIENT_SECRET: client-secret-dummy
       TWITTER_REDIRECT_URI: http://localhost/dummy
+      TWITTER_UPLOAD-BASE-URL: http://host.docker.internal:28080/
+      TWITTER_OAUTH2-REST-BASE-URL: http://host.docker.internal:28080/
+
+  postgres:
+    environment:
+      POSTGRES_PASSWORD: password

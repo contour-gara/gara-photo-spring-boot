@@ -40,7 +40,9 @@ dependencyManagement {
 
 dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
+    runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
@@ -73,7 +75,6 @@ dockerCompose {
     isRequiredBy(integrationTest)
     useComposeFiles = listOf("../compose.yml", "../compose.it.yml")
     composeAdditionalArgs = listOf("--compatibility")
-    environment.put("GARA_PHOTO_DB_PASSWORD", "test")
 }
 
 tasks.withType<KotlinCompile> {
