@@ -9,8 +9,9 @@ RUN jlink \
     --add-modules java.base,java.compiler,java.desktop,java.instrument,java.net.http,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.crypto.ec \
     --output jre-min
 
-FROM amazonlinux:2023.3.20240219.0
+FROM debian:stable-20240513-slim
 WORKDIR /deployments
+RUN apt-get update -y && apt-get install -y curl
 COPY --from=build /jlink/jre-min /opt/jre-min
 ENV JAVA_HOME=/opt/jre-min
 ENV PATH $JAVA_HOME/bin:$PATH
