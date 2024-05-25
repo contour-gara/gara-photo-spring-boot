@@ -18,7 +18,7 @@ import org.springframework.http.HttpStatus
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest
+@WebMvcTest(controllers = [OAuthController::class])
 class OAuthControllerTest {
   @Autowired
   lateinit var mockMvc: MockMvc
@@ -29,9 +29,6 @@ class OAuthControllerTest {
   lateinit var fetchTokenUseCase: FetchTokenUseCase
   @MockBean
   lateinit var findTokenUseCase: FindTokenUseCase
-
-  @MockBean
-  lateinit var tweetYesterdayScenario: TweetYesterdayScenario
 
   @BeforeEach
   fun setUp() {

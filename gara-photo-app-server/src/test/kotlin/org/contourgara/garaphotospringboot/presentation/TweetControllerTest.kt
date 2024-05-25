@@ -17,20 +17,13 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpStatus
 import org.springframework.test.web.servlet.MockMvc
 
-@WebMvcTest
+@WebMvcTest(controllers = [TweetController::class])
 class TweetControllerTest {
   @Autowired
   lateinit var mockMvc: MockMvc
 
   @MockBean
   lateinit var tweetYesterdayScenario: TweetYesterdayScenario
-
-  @MockBean
-  lateinit var createUrlUseCase: CreateUrlUseCase
-  @MockBean
-  lateinit var fetchTokenUseCase: FetchTokenUseCase
-  @MockBean
-  lateinit var findTokenUseCase: FindTokenUseCase
 
   @BeforeEach
   fun setUp() {
