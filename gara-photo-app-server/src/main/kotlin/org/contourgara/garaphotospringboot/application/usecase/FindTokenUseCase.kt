@@ -7,13 +7,14 @@ import org.contourgara.garaphotospringboot.common.TwitterConfig
 import org.contourgara.garaphotospringboot.domain.Token
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenProvider
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
+import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.stereotype.Service
 
 @Service
 class FindTokenUseCase(
   private val twitterConfig: TwitterConfig,
   private val tokenProvider: TokenProvider,
-  private val tokenRepository: TokenRepository,
+  @Qualifier("mybatis") private val tokenRepository: TokenRepository,
   private val garaPhotoEnvironment: GaraPhotoEnvironment,
   ) {
   fun execute(): FindTokenDto {

@@ -1,61 +1,75 @@
 package org.contourgara.garaphotospringboot.infrastructure
 
+import com.github.database.rider.core.api.configuration.DBUnit
+import com.github.database.rider.core.api.connection.ConnectionHolder
+import com.github.database.rider.core.api.dataset.DataSet
+import com.github.database.rider.core.api.dataset.ExpectedDataSet
+import com.github.database.rider.junit5.api.DBRider
 import org.assertj.core.api.Assertions.*
 import org.contourgara.garaphotospringboot.domain.Token
-import org.junit.jupiter.api.BeforeEach
+import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.junit.jupiter.api.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
-import org.mockito.MockitoAnnotations
-import org.mockito.kotlin.*
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.beans.factory.annotation.Qualifier
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.dao.DuplicateKeyException
+import java.sql.DriverManager
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
+@SpringBootTest
+@DBUnit
+@DBRider
 class TokenRepositoryImplTest {
-  @InjectMocks
-  lateinit var sut: TokenRepositoryImpl
+  companion object {
+    private const val DB_URL: String = "jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=false"
+    private const val DB_USERNAME: String = "sa"
+    private const val DB_PASSWORD: String = "sa"
 
-  @Mock
-  lateinit var tokenMapper: TokenMapper
-
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
+    private val connectionHolder: ConnectionHolder = ConnectionHolder {
+      DriverManager.getConnection(DB_URL, DB_USERNAME, DB_PASSWORD)
+    }
   }
 
-  @Test
-  fun `トークンを保存するためにマッパーを呼び出す`() {
-    // setup
-    val token = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault()))
+  @Autowired
+  @Qualifier("jdbc-client")
+  lateinit var sut: TokenRepository
 
+  @DataSet(value = ["datasets/setup/0-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+  @Test
+  fun `トークン情報をテーブルに保存できる`() {
     // execute
-    sut.insert(token)
-
-    // assert
-    verify(tokenMapper, times(1)).insert(any())
+    sut.insert(Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())))
   }
 
+  @DataSet(value = ["datasets/setup/1-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
   @Test
-  fun `トークンが取得できる`() {
-    // setup
-    val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T05:13:00.000+09:00[Asia/Tokyo]")
+  fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
+    // execute & assert
+    assertThatThrownBy {
+      sut.insert(Token("accessToken", "refreshToken", "clientId", ZonedDateTime.now()))
+    }.isInstanceOf(DuplicateKeyException::class.java)
+  }
 
-    doReturn(tokenEntity).whenever(tokenMapper).find()
-
+  @DataSet(value = ["datasets/setup/1-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+  @Test
+  fun `トークン情報を取得できる`() {
     // execute
     val actual = sut.find("clientId")
 
     // assert
-    val expected = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault()))
+    val expected = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault()))
     assertThat(actual).isEqualTo(expected)
   }
 
+  @DataSet(value = ["datasets/setup/0-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
   @Test
-  fun `トークン取得でトークンがなかった場合、null が返る`() {
-    // setup
-    doReturn(null).whenever(tokenMapper).find()
-
+  fun `トークン情報を取得でレコードが無い場合、null が返る`() {
     // execute
     val actual = sut.find("clientId")
 
@@ -63,15 +77,11 @@ class TokenRepositoryImplTest {
     assertThat(actual).isNull()
   }
 
+  @DataSet(value = ["datasets/setup/1-token.yml"])
+  @ExpectedDataSet(value = ["datasets/expected/1-token-update.yml"])
   @Test
-  fun `トークンを更新するためにマッパーを呼び出す`() {
-    // setup
-    val token = Token("accessToken2", "refreshToken2", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault()))
-
+  fun `トークン情報を更新できる`() {
     // execute
-    sut.update(token)
-
-    // assert
-    verify(tokenMapper, times(1)).update(any())
+    sut.update(Token("accessToken2", "refreshToken2", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())))
   }
 }
