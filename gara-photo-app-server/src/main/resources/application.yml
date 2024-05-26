@@ -16,3 +16,6 @@ spring:
     timeout-per-shutdown-phase: 15s
   server:
     shutdown: graceful
+
+application:
+  repository: jdbc-client

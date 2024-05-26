@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service
 class FetchTokenUseCase(
   private val twitterConfig: TwitterConfig,
   private val tokenProvider: TokenProvider,
-  @Qualifier("mybatis") private val tokenRepository: TokenRepository
+  @Qualifier("tokenRepositoryAlias") private val tokenRepository: TokenRepository
 ) {
   fun execute(fetchTokenParam: FetchTokenParam) {
     tokenRepository.insert(tokenProvider.fetchToken(

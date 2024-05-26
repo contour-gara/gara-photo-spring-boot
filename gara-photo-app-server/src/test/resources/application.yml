@@ -8,3 +8,6 @@ spring:
   flyway:
     enabled: true
     target: 1
+
+application:
+  repository: jdbc-client

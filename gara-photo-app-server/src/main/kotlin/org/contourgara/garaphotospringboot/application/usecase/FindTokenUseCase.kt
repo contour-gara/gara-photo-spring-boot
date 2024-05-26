@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service
 class FindTokenUseCase(
   private val twitterConfig: TwitterConfig,
   private val tokenProvider: TokenProvider,
-  @Qualifier("mybatis") private val tokenRepository: TokenRepository,
+  @Qualifier("tokenRepositoryAlias") private val tokenRepository: TokenRepository,
   private val garaPhotoEnvironment: GaraPhotoEnvironment,
   ) {
   fun execute(): FindTokenDto {
