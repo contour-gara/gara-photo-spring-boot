@@ -5,7 +5,7 @@ import org.contourgara.garaphotospringboot.common.ResourceUtils
 import org.contourgara.garaphotospringboot.domain.Media
 import org.junit.jupiter.api.Test
 
-class PhotoRepositoryImplTest {
+class PhotoYesterdayRepositoryImplTest {
   @Test
   fun `引数のディレクトリの写真を取得し、メディアを返す`() {
     // setup

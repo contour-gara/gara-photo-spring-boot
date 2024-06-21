@@ -3,9 +3,7 @@ package org.contourgara.garaphotospringboot.presentation
 import io.restassured.module.mockmvc.RestAssuredMockMvc.*
 import org.contourgara.garaphotospringboot.application.dto.TweetYesterdayDto
 import org.contourgara.garaphotospringboot.application.scenario.TweetYesterdayScenario
-import org.contourgara.garaphotospringboot.application.usecase.CreateUrlUseCase
-import org.contourgara.garaphotospringboot.application.usecase.FetchTokenUseCase
-import org.contourgara.garaphotospringboot.application.usecase.FindTokenUseCase
+import org.contourgara.garaphotospringboot.application.usecase.UploadYesterdayUseCase
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -24,6 +22,8 @@ class TweetControllerTest {
 
   @MockBean
   lateinit var tweetYesterdayScenario: TweetYesterdayScenario
+  @MockBean
+  lateinit var uploadYesterdayUseCase: UploadYesterdayUseCase
 
   @BeforeEach
   fun setUp() {

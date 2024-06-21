@@ -10,6 +10,9 @@ spring:
       maximum-pool-size: 5
   flyway:
     enabled: true
+  servlet:
+    multipart:
+      max-file-size: 20MB
   application:
     name: gara-photo-spring-boot
   lifecycle:
