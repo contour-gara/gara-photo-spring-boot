@@ -17,6 +17,6 @@ class PhotoRepositoryImpl: PhotoRepository {
   override fun saveForYesterday(photoYesterday: PhotoYesterday, sourcePath: String) {
     val path = "${sourcePath}/${photoYesterday.getDate()}"
     Files.createDirectories(Path.of(path))
-    photoYesterday.photos.forEach { photo -> Files.write(Path.of("${path}/${photo.fileName}"), photo.byte) }
+    photoYesterday.photos.forEach { Files.write(Path.of("${path}/${it.fileName}"), it.byte) }
   }
 }

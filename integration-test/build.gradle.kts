@@ -45,6 +45,7 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
+    testImplementation("io.rest-assured:kotlin-extensions:${versions["restAssured"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
     testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
 }

@@ -16,6 +16,8 @@ val versions by extra {
         "mockito-kotlin" to "5.3.1",
         "rider-junit5" to "1.42.0",
         "wiremock" to "3.6.0",
+        "kotest" to "5.9.1",
+        "kotest-spring" to "1.3.0",
     )
 }
 
@@ -58,8 +60,12 @@ dependencies {
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+    testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
+    testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:${versions["kotest-spring"]}")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
+    testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:${versions["restAssured"]}")
     testImplementation("com.h2database:h2:${versions["h2"]}")
     testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
@@ -106,7 +112,7 @@ tasks.jacocoTestReport {
     reports {
         xml.required.set(true)
         csv.required.set(false)
-        html.required.set(false)
+        html.required.set(true)
     }
 }
 

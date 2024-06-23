@@ -9,6 +9,9 @@ import com.github.database.rider.junit5.api.DBRider
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import io.restassured.RestAssured.*
+import io.restassured.module.kotlin.extensions.Given
+import io.restassured.module.kotlin.extensions.Then
+import io.restassured.module.kotlin.extensions.When
 import org.hamcrest.Matchers
 import org.junit.jupiter.api.BeforeAll
 import org.junit.jupiter.api.Nested
@@ -46,12 +49,15 @@ class GaraPhotoSpringBootIT {
     @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
     fun `認可エンドポイントを取得するためのエンドポイントを GET した場合、レスポンスコード 200 と URL と検証コードが返る`() {
       // execute & assert
-      given()
-        .get("/v1/oauth/url")
-        .then()
-        .statusCode(HttpStatus.OK.value())
-        .body("url", Matchers.equalTo("https://twitter.com/i/oauth2/authorize?response_type=code&client_id=client-id-dummy&redirect_uri=http://localhost/dummy&scope=tweet.read%20users.read%20tweet.write%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain"))
-        .body("codeChallenge", Matchers.equalTo("challenge"))
+      Given {
+        body("")
+      } When {
+        get("/v1/oauth/url")
+      } Then {
+        statusCode(HttpStatus.OK.value())
+        body("url", Matchers.equalTo("https://twitter.com/i/oauth2/authorize?response_type=code&client_id=client-id-dummy&redirect_uri=http://localhost/dummy&scope=tweet.read%20users.read%20tweet.write%20offline.access&state=state&code_challenge=challenge&code_challenge_method=plain"))
+        body("codeChallenge", Matchers.equalTo("challenge"))
+      }
     }
 
     @Test

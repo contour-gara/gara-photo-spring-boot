@@ -1,44 +1,58 @@
 package org.contourgara.garaphotospringboot.domain
 
-import org.assertj.core.api.Assertions.*
+import io.kotest.assertions.throwables.shouldThrow
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.core.spec.style.WordSpec
+import io.kotest.matchers.shouldBe
 import org.contourgara.garaphotospringboot.common.ResourceUtils.getFile
-import org.junit.jupiter.api.Test
 
-class PhotoYesterdayTest {
-  @Test
-  fun `空のリスト`() {
-    // execute & assert
-    assertThatThrownBy { PhotoYesterday(emptyList()) }
-      .isInstanceOf(IllegalArgumentException::class.java)
-      .hasMessage("No photos yet")
-  }
-
-  @Test
-  fun `違う日`() {
+class PhotoYesterdayTest: WordSpec({
+  "写真の日付の文字列を返す" should {
     // setup
-    val photos = listOf(
-      getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg"),
-      getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg"),
-    )
+    val photo = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+    val sut = PhotoYesterday(listOf(UploadedPhoto(photo.name, photo.readBytes())))
+
     // execute & assert
-    assertThatThrownBy { PhotoYesterday(photos) }
-      .isInstanceOf(IllegalArgumentException::class.java)
-      .hasMessage("Photo must be taken same date")
+    sut.getDate() shouldBe "20240619"
   }
 
-  @Test
-  fun `日付を返す`() {
-    // setup
-    val photos = listOf(
-      getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg"),
-    )
-    val sut = PhotoYesterday(photos)
+  "インスタンス生成" When {
+    "アップロードする写真がない" should {
+      "例外が返る" {
+        // execute & assert
+        shouldThrowExactly<IllegalArgumentException> {
+          PhotoYesterday(emptyList())
+        }.message shouldBe "No photos yet"
+      }
+    }
 
-    // execute
-    val actual = sut.getDate()
+    "アップロードする写真が 5 つ以上" should {
+      "例外が返る" {
+        // setup
+        val photo = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+        val uploaderPhoto = UploadedPhoto(photo.name, photo.readBytes())
 
-    // assert
-    val expected = "20240619"
-    assertThat(actual).isEqualTo(expected)
+        // assert & execute
+        shouldThrow<IllegalArgumentException> {
+          PhotoYesterday(listOf(uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto))
+        }.message shouldBe "Photos must have at least 4 photos"
+      }
+    }
+
+    "アップロードする写真に異なる日の写真がある" should {
+      "例外が返る" {
+        // setup
+        val photo20240619 = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+        val photo20240620 = getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg")
+
+        // execute & assert
+        shouldThrow<IllegalArgumentException> {
+          PhotoYesterday(listOf(
+            UploadedPhoto(photo20240619.name, photo20240619.readBytes()),
+            UploadedPhoto(photo20240620.name, photo20240620.readBytes())
+          ))
+        }.message shouldBe "Photo must be taken same date"
+      }
+    }
   }
-}
+})

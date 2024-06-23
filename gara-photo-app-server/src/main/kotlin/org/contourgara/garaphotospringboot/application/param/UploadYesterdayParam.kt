@@ -8,6 +8,6 @@ data class UploadYesterdayParam(
   val bytes: List<ByteArray>
 ) {
   fun convertToModel(): PhotoYesterday {
-    return PhotoYesterday(fileNames.zip(bytes).map { photo -> UploadedPhoto(photo.first, photo.second) })
+    return PhotoYesterday(fileNames.zip(bytes).map { UploadedPhoto(it.first, it.second) })
   }
 }

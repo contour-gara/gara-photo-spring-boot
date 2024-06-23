@@ -14,6 +14,6 @@ data class PhotoYesterday(
   }
 
   private fun isSameDate(): Boolean {
-    return photos.map { photo -> photo.fileName.substring(0, 8) }.toSet().size == 1
+    return photos.map { it.fileName.substring(0, 8) }.toSet().size == 1
   }
 }
