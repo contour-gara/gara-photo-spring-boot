@@ -1,9 +1,9 @@
-package org.contourgara.garaphotospringboot.common
+package org.contourgara.integration
 
 import org.springframework.core.io.DefaultResourceLoader
 import java.io.File
 
-object ResourceUtils {
+object TestUtils {
   fun getFile(sourcePath: String): File {
     return DefaultResourceLoader().getResource("classpath:${sourcePath}").file
   }

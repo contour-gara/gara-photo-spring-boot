@@ -4,7 +4,7 @@ import io.kotest.assertions.throwables.shouldThrow
 import io.kotest.assertions.throwables.shouldThrowExactly
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
-import org.contourgara.garaphotospringboot.common.ResourceUtils.getFile
+import org.contourgara.garaphotospringboot.TestUtils.getFile
 
 class PhotoYesterdayTest: WordSpec({
   "写真の日付の文字列を返す" should {

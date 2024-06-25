@@ -3,7 +3,7 @@ package org.contourgara.garaphotospringboot.domain
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.booleans.shouldBeFalse
 import io.kotest.matchers.booleans.shouldBeTrue
-import org.contourgara.garaphotospringboot.common.ResourceUtils.getFile
+import org.contourgara.garaphotospringboot.TestUtils.getFile
 
 class UploadedPhotoTest: WordSpec({
   "インスタンスの比較" should {

@@ -1,7 +1,7 @@
 package org.contourgara.garaphotospringboot.domain
 
 import org.assertj.core.api.Assertions.*
-import org.contourgara.garaphotospringboot.common.ResourceUtils
+import org.contourgara.garaphotospringboot.TestUtils
 import org.junit.jupiter.api.Test
 
 class MediaTest {
@@ -9,10 +9,10 @@ class MediaTest {
   fun `4 個の画像リストでインスタンスを生成できる`() {
     // setup
     val files = listOf(
-      ResourceUtils.getFile("photo/test/1.jpg"),
-      ResourceUtils.getFile("photo/test/2.jpg"),
-      ResourceUtils.getFile("photo/test/3.jpg"),
-      ResourceUtils.getFile("photo/test/4.jpg"),
+      TestUtils.getFile("photo/test/1.jpg"),
+      TestUtils.getFile("photo/test/2.jpg"),
+      TestUtils.getFile("photo/test/3.jpg"),
+      TestUtils.getFile("photo/test/4.jpg"),
       )
 
     // execute & assert
@@ -23,11 +23,11 @@ class MediaTest {
   fun `5 個の画像リストの場合、例外が飛ぶ`() {
     // setup
     val files = listOf(
-      ResourceUtils.getFile("photo/test/1.jpg"),
-      ResourceUtils.getFile("photo/test/2.jpg"),
-      ResourceUtils.getFile("photo/test/3.jpg"),
-      ResourceUtils.getFile("photo/test/4.jpg"),
-      ResourceUtils.getFile("photo/test/5.jpg"),
+      TestUtils.getFile("photo/test/1.jpg"),
+      TestUtils.getFile("photo/test/2.jpg"),
+      TestUtils.getFile("photo/test/3.jpg"),
+      TestUtils.getFile("photo/test/4.jpg"),
+      TestUtils.getFile("photo/test/5.jpg"),
     )
 
     // execute & assert

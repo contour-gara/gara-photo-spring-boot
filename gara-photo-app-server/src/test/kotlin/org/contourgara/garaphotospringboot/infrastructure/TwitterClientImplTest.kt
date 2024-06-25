@@ -3,7 +3,7 @@ package org.contourgara.garaphotospringboot.infrastructure
 import com.github.tomakehurst.wiremock.client.WireMock.*
 import com.github.tomakehurst.wiremock.junit5.WireMockTest
 import org.assertj.core.api.Assertions.*
-import org.contourgara.garaphotospringboot.common.ResourceUtils
+import org.contourgara.garaphotospringboot.TestUtils
 import org.contourgara.garaphotospringboot.domain.Media
 import org.contourgara.garaphotospringboot.domain.Tweet
 import org.contourgara.garaphotospringboot.domain.infrastructure.TwitterClient
@@ -39,10 +39,10 @@ class TwitterClientImplTest {
         .withBody("{\"data\":{\"edit_history_tweet_ids\":[\"1778064547540353187\"],\"id\":\"1778064547540353187\",\"text\":\"tweet\"}}")))
 
     val media = Media(listOf(
-      ResourceUtils.getFile("photo/20240422/1.jpg"),
-      ResourceUtils.getFile("photo/20240422/2.jpg"),
-      ResourceUtils.getFile("photo/20240422/3.jpg"),
-      ResourceUtils.getFile("photo/20240422/4.jpg"),
+      TestUtils.getFile("photo/20240422/1.jpg"),
+      TestUtils.getFile("photo/20240422/2.jpg"),
+      TestUtils.getFile("photo/20240422/3.jpg"),
+      TestUtils.getFile("photo/20240422/4.jpg"),
     ))
 
     // execute
@@ -68,10 +68,10 @@ class TwitterClientImplTest {
         .withStatus(500)))
 
     val media = Media(listOf(
-      ResourceUtils.getFile("photo/20240422/1.jpg"),
-      ResourceUtils.getFile("photo/20240422/2.jpg"),
-      ResourceUtils.getFile("photo/20240422/3.jpg"),
-      ResourceUtils.getFile("photo/20240422/4.jpg"),
+      TestUtils.getFile("photo/20240422/1.jpg"),
+      TestUtils.getFile("photo/20240422/2.jpg"),
+      TestUtils.getFile("photo/20240422/3.jpg"),
+      TestUtils.getFile("photo/20240422/4.jpg"),
     ))
 
     // execute & assert

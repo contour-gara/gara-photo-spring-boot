@@ -8,7 +8,7 @@ import io.restassured.module.mockmvc.kotlin.extensions.When
 import org.contourgara.garaphotospringboot.application.dto.TweetYesterdayDto
 import org.contourgara.garaphotospringboot.application.scenario.TweetYesterdayScenario
 import org.contourgara.garaphotospringboot.application.usecase.UploadYesterdayUseCase
-import org.contourgara.garaphotospringboot.common.ResourceUtils.getFile
+import org.contourgara.garaphotospringboot.TestUtils.getFile
 import org.hamcrest.Matchers.*
 import org.mockito.kotlin.doReturn
 import org.mockito.kotlin.whenever
