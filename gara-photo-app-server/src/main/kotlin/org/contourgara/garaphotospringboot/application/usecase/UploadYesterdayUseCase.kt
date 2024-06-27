@@ -7,6 +7,6 @@ import org.springframework.stereotype.Service
 @Service
 class UploadYesterdayUseCase(private val photoRepository: PhotoRepository) {
   fun execute(uploadYesterdayParam: UploadYesterdayParam) {
-    photoRepository.saveForYesterday(uploadYesterdayParam.convertToModel(), "/opt/photo")
+    photoRepository.saveForYesterday(uploadYesterdayParam.convertToModel(), "/opt/photo/yesterday")
   }
 }
