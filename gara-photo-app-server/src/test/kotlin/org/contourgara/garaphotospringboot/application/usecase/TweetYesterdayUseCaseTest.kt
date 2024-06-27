@@ -38,7 +38,7 @@ class TweetYesterdayUseCaseTest {
   fun `ツイート ID が返る`() {
     // setup
     val dateTime = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
-    val media = Media(listOf(getFile("photo/test/1.jpg")))
+    val media = Media(listOf(getFile("photo/yesterday/20240422/20240422-190001-01.png")))
 
     doReturn(dateTime).whenever(garaPhotoEnvironment).getCurrentDateTime()
     doReturn(media).whenever(photoRepository).findForYesterday("file:///opt/photo/yesterday/20240422")

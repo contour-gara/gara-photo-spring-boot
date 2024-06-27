@@ -60,7 +60,7 @@ class TweetControllerTest(
   "yesterday アップロードエンドポイントに POST した場合" should {
     "レスポンスコード 204 が返る" {
       // setup
-      val photo = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+      val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
 
       // execute & assert
       Given {

@@ -225,8 +225,8 @@ class GaraPhotoSpringBootIT {
   @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
   fun `写真をアップロードできる`() {
     // setup
-    val photo1 = getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg")
-    val photo2 = getFile("photo/yesterday/20240620-193123-L1003326-LEICA M10 MONOCHROM.jpg")
+    val photo1 = getFile("photo/yesterday/20240620/20240620-190001-01.png")
+    val photo2 = getFile("photo/yesterday/20240620/20240620-190002-02.png")
 
     // execute & assert
     Given {

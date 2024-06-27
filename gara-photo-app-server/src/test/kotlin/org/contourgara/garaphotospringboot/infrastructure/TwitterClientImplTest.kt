@@ -39,10 +39,10 @@ class TwitterClientImplTest {
         .withBody("{\"data\":{\"edit_history_tweet_ids\":[\"1778064547540353187\"],\"id\":\"1778064547540353187\",\"text\":\"tweet\"}}")))
 
     val media = Media(listOf(
-      TestUtils.getFile("photo/20240422/1.jpg"),
-      TestUtils.getFile("photo/20240422/2.jpg"),
-      TestUtils.getFile("photo/20240422/3.jpg"),
-      TestUtils.getFile("photo/20240422/4.jpg"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190002-02.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190003-03.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190004-04.png"),
     ))
 
     // execute
@@ -54,7 +54,7 @@ class TwitterClientImplTest {
   }
 
   @Test
-  fun `ツイートできなかった場合、ツイート ID が返る`() {
+  fun `ツイートできなかった場合、例外が返る`() {
     // setup
     stubFor(post(urlEqualTo("/media/upload.json"))
       .willReturn(aResponse()
@@ -68,10 +68,10 @@ class TwitterClientImplTest {
         .withStatus(500)))
 
     val media = Media(listOf(
-      TestUtils.getFile("photo/20240422/1.jpg"),
-      TestUtils.getFile("photo/20240422/2.jpg"),
-      TestUtils.getFile("photo/20240422/3.jpg"),
-      TestUtils.getFile("photo/20240422/4.jpg"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190002-02.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190003-03.png"),
+      TestUtils.getFile("photo/yesterday/20240422/20240422-190004-04.png"),
     ))
 
     // execute & assert

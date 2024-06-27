@@ -9,11 +9,11 @@ import org.contourgara.garaphotospringboot.TestUtils.getFile
 class PhotoYesterdayTest: WordSpec({
   "写真の日付の文字列を返す" should {
     // setup
-    val photo = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+    val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
     val sut = PhotoYesterday(listOf(UploadedPhoto(photo.name, photo.readBytes())))
 
     // execute & assert
-    sut.getDate() shouldBe "20240619"
+    sut.getDate() shouldBe "20240422"
   }
 
   "インスタンス生成" When {
@@ -29,7 +29,7 @@ class PhotoYesterdayTest: WordSpec({
     "アップロードする写真が 5 つ以上" should {
       "例外が返る" {
         // setup
-        val photo = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
+        val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
         val uploaderPhoto = UploadedPhoto(photo.name, photo.readBytes())
 
         // assert & execute
@@ -42,8 +42,8 @@ class PhotoYesterdayTest: WordSpec({
     "アップロードする写真に異なる日の写真がある" should {
       "例外が返る" {
         // setup
-        val photo20240619 = getFile("photo/yesterday/20240619-100940-L1003318-LEICA M10 MONOCHROM.jpg")
-        val photo20240620 = getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg")
+        val photo20240619 = getFile("photo/yesterday/20240422/20240422-190001-01.png")
+        val photo20240620 = getFile("photo/yesterday/20240421/20240421-190001-01.png")
 
         // execute & assert
         shouldThrow<IllegalArgumentException> {

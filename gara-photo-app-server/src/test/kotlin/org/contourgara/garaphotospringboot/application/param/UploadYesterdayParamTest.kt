@@ -10,7 +10,7 @@ class UploadYesterdayParamTest: WordSpec({
   "ドメインモデルに変換" should {
     "ドメインモデルが返る" {
       // setup
-      val photo = TestUtils.getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg")
+      val photo = TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png")
       val sut = UploadYesterdayParam(listOf(photo.name), listOf(photo.readBytes()))
 
       // execute & assert

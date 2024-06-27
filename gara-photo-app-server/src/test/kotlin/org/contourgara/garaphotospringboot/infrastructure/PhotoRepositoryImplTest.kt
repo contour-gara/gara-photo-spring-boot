@@ -17,11 +17,11 @@ class PhotoRepositoryImplTest: WordSpec({
       val sut = PhotoRepositoryImpl()
 
       // execute & assert
-      sut.findForYesterday("classpath:photo/20240422") shouldBe Media(listOf(
-        TestUtils.getFile("photo/20240422/1.jpg"),
-        TestUtils.getFile("photo/20240422/2.jpg"),
-        TestUtils.getFile("photo/20240422/3.jpg"),
-        TestUtils.getFile("photo/20240422/4.jpg"),
+      sut.findForYesterday("classpath:photo/yesterday/20240422") shouldBe Media(listOf(
+        TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png"),
+        TestUtils.getFile("photo/yesterday/20240422/20240422-190002-02.png"),
+        TestUtils.getFile("photo/yesterday/20240422/20240422-190003-03.png"),
+        TestUtils.getFile("photo/yesterday/20240422/20240422-190004-04.png"),
       ))
     }
   }
@@ -31,8 +31,8 @@ class PhotoRepositoryImplTest: WordSpec({
       // setup
       val sut = PhotoRepositoryImpl()
 
-      val photo1 = TestUtils.getFile("photo/yesterday/20240620-192304-L1003325-LEICA M10 MONOCHROM.jpg")
-      val photo2 = TestUtils.getFile("photo/yesterday/20240620-193123-L1003326-LEICA M10 MONOCHROM.jpg")
+      val photo1 = TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png")
+      val photo2 = TestUtils.getFile("photo/yesterday/20240422/20240422-190002-02.png")
       val photoYesterday = PhotoYesterday(listOf(
         UploadedPhoto(photo1.name, photo1.readBytes()),
         UploadedPhoto(photo2.name, photo2.readBytes()),
@@ -44,8 +44,8 @@ class PhotoRepositoryImplTest: WordSpec({
       sut.saveForYesterday(photoYesterday, tempDir.absolutePath)
 
       // assert
-      File("${tempDir.absolutePath}/20240620/${photo1.name}").shouldExist()
-      File("${tempDir.absolutePath}/20240620/${photo2.name}").shouldExist()
+      File("${tempDir.absolutePath}/20240422/${photo1.name}").shouldExist()
+      File("${tempDir.absolutePath}/20240422/${photo2.name}").shouldExist()
     }
   }
 })

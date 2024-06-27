@@ -45,3 +45,5 @@ out/
 ### app ###
 gara-photo-app-server/*.hprof
 gara-photo-app-server/src/main/resources/db/migration/V2.0.0__insert_data.sql
+gara-photo-app-server/src/test/resources/photo/20240620/
+gara-photo-app-server/src/test/resources/photo/yesterday/20240620/
