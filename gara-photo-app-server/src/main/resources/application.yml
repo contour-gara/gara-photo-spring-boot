@@ -17,8 +17,9 @@ spring:
     name: gara-photo-spring-boot
   lifecycle:
     timeout-per-shutdown-phase: 15s
-  server:
-    shutdown: graceful
+
+server:
+  shutdown: graceful
 
 application:
   repository: jdbc-client

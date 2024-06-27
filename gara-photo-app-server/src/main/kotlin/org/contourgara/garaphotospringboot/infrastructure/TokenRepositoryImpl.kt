@@ -2,11 +2,15 @@ package org.contourgara.garaphotospringboot.infrastructure
 
 import org.contourgara.garaphotospringboot.domain.Token
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.jdbc.core.DataClassRowMapper
 import org.springframework.jdbc.core.simple.JdbcClient
 import org.springframework.stereotype.Repository
 
-@Repository("jdbc-client")
+@Repository
+@ConditionalOnProperty(
+  prefix = "application", name = ["repository"], havingValue = "jdbc-client", matchIfMissing = true
+)
 class TokenRepositoryImpl(
   private val jdbcClient: JdbcClient
 ): TokenRepository {

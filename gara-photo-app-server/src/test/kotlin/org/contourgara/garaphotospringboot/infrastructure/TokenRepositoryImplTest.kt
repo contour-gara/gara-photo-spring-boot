@@ -9,7 +9,6 @@ import org.contourgara.garaphotospringboot.domain.Token
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.beans.factory.annotation.Qualifier
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.dao.DuplicateKeyException
 import java.time.LocalDateTime
@@ -21,7 +20,6 @@ import java.time.ZonedDateTime
 @DBRider
 class TokenRepositoryImplTest {
   @Autowired
-  @Qualifier("jdbc-client")
   lateinit var sut: TokenRepository
 
   @DataSet(value = ["datasets/setup/0-token.yml"])
