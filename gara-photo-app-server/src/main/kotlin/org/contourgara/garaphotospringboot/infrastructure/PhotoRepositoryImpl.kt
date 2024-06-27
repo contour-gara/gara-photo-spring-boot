@@ -7,6 +7,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver
 import org.springframework.stereotype.Component
 import java.nio.file.Files
 import java.nio.file.Path
+import kotlin.io.path.isRegularFile
 
 @Component
 class PhotoRepositoryImpl: PhotoRepository {
@@ -17,6 +18,7 @@ class PhotoRepositoryImpl: PhotoRepository {
   override fun saveForYesterday(photoYesterday: PhotoYesterday, sourcePath: String) {
     val path = "${sourcePath}/${photoYesterday.getDate()}"
     Files.createDirectories(Path.of(path))
+    Files.walk(Path.of(path)).filter { it.isRegularFile() }.map { it.toFile() }.forEach { it.delete() }
     photoYesterday.photos.forEach { Files.write(Path.of("${path}/${it.fileName}"), it.byte) }
   }
 }

@@ -3,12 +3,15 @@ package org.contourgara.garaphotospringboot.infrastructure
 import io.kotest.core.spec.style.WordSpec
 import io.kotest.engine.spec.tempdir
 import io.kotest.matchers.file.shouldExist
+import io.kotest.matchers.file.shouldNotExist
 import io.kotest.matchers.shouldBe
 import org.contourgara.garaphotospringboot.TestUtils
 import org.contourgara.garaphotospringboot.domain.Media
 import org.contourgara.garaphotospringboot.domain.PhotoYesterday
 import org.contourgara.garaphotospringboot.domain.UploadedPhoto
 import java.io.File
+import java.nio.file.Files
+import java.nio.file.Path
 
 class PhotoRepositoryImplTest: WordSpec({
   "引数のディレクトリの写真を取得" should  {
@@ -46,6 +49,26 @@ class PhotoRepositoryImplTest: WordSpec({
       // assert
       File("${tempDir.absolutePath}/20240422/${photo1.name}").shouldExist()
       File("${tempDir.absolutePath}/20240422/${photo2.name}").shouldExist()
+    }
+
+    "すでにあった写真は削除されている" {
+      // setup
+      val sut = PhotoRepositoryImpl()
+
+      val photo = TestUtils.getFile("photo/yesterday/20240422/20240422-190001-01.png")
+      val photoYesterday = PhotoYesterday(listOf(UploadedPhoto(photo.name, photo.readBytes())))
+
+      val tempDir = tempdir()
+
+      Files.createDirectories(Path.of("${tempDir.absolutePath}/20240422"))
+      Files.writeString(Path.of("${tempDir.absolutePath}/20240422/test.txt"), "test")
+
+      // execute
+      sut.saveForYesterday(photoYesterday, tempDir.absolutePath)
+
+      // assert
+      File("${tempDir.absolutePath}/20240422/${photo.name}").shouldExist()
+      File("${tempDir.absolutePath}/20240422/test.txt").shouldNotExist()
     }
   }
 })
