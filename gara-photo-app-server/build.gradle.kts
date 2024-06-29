@@ -122,3 +122,8 @@ tasks.jacocoTestReport {
 plugins.withType<JacocoPlugin> {
     tasks["test"].finalizedBy("jacocoTestReport")
 }
+
+detekt {
+    parallel = true
+    ignoreFailures = false
+}

@@ -9,7 +9,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 @ConditionalOnProperty(
-    prefix = "application", name = ["repository"], havingValue = "jdbc-client", matchIfMissing = true
+    prefix = "application",
+    name = ["repository"],
+    havingValue = "jdbc-client",
+    matchIfMissing = true,
 )
 class TokenRepositoryImpl(
     private val jdbcClient: JdbcClient

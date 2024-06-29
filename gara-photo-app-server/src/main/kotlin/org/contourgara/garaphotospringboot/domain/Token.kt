@@ -10,6 +10,10 @@ data class Token(
     val dateTime: ZonedDateTime,
 ) {
     fun isInvalid(arg: ZonedDateTime): Boolean {
-        return ChronoUnit.SECONDS.between(dateTime, arg) >= 6900
+        return ChronoUnit.SECONDS.between(dateTime, arg) >= TOKEN_EXPIRATION_SECONDS
+    }
+
+    companion object {
+        private const val TOKEN_EXPIRATION_SECONDS = 6900
     }
 }

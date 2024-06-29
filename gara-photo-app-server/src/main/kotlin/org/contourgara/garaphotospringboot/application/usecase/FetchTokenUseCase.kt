@@ -3,8 +3,8 @@ package org.contourgara.garaphotospringboot.application.usecase
 import org.contourgara.garaphotospringboot.application.param.FetchTokenParam
 import org.contourgara.garaphotospringboot.common.TwitterConfig
 import org.contourgara.garaphotospringboot.domain.Authorization
-import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenProvider
+import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.springframework.stereotype.Service
 
 @Service

@@ -5,7 +5,7 @@
 1. ビルドし、コンテナを起動します。
 
     ```shell
-    (cd gara-photo-app-server && gradle clean build -x test)
+    (cd gara-photo-app-server && gradle clean build -x test -x detekt)
     docker compose up --build -d
     ```
 

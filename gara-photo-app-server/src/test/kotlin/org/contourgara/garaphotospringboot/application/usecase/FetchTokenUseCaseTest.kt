@@ -16,7 +16,7 @@ import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime
 
-class FetchTokenUseCaseTest() {
+class FetchTokenUseCaseTest {
     @InjectMocks
     lateinit var sut: FetchTokenUseCase
 

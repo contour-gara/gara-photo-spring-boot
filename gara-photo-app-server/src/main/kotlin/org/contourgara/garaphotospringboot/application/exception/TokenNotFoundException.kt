@@ -1,3 +1,3 @@
 package org.contourgara.garaphotospringboot.application.exception
 
-class TokenNotFoundException: RuntimeException()
+class TokenNotFoundException : RuntimeException()

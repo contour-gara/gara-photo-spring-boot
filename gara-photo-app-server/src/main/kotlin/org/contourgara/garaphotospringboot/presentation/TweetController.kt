@@ -34,7 +34,11 @@ class TweetController(
     @PostMapping("yesterday/upload_media")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     fun uploadYesterday(@RequestPart("photos") files: List<MultipartFile>) {
-        uploadYesterdayUseCase.execute(UploadYesterdayParam(files.map { it.originalFilename!! },
-            files.map { it.bytes }))
+        uploadYesterdayUseCase.execute(
+            UploadYesterdayParam(
+                files.map { it.originalFilename!! },
+                files.map { it.bytes }
+            )
+        )
     }
 }

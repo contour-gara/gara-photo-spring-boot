@@ -5,9 +5,12 @@ import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty
 import org.springframework.stereotype.Repository
 
+@Suppress("ForbiddenComment")
 @Repository
 @ConditionalOnProperty(
-    prefix = "application", name = ["repository"], havingValue = "mybatis"
+    prefix = "application",
+    name = ["repository"],
+    havingValue = "mybatis",
 )
 class TokenRepositoryImplOld(
     private val tokenMapper: TokenMapper

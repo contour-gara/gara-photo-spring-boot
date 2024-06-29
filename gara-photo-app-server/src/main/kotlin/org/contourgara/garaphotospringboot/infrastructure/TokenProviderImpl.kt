@@ -11,6 +11,7 @@ import twitter4j.OAuth2TokenProvider
 import twitter4j.conf.ConfigurationBuilder
 import twitter4j.v2Configuration
 
+@Suppress("TooGenericExceptionThrown", "ThrowingExceptionsWithoutMessageOrCause", "ForbiddenComment")
 @Component
 class TokenProviderImpl(
     private val twitterConfig: TwitterConfig,

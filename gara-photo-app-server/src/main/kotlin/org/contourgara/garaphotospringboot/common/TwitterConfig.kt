@@ -23,9 +23,14 @@ class TwitterConfig {
     var codeChallenge: String = createChallenge()
 
     private fun createChallenge(): String {
-        val chars = ('a'..'z') + (1..9)
-        return (1..12).map {
+        val chars = ('a'..'z') + (1..MAX_SINGLE_DIGIT_NUMBER)
+        return (1..MIN_DIGIT_CODE_CHALLENGE).map {
             chars.random()
         }.joinToString("")
+    }
+
+    companion object {
+        private const val MAX_SINGLE_DIGIT_NUMBER = 9
+        private const val MIN_DIGIT_CODE_CHALLENGE = 12
     }
 }
