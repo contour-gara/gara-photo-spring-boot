@@ -17,31 +17,31 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @RequestMapping("/v1/oauth")
 class OAuthController(
-  private val createUrlUseCase: CreateUrlUseCase,
-  private val fetchTokenUseCase: FetchTokenUseCase,
-  private val findTokenUseCase: FindTokenUseCase,
+    private val createUrlUseCase: CreateUrlUseCase,
+    private val fetchTokenUseCase: FetchTokenUseCase,
+    private val findTokenUseCase: FindTokenUseCase,
 ) {
-  @GetMapping
-  @ResponseStatus(HttpStatus.OK)
-  fun root() {
-    // Do nothing
-  }
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun root() {
+        // Do nothing
+    }
 
-  @GetMapping("url")
-  @ResponseStatus(HttpStatus.OK)
-  fun createUrl(): CreateUrlResponse {
-    return CreateUrlResponse.of(createUrlUseCase.execute())
-  }
+    @GetMapping("url")
+    @ResponseStatus(HttpStatus.OK)
+    fun createUrl(): CreateUrlResponse {
+        return CreateUrlResponse.of(createUrlUseCase.execute())
+    }
 
-  @PostMapping("token")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  fun fetchToken(@RequestBody fetchTokenRequest: FetchTokenRequest) {
-    fetchTokenUseCase.execute(fetchTokenRequest.convertToParam())
-  }
+    @PostMapping("token")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    fun fetchToken(@RequestBody fetchTokenRequest: FetchTokenRequest) {
+        fetchTokenUseCase.execute(fetchTokenRequest.convertToParam())
+    }
 
-  @GetMapping("token")
-  @ResponseStatus(HttpStatus.OK)
-  fun findToken(): FindTokenResponse {
-    return FindTokenResponse.of(findTokenUseCase.execute())
-  }
+    @GetMapping("token")
+    @ResponseStatus(HttpStatus.OK)
+    fun findToken(): FindTokenResponse {
+        return FindTokenResponse.of(findTokenUseCase.execute())
+    }
 }

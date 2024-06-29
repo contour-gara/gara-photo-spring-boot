@@ -9,23 +9,23 @@ import org.springframework.stereotype.Component
 @ConfigurationProperties(prefix = "twitter")
 @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
 class TwitterConfig {
-  var oauth1AccessToken: String = ""
-  var oauth1AccessTokenSecret: String = ""
-  var oauth2AccessToken: String = ""
-  var oauth2RefreshToken: String = ""
-  var apiKey: String = ""
-  var apiKeySecret: String = ""
-  var clientId: String = ""
-  var clientSecret: String = ""
-  var redirectUri: String = ""
-  var uploadBaseUrl: String = ""
-  var oauth2RestBaseUrl: String = ""
-  var codeChallenge: String = createChallenge()
+    var oauth1AccessToken: String = ""
+    var oauth1AccessTokenSecret: String = ""
+    var oauth2AccessToken: String = ""
+    var oauth2RefreshToken: String = ""
+    var apiKey: String = ""
+    var apiKeySecret: String = ""
+    var clientId: String = ""
+    var clientSecret: String = ""
+    var redirectUri: String = ""
+    var uploadBaseUrl: String = ""
+    var oauth2RestBaseUrl: String = ""
+    var codeChallenge: String = createChallenge()
 
-  private fun createChallenge(): String {
-    val chars = ('a'..'z') + (1..9)
-    return (1..12).map {
-      chars.random()
-    }.joinToString("")
-  }
+    private fun createChallenge(): String {
+        val chars = ('a'..'z') + (1..9)
+        return (1..12).map {
+            chars.random()
+        }.joinToString("")
+    }
 }

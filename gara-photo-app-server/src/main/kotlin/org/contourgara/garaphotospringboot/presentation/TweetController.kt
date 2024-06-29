@@ -16,27 +16,25 @@ import org.springframework.web.multipart.MultipartFile
 @RestController
 @RequestMapping("/v1/tweet")
 class TweetController(
-  private val tweetYesterdayScenario: TweetYesterdayScenario,
-  private val uploadYesterdayUseCase: UploadYesterdayUseCase,
-  ) {
-  @GetMapping
-  @ResponseStatus(HttpStatus.OK)
-  fun root() {
-    // Do nothing
-  }
+    private val tweetYesterdayScenario: TweetYesterdayScenario,
+    private val uploadYesterdayUseCase: UploadYesterdayUseCase,
+) {
+    @GetMapping
+    @ResponseStatus(HttpStatus.OK)
+    fun root() {
+        // Do nothing
+    }
 
-  @PostMapping("yesterday")
-  @ResponseStatus(HttpStatus.CREATED)
-  fun tweetYesterday(): TweetYesterdayResponse {
-    return TweetYesterdayResponse.of(tweetYesterdayScenario.execute())
-  }
+    @PostMapping("yesterday")
+    @ResponseStatus(HttpStatus.CREATED)
+    fun tweetYesterday(): TweetYesterdayResponse {
+        return TweetYesterdayResponse.of(tweetYesterdayScenario.execute())
+    }
 
-  @PostMapping("yesterday/upload_media")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PostMapping("yesterday/upload_media")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun uploadYesterday(@RequestPart("photos") files: List<MultipartFile>) {
-    uploadYesterdayUseCase.execute(UploadYesterdayParam(
-      files.map { it.originalFilename!! },
-      files.map { it.bytes }
-    ))
-  }
+        uploadYesterdayUseCase.execute(UploadYesterdayParam(files.map { it.originalFilename!! },
+            files.map { it.bytes }))
+    }
 }

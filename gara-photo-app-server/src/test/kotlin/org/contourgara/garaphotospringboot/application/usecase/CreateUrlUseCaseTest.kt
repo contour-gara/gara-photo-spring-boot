@@ -12,33 +12,34 @@ import org.mockito.kotlin.*
 import org.mockito.MockitoAnnotations
 
 class CreateUrlUseCaseTest {
-  @InjectMocks
-  lateinit var sut: CreateUrlUseCase
+    @InjectMocks
+    lateinit var sut: CreateUrlUseCase
 
-  @Mock
-  lateinit var tokenProvider: TokenProvider
-  @Mock
-  lateinit var twitterConfig: TwitterConfig
+    @Mock
+    lateinit var tokenProvider: TokenProvider
 
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
-  }
+    @Mock
+    lateinit var twitterConfig: TwitterConfig
 
-  @Test
-  fun `URL と code_challenge を取得できる`() {
-    // setup
-    doReturn("url").whenever(tokenProvider).createUrl(any())
-    doReturn("dummy").whenever(twitterConfig).clientId
-    doReturn("dummy").whenever(twitterConfig).redirectUri
-    doReturn("challenge").whenever(twitterConfig).codeChallenge
+    @BeforeEach
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+    }
 
-    // execute
-    val actual = sut.execute()
+    @Test
+    fun `URL と code_challenge を取得できる`() {
+        // setup
+        doReturn("url").whenever(tokenProvider).createUrl(any())
+        doReturn("dummy").whenever(twitterConfig).clientId
+        doReturn("dummy").whenever(twitterConfig).redirectUri
+        doReturn("challenge").whenever(twitterConfig).codeChallenge
 
-    // assert
-    val expected = CreateUrlDto("url", "challenge")
+        // execute
+        val actual = sut.execute()
 
-    assertThat(actual).isEqualTo(expected)
-  }
+        // assert
+        val expected = CreateUrlDto("url", "challenge")
+
+        assertThat(actual).isEqualTo(expected)
+    }
 }

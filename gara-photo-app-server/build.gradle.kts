@@ -5,7 +5,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val versions by extra {
     mapOf(
         "java" to "21",
-        "kotlin" to "1.9.24",
+        "kotlin" to "1.9.23",
         "springBoot" to "3.2.5",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
@@ -18,16 +18,18 @@ val versions by extra {
         "wiremock" to "3.6.0",
         "kotest" to "5.9.1",
         "kotest-spring" to "1.3.0",
+        "detekt" to "1.23.6",
     )
 }
 
 plugins {
     id("org.springframework.boot") version "3.2.5"
     id("io.spring.dependency-management") version "1.1.5"
-    kotlin("jvm") version "1.9.24"
-    kotlin("plugin.spring") version "1.9.24"
+    kotlin("jvm") version "1.9.23"
+    kotlin("plugin.spring") version "1.9.23"
     id("org.sonarqube") version "5.0.0.4638"
     id("jacoco")
+    id("io.gitlab.arturbosch.detekt") version "1.23.6"
 }
 
 group = "org.contourgara"
@@ -70,6 +72,7 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
     testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${versions["detekt"]}")
 }
 
 tasks.withType<KotlinCompile> {

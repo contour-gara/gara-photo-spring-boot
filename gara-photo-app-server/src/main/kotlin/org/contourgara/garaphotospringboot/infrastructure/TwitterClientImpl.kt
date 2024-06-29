@@ -10,23 +10,23 @@ import twitter4j.v2
 import twitter4j.v2Configuration
 
 @Component
-class TwitterClientImpl(private val twitterConfig: TwitterConfig): TwitterClient {
-  override fun tweetWithMedia(tweet: Tweet, accessToken: String): Long {
-    val conf = ConfigurationBuilder()
-      .setOAuthAccessToken(twitterConfig.oauth1AccessToken)
-      .setOAuthAccessTokenSecret(twitterConfig.oauth1AccessTokenSecret)
-      .setOAuthConsumerKey(twitterConfig.apiKey)
-      .setOAuthConsumerSecret(twitterConfig.apiKeySecret)
-      .setOAuth2AccessToken(accessToken)
-      .setUploadBaseURL(twitterConfig.uploadBaseUrl)
-      .build()
+class TwitterClientImpl(private val twitterConfig: TwitterConfig) : TwitterClient {
+    override fun tweetWithMedia(tweet: Tweet, accessToken: String): Long {
+        val conf = ConfigurationBuilder()
+            .setOAuthAccessToken(twitterConfig.oauth1AccessToken)
+            .setOAuthAccessTokenSecret(twitterConfig.oauth1AccessTokenSecret)
+            .setOAuthConsumerKey(twitterConfig.apiKey)
+            .setOAuthConsumerSecret(twitterConfig.apiKeySecret)
+            .setOAuth2AccessToken(accessToken)
+            .setUploadBaseURL(twitterConfig.uploadBaseUrl)
+            .build()
 
-    conf.v2Configuration.baseURL = twitterConfig.oauth2RestBaseUrl
+        conf.v2Configuration.baseURL = twitterConfig.oauth2RestBaseUrl
 
-    val twitter = TwitterFactory(conf).instance
+        val twitter = TwitterFactory(conf).instance
 
-    val mediaIds = tweet.media.files.map { twitter.uploadMedia(it).mediaId }
+        val mediaIds = tweet.media.files.map { twitter.uploadMedia(it).mediaId }
 
-    return twitter.v2.createTweet(text = tweet.text, mediaIds = mediaIds.toTypedArray()).id
-  }
+        return twitter.v2.createTweet(text = tweet.text, mediaIds = mediaIds.toTypedArray()).id
+    }
 }

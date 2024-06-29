@@ -9,15 +9,15 @@ import java.time.ZoneId
 
 @Configuration
 class GaraPhotoEnvironmentConfig {
-  @Profile(value = ["default", "prd"])
-  @Bean
-  fun realTimeClock(): Clock {
-    return Clock.system(ZoneId.systemDefault())
-  }
+    @Profile(value = ["default", "prd"])
+    @Bean
+    fun realTimeClock(): Clock {
+        return Clock.system(ZoneId.systemDefault())
+    }
 
-  @Profile(value = ["test"])
-  @Bean
-  fun fixedTimeClock(): Clock {
-    return Clock.fixed(Instant.parse("2024-04-23T00:00:00+09:00"), ZoneId.systemDefault())
-  }
+    @Profile(value = ["test"])
+    @Bean
+    fun fixedTimeClock(): Clock {
+        return Clock.fixed(Instant.parse("2024-04-23T00:00:00+09:00"), ZoneId.systemDefault())
+    }
 }

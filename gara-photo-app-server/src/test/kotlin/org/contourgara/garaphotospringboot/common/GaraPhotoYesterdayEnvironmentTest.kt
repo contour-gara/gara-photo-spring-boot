@@ -12,16 +12,16 @@ import java.time.ZonedDateTime
 @ActiveProfiles("test")
 @SpringBootTest
 class GaraPhotoYesterdayEnvironmentTest {
-  @Autowired
-  lateinit var sut: GaraPhotoEnvironment
+    @Autowired
+    lateinit var sut: GaraPhotoEnvironment
 
-  @Test
-  fun `テストプロファイルで起動した場合、2024 年 4 月 23 日が返る`() {
-    // execute
-    val actual = sut.getCurrentDateTime()
+    @Test
+    fun `テストプロファイルで起動した場合、2024 年 4 月 23 日が返る`() {
+        // execute
+        val actual = sut.getCurrentDateTime()
 
-    // assert
-    val expected = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
-    assertThat(actual).isEqualTo(expected)
-  }
+        // assert
+        val expected = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        assertThat(actual).isEqualTo(expected)
+    }
 }

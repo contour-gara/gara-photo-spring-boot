@@ -5,16 +5,16 @@ import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
 import org.junit.jupiter.api.Test
 
 class FindTokenResponseTest {
-  @Test
-  fun `DTO からインスタンスを生成できる`() {
-    // setup
-    val findTokenDto = FindTokenDto("accessToken")
+    @Test
+    fun `DTO からインスタンスを生成できる`() {
+        // setup
+        val findTokenDto = FindTokenDto("accessToken")
 
-    // execute
-    val actual = FindTokenResponse.of(findTokenDto)
+        // execute
+        val actual = FindTokenResponse.of(findTokenDto)
 
-    // assert
-    val expected = FindTokenResponse("accessToken")
-    assertThat(actual).isEqualTo(expected)
-  }
+        // assert
+        val expected = FindTokenResponse("accessToken")
+        assertThat(actual).isEqualTo(expected)
+    }
 }

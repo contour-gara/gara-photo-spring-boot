@@ -19,67 +19,89 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class FindTokenUseCaseTest() {
-  @InjectMocks
-  lateinit var sut: FindTokenUseCase
+    @InjectMocks
+    lateinit var sut: FindTokenUseCase
 
-  @Mock
-  lateinit var twitterConfig: TwitterConfig
-  @Mock
-  lateinit var tokenProvider: TokenProvider
-  @Mock
-  lateinit var tokenRepository: TokenRepository
-  @Mock
-  lateinit var garaPhotoEnvironment: GaraPhotoEnvironment
+    @Mock
+    lateinit var twitterConfig: TwitterConfig
 
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
-  }
+    @Mock
+    lateinit var tokenProvider: TokenProvider
 
-  @Test
-  fun `トークンが存在しない場合、例外が投げられる`() {
-    // setup
-    doReturn("clientId").whenever(twitterConfig).clientId
-    doReturn(null).whenever(tokenRepository).find("clientId")
+    @Mock
+    lateinit var tokenRepository: TokenRepository
 
-    // execute & assert
-    assertThatThrownBy { sut.execute() }.isInstanceOf(TokenNotFoundException::class.java)
-  }
+    @Mock
+    lateinit var garaPhotoEnvironment: GaraPhotoEnvironment
 
-  @Test
-  fun `トークンが有効期限内の場合、そのままアクセストークンを返す`() {
-    // setup
-    val token = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault()))
+    @BeforeEach
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+    }
 
-    doReturn("clientId").whenever(twitterConfig).clientId
-    doReturn(token).whenever(tokenRepository).find("clientId")
-    doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 1, 0, 0), ZoneId.systemDefault())).whenever(garaPhotoEnvironment).getCurrentDateTime()
+    @Test
+    fun `トークンが存在しない場合、例外が投げられる`() {
+        // setup
+        doReturn("clientId").whenever(twitterConfig).clientId
+        doReturn(null).whenever(tokenRepository).find("clientId")
 
-    // execute
-    val actual = sut.execute()
+        // execute & assert
+        assertThatThrownBy { sut.execute() }.isInstanceOf(TokenNotFoundException::class.java)
+    }
 
-    // assert
-    val expected = FindTokenDto("accessToken")
-    assertThat(actual).isEqualTo(expected)
-  }
+    @Test
+    fun `トークンが有効期限内の場合、そのままアクセストークンを返す`() {
+        // setup
+        val token = Token(
+            "accessToken",
+            "refreshToken",
+            "clientId",
+            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        )
 
-  @Test
-  fun `トークンが有効期限外の場合、トークンを再取得しアクセストークンを返す`() {
-    // setup
-    val invalidToken = Token("invalidAccessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault()))
-    val validToken = Token("validAccessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault()))
+        doReturn("clientId").whenever(twitterConfig).clientId
+        doReturn(token).whenever(tokenRepository).find("clientId")
+        doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 1, 0, 0), ZoneId.systemDefault())).whenever(
+            garaPhotoEnvironment
+        ).getCurrentDateTime()
 
-    doReturn("clientId").whenever(twitterConfig).clientId
-    doReturn(invalidToken).whenever(tokenRepository).find("clientId")
-    doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault())).whenever(garaPhotoEnvironment).getCurrentDateTime()
-    doReturn(validToken).whenever(tokenProvider).fetchTokenByRefreshToken(invalidToken)
+        // execute
+        val actual = sut.execute()
 
-    // execute
-    val actual = sut.execute()
+        // assert
+        val expected = FindTokenDto("accessToken")
+        assertThat(actual).isEqualTo(expected)
+    }
 
-    // assert
-    val expected = FindTokenDto("validAccessToken")
-    assertThat(actual).isEqualTo(expected)
-    verify(tokenRepository, times(1)).update(validToken)
-  }
+    @Test
+    fun `トークンが有効期限外の場合、トークンを再取得しアクセストークンを返す`() {
+        // setup
+        val invalidToken = Token(
+            "invalidAccessToken",
+            "refreshToken",
+            "clientId",
+            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        )
+        val validToken = Token(
+            "validAccessToken",
+            "refreshToken",
+            "clientId",
+            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault())
+        )
+
+        doReturn("clientId").whenever(twitterConfig).clientId
+        doReturn(invalidToken).whenever(tokenRepository).find("clientId")
+        doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault())).whenever(
+            garaPhotoEnvironment
+        ).getCurrentDateTime()
+        doReturn(validToken).whenever(tokenProvider).fetchTokenByRefreshToken(invalidToken)
+
+        // execute
+        val actual = sut.execute()
+
+        // assert
+        val expected = FindTokenDto("validAccessToken")
+        assertThat(actual).isEqualTo(expected)
+        verify(tokenRepository, times(1)).update(validToken)
+    }
 }

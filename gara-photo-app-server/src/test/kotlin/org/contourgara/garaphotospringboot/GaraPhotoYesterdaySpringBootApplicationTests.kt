@@ -8,11 +8,11 @@ import org.springframework.boot.test.context.SpringBootTest
 
 @SpringBootTest
 class GaraPhotoYesterdaySpringBootApplicationTests {
-  @Autowired
-  lateinit var oAuthController: OAuthController
+    @Autowired
+    lateinit var oAuthController: OAuthController
 
-  @Test
-  fun contextLoads() {
-    assertThat(oAuthController).isNotNull
-  }
+    @Test
+    fun contextLoads() {
+        assertThat(oAuthController).isNotNull
+    }
 }

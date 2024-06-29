@@ -13,30 +13,31 @@ import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 
 class TweetYesterdayScenarioTest {
-  @InjectMocks
-  lateinit var sut: TweetYesterdayScenario
+    @InjectMocks
+    lateinit var sut: TweetYesterdayScenario
 
-  @Mock
-  lateinit var findTokenUseCase: FindTokenUseCase
-  @Mock
-  lateinit var tweetYesterdayUseCase: TweetYesterdayUseCase
+    @Mock
+    lateinit var findTokenUseCase: FindTokenUseCase
 
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
-  }
+    @Mock
+    lateinit var tweetYesterdayUseCase: TweetYesterdayUseCase
 
-  @Test
-  fun `ツイート ID が返る`() {
-    // setup
-    doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
-    doReturn(TweetYesterdayDto("1")).whenever(tweetYesterdayUseCase).execute("accessToken")
+    @BeforeEach
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+    }
 
-    // execute
-    val actual = sut.execute()
+    @Test
+    fun `ツイート ID が返る`() {
+        // setup
+        doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
+        doReturn(TweetYesterdayDto("1")).whenever(tweetYesterdayUseCase).execute("accessToken")
 
-    // assert
-    val expected = TweetYesterdayDto("1")
-    assertThat(actual).isEqualTo(expected)
-  }
+        // execute
+        val actual = sut.execute()
+
+        // assert
+        val expected = TweetYesterdayDto("1")
+        assertThat(actual).isEqualTo(expected)
+    }
 }

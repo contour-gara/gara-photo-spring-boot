@@ -19,57 +19,57 @@ import org.springframework.test.web.servlet.MockMvc
 
 @WebMvcTest(controllers = [TweetController::class])
 class TweetControllerTest(
-  private val mockMvc: MockMvc,
-  @MockBean private val tweetYesterdayScenario: TweetYesterdayScenario,
-  @MockBean private val uploadYesterdayUseCase: UploadYesterdayUseCase,
+    private val mockMvc: MockMvc,
+    @MockBean private val tweetYesterdayScenario: TweetYesterdayScenario,
+    @MockBean private val uploadYesterdayUseCase: UploadYesterdayUseCase,
 ) : WordSpec({
-  beforeEach {
-    mockMvc(mockMvc)
-  }
-
-  "ルートにアクセスした場合" should {
-    "レスポンスコード 200 が返る" {
-      // execute & assert
-      Given {
-        body("")
-      } When {
-        get("/v1/tweet")
-      } Then {
-        status(HttpStatus.OK)
-      }
+    beforeEach {
+        mockMvc(mockMvc)
     }
-  }
 
-  "yesterday ツイートエンドポイントに POST した場合" should  {
-    "レスポンスコード 201 が返り、ツイート ID を取得できる" {
-      // setup
-      doReturn(TweetYesterdayDto("1")).whenever(tweetYesterdayScenario).execute()
-
-      // execute & assert
-      Given {
-        body("")
-      } When {
-        post("/v1/tweet/yesterday")
-      } Then {
-        status(HttpStatus.CREATED)
-        body("tweetId", equalTo("1"))
-      }
+    "ルートにアクセスした場合" should {
+        "レスポンスコード 200 が返る" {
+            // execute & assert
+            Given {
+                body("")
+            } When {
+                get("/v1/tweet")
+            } Then {
+                status(HttpStatus.OK)
+            }
+        }
     }
-  }
 
-  "yesterday アップロードエンドポイントに POST した場合" should {
-    "レスポンスコード 204 が返る" {
-      // setup
-      val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
+    "yesterday ツイートエンドポイントに POST した場合" should {
+        "レスポンスコード 201 が返り、ツイート ID を取得できる" {
+            // setup
+            doReturn(TweetYesterdayDto("1")).whenever(tweetYesterdayScenario).execute()
 
-      // execute & assert
-      Given {
-        multiPart("photos", listOf(photo))
-      } When {
-        post("/v1/tweet/yesterday/upload_media")
-      } Then {
-        status(HttpStatus.NO_CONTENT)
-      }
+            // execute & assert
+            Given {
+                body("")
+            } When {
+                post("/v1/tweet/yesterday")
+            } Then {
+                status(HttpStatus.CREATED)
+                body("tweetId", equalTo("1"))
+            }
+        }
     }
-  }
+
+    "yesterday アップロードエンドポイントに POST した場合" should {
+        "レスポンスコード 204 が返る" {
+            // setup
+            val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
+
+            // execute & assert
+            Given {
+                multiPart("photos", listOf(photo))
+            } When {
+                post("/v1/tweet/yesterday/upload_media")
+            } Then {
+                status(HttpStatus.NO_CONTENT)
+            }
+        }
+    }
 })

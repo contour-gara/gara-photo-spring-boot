@@ -19,36 +19,38 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class TweetYesterdayUseCaseTest {
-  @InjectMocks
-  lateinit var sut: TweetYesterdayUseCase
+    @InjectMocks
+    lateinit var sut: TweetYesterdayUseCase
 
-  @Mock
-  lateinit var garaPhotoEnvironment: GaraPhotoEnvironment
-  @Mock
-  lateinit var photoRepository: PhotoRepository
-  @Mock
-  lateinit var twitterClient: TwitterClient
+    @Mock
+    lateinit var garaPhotoEnvironment: GaraPhotoEnvironment
 
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
-  }
+    @Mock
+    lateinit var photoRepository: PhotoRepository
 
-  @Test
-  fun `ツイート ID が返る`() {
-    // setup
-    val dateTime = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
-    val media = Media(listOf(getFile("photo/yesterday/20240422/20240422-190001-01.png")))
+    @Mock
+    lateinit var twitterClient: TwitterClient
 
-    doReturn(dateTime).whenever(garaPhotoEnvironment).getCurrentDateTime()
-    doReturn(media).whenever(photoRepository).findForYesterday("file:///opt/photo/yesterday/20240422")
-    doReturn(1L).whenever(twitterClient).tweetWithMedia(Tweet("yesterday", media), "accessToken")
+    @BeforeEach
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+    }
 
-    // execute
-    val actual = sut.execute("accessToken")
+    @Test
+    fun `ツイート ID が返る`() {
+        // setup
+        val dateTime = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        val media = Media(listOf(getFile("photo/yesterday/20240422/20240422-190001-01.png")))
 
-    // assert
-    val expected = TweetYesterdayDto("1")
-    assertThat(actual).isEqualTo(expected)
-  }
+        doReturn(dateTime).whenever(garaPhotoEnvironment).getCurrentDateTime()
+        doReturn(media).whenever(photoRepository).findForYesterday("file:///opt/photo/yesterday/20240422")
+        doReturn(1L).whenever(twitterClient).tweetWithMedia(Tweet("yesterday", media), "accessToken")
+
+        // execute
+        val actual = sut.execute("accessToken")
+
+        // assert
+        val expected = TweetYesterdayDto("1")
+        assertThat(actual).isEqualTo(expected)
+    }
 }

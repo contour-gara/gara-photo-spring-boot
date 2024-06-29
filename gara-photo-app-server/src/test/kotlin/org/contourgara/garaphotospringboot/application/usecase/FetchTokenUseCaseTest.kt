@@ -17,36 +17,44 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 
 class FetchTokenUseCaseTest() {
-  @InjectMocks
-  lateinit var sut: FetchTokenUseCase
+    @InjectMocks
+    lateinit var sut: FetchTokenUseCase
 
-  @Mock
-  lateinit var twitterConfig: TwitterConfig
-  @Mock
-  lateinit var tokenProvider: TokenProvider
-  @Mock
-  lateinit var tokenRepository: TokenRepository
+    @Mock
+    lateinit var twitterConfig: TwitterConfig
 
-  @BeforeEach
-  fun setUp() {
-    MockitoAnnotations.openMocks(this)
-  }
+    @Mock
+    lateinit var tokenProvider: TokenProvider
 
-  @Test
-  fun `トークンを取得し、リポジトリに保存できる`() {
-    // setup
-    val token = Token("accessToken", "refreshToken", "clientId", ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 4, 10, 30), ZoneId.systemDefault()))
+    @Mock
+    lateinit var tokenRepository: TokenRepository
 
-    doReturn("clientId").whenever(twitterConfig).clientId
-    doReturn("redirectUri").whenever(twitterConfig).redirectUri
-    doReturn(token).whenever(tokenProvider).fetchToken(Authorization("clientId", "redirectUri", "code", "challenge"))
+    @BeforeEach
+    fun setUp() {
+        MockitoAnnotations.openMocks(this)
+    }
 
-    val fetchTokenParam = FetchTokenParam("code", "challenge")
+    @Test
+    fun `トークンを取得し、リポジトリに保存できる`() {
+        // setup
+        val token = Token(
+            "accessToken",
+            "refreshToken",
+            "clientId",
+            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 4, 10, 30), ZoneId.systemDefault())
+        )
 
-    // execute
-    sut.execute(fetchTokenParam)
+        doReturn("clientId").whenever(twitterConfig).clientId
+        doReturn("redirectUri").whenever(twitterConfig).redirectUri
+        doReturn(token).whenever(tokenProvider)
+            .fetchToken(Authorization("clientId", "redirectUri", "code", "challenge"))
 
-    // assert
-    verify(tokenRepository, times(1)).insert(token)
-  }
+        val fetchTokenParam = FetchTokenParam("code", "challenge")
+
+        // execute
+        sut.execute(fetchTokenParam)
+
+        // assert
+        verify(tokenRepository, times(1)).insert(token)
+    }
 }

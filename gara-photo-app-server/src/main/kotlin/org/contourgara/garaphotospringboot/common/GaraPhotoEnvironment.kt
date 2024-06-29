@@ -6,7 +6,7 @@ import java.time.ZonedDateTime
 
 @Component
 class GaraPhotoEnvironment(private val clock: Clock) {
-  fun getCurrentDateTime(): ZonedDateTime {
-    return ZonedDateTime.now(clock)
-  }
+    fun getCurrentDateTime(): ZonedDateTime {
+        return ZonedDateTime.now(clock)
+    }
 }

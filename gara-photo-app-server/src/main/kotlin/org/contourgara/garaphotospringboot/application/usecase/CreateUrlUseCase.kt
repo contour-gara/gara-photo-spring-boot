@@ -8,18 +8,21 @@ import org.springframework.stereotype.Service
 
 @Service
 class CreateUrlUseCase(
-  private val tokenProvider: TokenProvider,
-  private val twitterConfig: TwitterConfig,
+    private val tokenProvider: TokenProvider,
+    private val twitterConfig: TwitterConfig,
 ) {
-  fun execute(): CreateUrlDto {
-    val codeChallenge = twitterConfig.codeChallenge
+    fun execute(): CreateUrlDto {
+        val codeChallenge = twitterConfig.codeChallenge
 
-    val url = tokenProvider.createUrl(AuthorizationSetting(
-      twitterConfig.clientId,
-      twitterConfig.redirectUri,
-      listOf("tweet.read", "users.read", "tweet.write", "offline.access"),
-      codeChallenge))
+        val url = tokenProvider.createUrl(
+            AuthorizationSetting(
+                twitterConfig.clientId,
+                twitterConfig.redirectUri,
+                listOf("tweet.read", "users.read", "tweet.write", "offline.access"),
+                codeChallenge
+            )
+        )
 
-    return CreateUrlDto(url, codeChallenge)
-  }
+        return CreateUrlDto(url, codeChallenge)
+    }
 }

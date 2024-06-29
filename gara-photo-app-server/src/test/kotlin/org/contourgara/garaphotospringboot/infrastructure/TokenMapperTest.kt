@@ -14,62 +14,62 @@ import org.springframework.dao.DuplicateKeyException
 @DBUnit
 @SpringBootTest
 class TokenMapperTest {
-  @Autowired
-  lateinit var sut: TokenMapper
+    @Autowired
+    lateinit var sut: TokenMapper
 
-  @DataSet(value = ["datasets/setup/0-token.yml"])
-  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-  @Test
-  fun `トークン情報をテーブルに保存できる`() {
-    // setup
-    val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+    @DataSet(value = ["datasets/setup/0-token.yml"])
+    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+    @Test
+    fun `トークン情報をテーブルに保存できる`() {
+        // setup
+        val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
 
-    // execute
-    sut.insert(tokenEntity)
-  }
+        // execute
+        sut.insert(tokenEntity)
+    }
 
-  @DataSet(value = ["datasets/setup/1-token.yml"])
-  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-  @Test
-  fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
-    // setup
-    val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+    @DataSet(value = ["datasets/setup/1-token.yml"])
+    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+    @Test
+    fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
+        // setup
+        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
 
-    // execute & assert
-    assertThatThrownBy { sut.insert(tokenEntity) }.isInstanceOf(DuplicateKeyException::class.java)
-  }
+        // execute & assert
+        assertThatThrownBy { sut.insert(tokenEntity) }.isInstanceOf(DuplicateKeyException::class.java)
+    }
 
-  @DataSet(value = ["datasets/setup/1-token.yml"])
-  @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-  @Test
-  fun `トークン情報を取得できる`() {
-    // execute
-    val actual = sut.find()
+    @DataSet(value = ["datasets/setup/1-token.yml"])
+    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
+    @Test
+    fun `トークン情報を取得できる`() {
+        // execute
+        val actual = sut.find()
 
-    // assert
-    val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
-    assertThat(actual).isEqualTo(expected)
-  }
+        // assert
+        val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+        assertThat(actual).isEqualTo(expected)
+    }
 
-  @DataSet(value = ["datasets/setup/0-token.yml"])
-  @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
-  @Test
-  fun `トークン情報を取得でレコードが無い場合、null が返る`() {
-    // execute
-    val actual = sut.find()
+    @DataSet(value = ["datasets/setup/0-token.yml"])
+    @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
+    @Test
+    fun `トークン情報を取得でレコードが無い場合、null が返る`() {
+        // execute
+        val actual = sut.find()
 
-    // assert
-    assertThat(actual).isNull()
-  }
+        // assert
+        assertThat(actual).isNull()
+    }
 
-  @DataSet(value = ["datasets/setup/1-token.yml"])
-  @ExpectedDataSet(value = ["datasets/expected/1-token-update.yml"])
-  @Test
-  fun `トークン情報を更新できる`() {
-    // setup
-    val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+    @DataSet(value = ["datasets/setup/1-token.yml"])
+    @ExpectedDataSet(value = ["datasets/expected/1-token-update.yml"])
+    @Test
+    fun `トークン情報を更新できる`() {
+        // setup
+        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
 
-    // execute
-    sut.update(tokenEntity)
-  }
+        // execute
+        sut.update(tokenEntity)
+    }
 }

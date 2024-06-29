@@ -9,11 +9,11 @@ import org.springframework.test.context.ActiveProfiles
 @SpringBootTest
 @ActiveProfiles("test")
 class TwitterConfigTest {
-  @Autowired
-  lateinit var twitterConfig: TwitterConfig
+    @Autowired
+    lateinit var twitterConfig: TwitterConfig
 
-  @Test
-  fun `テストプロファイルの場合、適切な値が設定されている`() {
-    assertThat(twitterConfig.oauth1AccessToken).isEqualTo("oauth1-access-token-dummy")
-  }
+    @Test
+    fun `テストプロファイルの場合、適切な値が設定されている`() {
+        assertThat(twitterConfig.oauth1AccessToken).isEqualTo("oauth1-access-token-dummy")
+    }
 }

@@ -9,13 +9,20 @@ import org.springframework.stereotype.Service
 
 @Service
 class FetchTokenUseCase(
-  private val twitterConfig: TwitterConfig,
-  private val tokenProvider: TokenProvider,
-  private val tokenRepository: TokenRepository
+    private val twitterConfig: TwitterConfig,
+    private val tokenProvider: TokenProvider,
+    private val tokenRepository: TokenRepository,
 ) {
-  fun execute(fetchTokenParam: FetchTokenParam) {
-    tokenRepository.insert(tokenProvider.fetchToken(
-      Authorization(twitterConfig.clientId, twitterConfig.redirectUri, fetchTokenParam.code, fetchTokenParam.codeChallenge)
-    ))
-  }
+    fun execute(fetchTokenParam: FetchTokenParam) {
+        tokenRepository.insert(
+            tokenProvider.fetchToken(
+                Authorization(
+                    twitterConfig.clientId,
+                    twitterConfig.redirectUri,
+                    fetchTokenParam.code,
+                    fetchTokenParam.codeChallenge
+                )
+            )
+        )
+    }
 }

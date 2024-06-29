@@ -19,71 +19,73 @@ import org.springframework.test.web.servlet.MockMvc
 
 @WebMvcTest(controllers = [OAuthController::class])
 class OAuthControllerTest {
-  @Autowired
-  lateinit var mockMvc: MockMvc
+    @Autowired
+    lateinit var mockMvc: MockMvc
 
-  @MockBean
-  lateinit var createUrlUseCase: CreateUrlUseCase
-  @MockBean
-  lateinit var fetchTokenUseCase: FetchTokenUseCase
-  @MockBean
-  lateinit var findTokenUseCase: FindTokenUseCase
+    @MockBean
+    lateinit var createUrlUseCase: CreateUrlUseCase
 
-  @BeforeEach
-  fun setUp() {
-    mockMvc(mockMvc)
-  }
+    @MockBean
+    lateinit var fetchTokenUseCase: FetchTokenUseCase
 
-  @Test
-  fun `ルートにアクセスした場合、レスポンスコード 200 が返る`() {
-    // execute & assert
-    given()
-      .`when`()
-      .get("/v1/oauth")
-      .then()
-      .status(HttpStatus.OK)
-  }
+    @MockBean
+    lateinit var findTokenUseCase: FindTokenUseCase
 
-  @Test
-  fun `URL 発行エンドポイントに GET した場合、レスポンスコード 200 が返り、URL と code_challenge を取得できる`() {
-    // setup
-    doReturn(CreateUrlDto("url", "challenge")).whenever(createUrlUseCase).execute()
+    @BeforeEach
+    fun setUp() {
+        mockMvc(mockMvc)
+    }
 
-    // execute & assert
-    given()
-      .`when`()
-      .get("/v1/oauth/url")
-      .then()
-      .status(HttpStatus.OK)
-      .body("url", equalTo("url"))
-      .body("codeChallenge", equalTo("challenge"))
-  }
+    @Test
+    fun `ルートにアクセスした場合、レスポンスコード 200 が返る`() {
+        // execute & assert
+        given()
+            .`when`()
+            .get("/v1/oauth")
+            .then()
+            .status(HttpStatus.OK)
+    }
 
-  @Test
-  fun `トークン取得エンドポイントに POST した場合、レスポンスコード 204 が返る`() {
-    // execute & assert
-    given()
-      .contentType(MediaType.APPLICATION_JSON)
-      .body("{\"code\": \"dummy\",\"codeChallenge\": \"dummy\"}")
-      .`when`()
-      .post("/v1/oauth/token")
-      .then()
-      .status(HttpStatus.NO_CONTENT)
+    @Test
+    fun `URL 発行エンドポイントに GET した場合、レスポンスコード 200 が返り、URL と code_challenge を取得できる`() {
+        // setup
+        doReturn(CreateUrlDto("url", "challenge")).whenever(createUrlUseCase).execute()
 
-    verify(fetchTokenUseCase, times(1)).execute(any())
-  }
+        // execute & assert
+        given()
+            .`when`()
+            .get("/v1/oauth/url")
+            .then()
+            .status(HttpStatus.OK)
+            .body("url", equalTo("url"))
+            .body("codeChallenge", equalTo("challenge"))
+    }
 
-  @Test
-  fun `トークン取得エンドポイントに GET した場合、レスポンスコード 200 が返り、アクセストークンを取得できる`() {
-    // setup
-    doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
+    @Test
+    fun `トークン取得エンドポイントに POST した場合、レスポンスコード 204 が返る`() {
+        // execute & assert
+        given()
+            .contentType(MediaType.APPLICATION_JSON)
+            .body("{\"code\": \"dummy\",\"codeChallenge\": \"dummy\"}")
+            .`when`()
+            .post("/v1/oauth/token")
+            .then()
+            .status(HttpStatus.NO_CONTENT)
 
-    // execute & assert
-    given()
-      .`when`()
-      .get("/v1/oauth/token")
-      .then()
-      .status(HttpStatus.OK)
-      .body("accessToken", equalTo("accessToken"))
-  }
+        verify(fetchTokenUseCase, times(1)).execute(any())
+    }
+
+    @Test
+    fun `トークン取得エンドポイントに GET した場合、レスポンスコード 200 が返り、アクセストークンを取得できる`() {
+        // setup
+        doReturn(FindTokenDto("accessToken")).whenever(findTokenUseCase).execute()
+
+        // execute & assert
+        given()
+            .`when`()
+            .get("/v1/oauth/token")
+            .then()
+            .status(HttpStatus.OK)
+            .body("accessToken", equalTo("accessToken"))
+    }
 }

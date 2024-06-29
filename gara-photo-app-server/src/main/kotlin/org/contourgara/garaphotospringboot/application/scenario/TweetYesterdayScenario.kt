@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service
 
 @Service
 class TweetYesterdayScenario(
-  private val findTokenUseCase: FindTokenUseCase,
-  private val tweetYesterdayUseCase: TweetYesterdayUseCase,
-  ) {
-  fun execute(): TweetYesterdayDto {
-    val findTokenDto = findTokenUseCase.execute()
-    return tweetYesterdayUseCase.execute(findTokenDto.accessToken)
-  }
+    private val findTokenUseCase: FindTokenUseCase,
+    private val tweetYesterdayUseCase: TweetYesterdayUseCase,
+) {
+    fun execute(): TweetYesterdayDto {
+        val findTokenDto = findTokenUseCase.execute()
+        return tweetYesterdayUseCase.execute(findTokenDto.accessToken)
+    }
 }

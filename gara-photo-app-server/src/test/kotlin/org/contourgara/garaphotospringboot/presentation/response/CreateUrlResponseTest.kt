@@ -5,17 +5,17 @@ import org.contourgara.garaphotospringboot.application.dto.CreateUrlDto
 import org.junit.jupiter.api.Test
 
 class CreateUrlResponseTest {
-  @Test
-  fun `DTO からインスタンスを生成できる`() {
-    // setup
-    val createUrlDto = CreateUrlDto("url", "challenge")
+    @Test
+    fun `DTO からインスタンスを生成できる`() {
+        // setup
+        val createUrlDto = CreateUrlDto("url", "challenge")
 
-    // execute
-    val actual = CreateUrlResponse.of(createUrlDto)
+        // execute
+        val actual = CreateUrlResponse.of(createUrlDto)
 
-    // assert
-    val expected = CreateUrlResponse("url", "challenge")
+        // assert
+        val expected = CreateUrlResponse("url", "challenge")
 
-    assertThat(actual).isEqualTo(expected)
-  }
+        assertThat(actual).isEqualTo(expected)
+    }
 }

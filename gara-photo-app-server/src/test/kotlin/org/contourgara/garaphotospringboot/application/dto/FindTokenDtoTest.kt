@@ -6,16 +6,16 @@ import org.junit.jupiter.api.Test
 import java.time.ZonedDateTime
 
 class FindTokenDtoTest {
-  @Test
-  fun `ドメインオブジェクトからインスタンスを生成できる`() {
-    // setup
-    val token = Token("accessToken", "refreshTOken", "clientId", ZonedDateTime.now())
+    @Test
+    fun `ドメインオブジェクトからインスタンスを生成できる`() {
+        // setup
+        val token = Token("accessToken", "refreshTOken", "clientId", ZonedDateTime.now())
 
-    // execute
-    val actual = FindTokenDto.of(token)
+        // execute
+        val actual = FindTokenDto.of(token)
 
-    // assert
-    val expected = FindTokenDto("accessToken")
-    assertThat(actual).isEqualTo(expected)
-  }
+        // assert
+        val expected = FindTokenDto("accessToken")
+        assertThat(actual).isEqualTo(expected)
+    }
 }

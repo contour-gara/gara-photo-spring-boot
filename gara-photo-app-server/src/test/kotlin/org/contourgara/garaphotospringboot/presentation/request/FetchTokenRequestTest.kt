@@ -5,17 +5,17 @@ import org.contourgara.garaphotospringboot.application.param.FetchTokenParam
 import org.junit.jupiter.api.Test
 
 class FetchTokenRequestTest {
-  @Test
-  fun `パラムに変換できる`() {
-    // setup
-    val sut = FetchTokenRequest("dummy", "dummy")
+    @Test
+    fun `パラムに変換できる`() {
+        // setup
+        val sut = FetchTokenRequest("dummy", "dummy")
 
-    // execute
-    val actual = sut.convertToParam()
+        // execute
+        val actual = sut.convertToParam()
 
-    // assert
-    val expected = FetchTokenParam("dummy", "dummy")
+        // assert
+        val expected = FetchTokenParam("dummy", "dummy")
 
-    assertThat(actual).isEqualTo(expected)
-  }
+        assertThat(actual).isEqualTo(expected)
+    }
 }
