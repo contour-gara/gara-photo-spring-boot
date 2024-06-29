@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class GaraPhotoSpringBootApplication
 
 fun main(args: Array<String>) {
-  runApplication<GaraPhotoSpringBootApplication>(*args)
+    runApplication<GaraPhotoSpringBootApplication>(*args)
 }
