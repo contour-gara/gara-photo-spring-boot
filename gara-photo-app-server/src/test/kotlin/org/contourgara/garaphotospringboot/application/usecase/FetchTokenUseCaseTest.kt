@@ -4,14 +4,14 @@ import org.contourgara.garaphotospringboot.application.param.FetchTokenParam
 import org.contourgara.garaphotospringboot.common.TwitterConfig
 import org.contourgara.garaphotospringboot.domain.Authorization
 import org.contourgara.garaphotospringboot.domain.Token
-import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenProvider
+import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 import org.mockito.InjectMocks
-import org.mockito.kotlin.*
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
+import org.mockito.kotlin.*
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.time.ZonedDateTime

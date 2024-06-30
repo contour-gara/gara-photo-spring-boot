@@ -14,6 +14,8 @@ class TestUtilsTest {
     @Test
     fun `ファイルが存在しない場合、例外が投げられる`() {
         // execute & assert
-        assertThatThrownBy { TestUtils.getFile("photo/5photo/20240422-190000-00.png") }.isInstanceOf(IOException::class.java)
+        assertThatThrownBy {
+            TestUtils.getFile("photo/5photo/20240422-190000-00.png")
+        }.isInstanceOf(IOException::class.java)
     }
 }

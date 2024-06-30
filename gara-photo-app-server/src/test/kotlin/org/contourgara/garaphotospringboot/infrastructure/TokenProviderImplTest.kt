@@ -36,8 +36,15 @@ class TokenProviderImplTest {
         )
 
         // assert
-        val expected =
-            "https://twitter.com/i/oauth2/authorize?response_type=code&client_id=client-id-dummy&redirect_uri=http://localhost/dummy&scope=dummy%20dummy&state=state&code_challenge=challenge&code_challenge_method=plain"
+        val expected = """
+            https://twitter.com/i/oauth2/authorize?
+            response_type=code&
+            client_id=client-id-dummy&
+            redirect_uri=http://localhost/dummy&scope=dummy%20dummy&
+            state=state&
+            code_challenge=challenge&
+            code_challenge_method=plain
+        """.trimIndent().replace(System.lineSeparator(), "")
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -48,12 +55,32 @@ class TokenProviderImplTest {
             post(urlEqualTo("/oauth2/token"))
                 .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
                 .withHeader("Authorization", equalTo("Basic Y2xpZW50LWlkLWR1bW15OmNsaWVudC1zZWNyZXQtZHVtbXk="))
-                .withRequestBody(equalTo("code=code&grant_type=authorization_code&client_id=client-id&redirect_uri=redirect-uri&code_verifier=code-challenge"))
+                .withRequestBody(
+                    equalTo(
+                        """
+                            code=code&
+                            grant_type=authorization_code&
+                            client_id=client-id&
+                            redirect_uri=redirect-uri&
+                            code_verifier=code-challenge
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
+                )
                 .willReturn(
                     aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json; charset=utf-8")
-                        .withBody("{\"token_type\":\"bearer\",\"expires_in\":7200,\"access_token\":\"access-token\",\"scope\":\"tweet.write users.read tweet.read offline.access\",\"refresh_token\":\"refresh-token\"}")
+                        .withBody(
+                            """
+                                {
+                                "token_type":"bearer",
+                                "expires_in":7200,
+                                "access_token":"access-token",
+                                "scope":"tweet.write users.read tweet.read offline.access",
+                                "refresh_token":"refresh-token"
+                                }
+                            """.trimIndent()
+                        )
                 )
         )
 
@@ -77,7 +104,17 @@ class TokenProviderImplTest {
             post(urlEqualTo("/oauth2/token"))
                 .withHeader("Content-Type", equalTo("application/x-www-form-urlencoded"))
                 .withHeader("Authorization", equalTo("Basic Y2xpZW50LWlkLWR1bW15OmNsaWVudC1zZWNyZXQtZHVtbXk="))
-                .withRequestBody(equalTo("code=code&grant_type=authorization_code&client_id=client-id&redirect_uri=redirect-uri&code_verifier=code-challenge"))
+                .withRequestBody(
+                    equalTo(
+                        """
+                            code=code&
+                            grant_type=authorization_code&
+                            client_id=client-id&
+                            redirect_uri=redirect-uri&
+                            code_verifier=code-challenge
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
+                )
                 .willReturn(
                     aResponse()
                         .withStatus(500)
@@ -109,7 +146,17 @@ class TokenProviderImplTest {
                     aResponse()
                         .withStatus(200)
                         .withHeader("Content-Type", "application/json; charset=utf-8")
-                        .withBody("{\"token_type\":\"bearer\",\"expires_in\":7200,\"access_token\":\"access-token2\",\"scope\":\"tweet.write users.read tweet.read offline.access\",\"refresh_token\":\"refresh-token2\"}")
+                        .withBody(
+                            """
+                                {
+                                "token_type":"bearer",
+                                "expires_in":7200,
+                                "access_token":"access-token2",
+                                "scope":"tweet.write users.read tweet.read offline.access",
+                                "refresh_token":"refresh-token2"
+                                }
+                            """.trimIndent()
+                        )
                 )
         )
 

@@ -1,9 +1,9 @@
 package org.contourgara.garaphotospringboot.application.usecase
 
 import org.assertj.core.api.Assertions.*
+import org.contourgara.garaphotospringboot.TestUtils.getFile
 import org.contourgara.garaphotospringboot.application.dto.TweetYesterdayDto
 import org.contourgara.garaphotospringboot.common.GaraPhotoEnvironment
-import org.contourgara.garaphotospringboot.TestUtils.getFile
 import org.contourgara.garaphotospringboot.domain.Media
 import org.contourgara.garaphotospringboot.domain.Tweet
 import org.contourgara.garaphotospringboot.domain.infrastructure.PhotoRepository

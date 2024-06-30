@@ -12,10 +12,8 @@ class UploadedPhotoTest : WordSpec({
             val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
 
             // execute & assert
-            (UploadedPhoto(photo.name, photo.readBytes()) == UploadedPhoto(
-                photo.name,
-                photo.readBytes()
-            )).shouldBeTrue()
+            (UploadedPhoto(photo.name, photo.readBytes()) == UploadedPhoto(photo.name, photo.readBytes()))
+                .shouldBeTrue()
         }
 
         "異なっている" {
@@ -24,11 +22,8 @@ class UploadedPhotoTest : WordSpec({
             val photo2 = getFile("photo/yesterday/20240422/20240422-190002-02.png")
 
             // execute & assert
-            (UploadedPhoto(photo1.name, photo1.readBytes()) == UploadedPhoto(
-                photo2.name,
-                photo2.readBytes()
-            )).shouldBeFalse()
-
+            (UploadedPhoto(photo1.name, photo1.readBytes()) == UploadedPhoto(photo2.name, photo2.readBytes()))
+                .shouldBeFalse()
         }
     }
 })

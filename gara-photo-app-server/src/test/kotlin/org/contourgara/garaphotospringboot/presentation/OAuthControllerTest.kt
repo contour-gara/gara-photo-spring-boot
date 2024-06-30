@@ -1,11 +1,11 @@
 package org.contourgara.garaphotospringboot.presentation
 
 import io.restassured.module.mockmvc.RestAssuredMockMvc.*
+import org.contourgara.garaphotospringboot.application.dto.CreateUrlDto
+import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
 import org.contourgara.garaphotospringboot.application.usecase.CreateUrlUseCase
 import org.contourgara.garaphotospringboot.application.usecase.FetchTokenUseCase
 import org.contourgara.garaphotospringboot.application.usecase.FindTokenUseCase
-import org.contourgara.garaphotospringboot.application.dto.CreateUrlDto
-import org.contourgara.garaphotospringboot.application.dto.FindTokenDto
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test

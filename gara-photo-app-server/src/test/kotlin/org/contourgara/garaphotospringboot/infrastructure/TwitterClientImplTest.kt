@@ -29,7 +29,17 @@ class TwitterClientImplTest {
                     aResponse()
                         .withStatus(201)
                         .withHeader("Content-Type", "application/json; charset=utf-8")
-                        .withBody("{\"media_id\":710511363345354753,\"media_id_string\":\"710511363345354753\",\"size\":11065,\"expires_after_secs\":86400,\"image\":{\"image_type\":\"image/jpeg\",\"w\":800,\"h\":320}}")
+                        .withBody(
+                            """
+                                {
+                                "media_id":710511363345354753,
+                                "media_id_string":"710511363345354753",
+                                "size":11065,
+                                "expires_after_secs":86400,
+                                "image":{"image_type":"image/jpeg","w":800,"h":320}
+                                }
+                            """.trimIndent()
+                        )
                 )
         )
 
@@ -37,15 +47,46 @@ class TwitterClientImplTest {
             post(urlEqualTo("/tweets"))
                 .withHeader(
                     "Authorization",
-                    matching("^OAuth oauth_consumer_key=\"api-key-dummy\",oauth_signature_method=\"HMAC-SHA1\",oauth_timestamp=\"[^\"]+\",oauth_nonce=\"[^\"]+\",oauth_version=\"1\\.0\",oauth_token=\"oauth1-access-token-dummy\",oauth_signature=\"[^\"]+\"\$")
+                    matching(
+                        """
+                            ^OAuth oauth_consumer_key="api-key-dummy",
+                            oauth_signature_method="HMAC-SHA1",
+                            oauth_timestamp="[^"]+",
+                            oauth_nonce="[^"]+",
+                            oauth_version="1\.0",
+                            oauth_token="oauth1-access-token-dummy",
+                            oauth_signature="[^"]+"${'$'}
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
                 )
                 .withHeader("Content-Type", equalTo("application/json"))
-                .withRequestBody(equalTo("{\"media\":{\"media_ids\":[\"710511363345354753\",\"710511363345354753\",\"710511363345354753\",\"710511363345354753\"]},\"text\":\"tweet\"}"))
+                .withRequestBody(
+                    equalTo(
+                        """
+                            {
+                            "media":{
+                            "media_ids":["710511363345354753","710511363345354753","710511363345354753","710511363345354753"]
+                            },
+                            "text":"tweet"
+                            }
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
+                )
                 .willReturn(
                     aResponse()
                         .withStatus(201)
                         .withHeader("Content-Type", "application/json; charset=utf-8")
-                        .withBody("{\"data\":{\"edit_history_tweet_ids\":[\"1778064547540353187\"],\"id\":\"1778064547540353187\",\"text\":\"tweet\"}}")
+                        .withBody(
+                            """
+                                {
+                                "data":{
+                                "edit_history_tweet_ids":["1778064547540353187"],
+                                "id":"1778064547540353187",
+                                "text":"tweet"
+                                }
+                                }
+                            """.trimIndent()
+                        )
                 )
         )
 
@@ -81,10 +122,31 @@ class TwitterClientImplTest {
             post(urlEqualTo("/tweets"))
                 .withHeader(
                     "Authorization",
-                    matching("^OAuth oauth_consumer_key=\"api-key-dummy\",oauth_signature_method=\"HMAC-SHA1\",oauth_timestamp=\"[^\"]+\",oauth_nonce=\"[^\"]+\",oauth_version=\"1\\.0\",oauth_token=\"oauth1-access-token-dummy\",oauth_signature=\"[^\"]+\"\$")
+                    matching(
+                        """
+                            ^OAuth oauth_consumer_key="api-key-dummy",
+                            oauth_signature_method="HMAC-SHA1",
+                            oauth_timestamp="[^"]+",
+                            oauth_nonce="[^"]+",
+                            oauth_version="1\.0",
+                            oauth_token="oauth1-access-token-dummy",
+                            oauth_signature="[^"]+"${'$'}
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
                 )
                 .withHeader("Content-Type", equalTo("application/json"))
-                .withRequestBody(equalTo("{\"media\":{\"media_ids\":[\"710511363345354753\",\"710511363345354753\",\"710511363345354753\",\"710511363345354753\"]},\"text\":\"tweet\"}"))
+                .withRequestBody(
+                    equalTo(
+                        """
+                            {
+                            "media":{
+                            "media_ids":["710511363345354753","710511363345354753","710511363345354753","710511363345354753"]
+                            }
+                            ,"text":"tweet"
+                            }
+                        """.trimIndent().replace(System.lineSeparator(), "")
+                    )
+                )
                 .willReturn(
                     aResponse()
                         .withStatus(500)

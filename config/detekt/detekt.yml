@@ -1,0 +1,19 @@
+formatting:
+  NoWildcardImports:
+    excludes:
+      - "**/src/test/**"
+
+style:
+  WildcardImport:
+    excludes:
+      - "**/src/test/**"
+
+complexity:
+  LongMethod:
+    excludes:
+      - "**/src/test/**"
+
+performance:
+  SpreadOperator:
+    excludes:
+      - "**/**SpringBootApplication.kt"

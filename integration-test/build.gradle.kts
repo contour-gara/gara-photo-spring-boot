@@ -1,3 +1,4 @@
+import io.gitlab.arturbosch.detekt.Detekt
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -104,5 +105,23 @@ tasks.withType<Test> {
         showExceptions = true
         showCauses = true
         showStackTraces = true
+    }
+}
+
+detekt {
+    parallel = true
+    ignoreFailures = false
+    buildUponDefaultConfig = true
+    config.setFrom("$rootDir/config/detekt/detekt.yml")
+    basePath = projectDir.absolutePath
+}
+
+tasks.withType<Detekt>().configureEach {
+    reports {
+        xml.required.set(false)
+        html.required.set(false)
+        txt.required.set(false)
+        sarif.required.set(false)
+        md.required.set(true)
     }
 }

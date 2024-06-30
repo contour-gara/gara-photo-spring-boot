@@ -10,7 +10,8 @@ import java.time.ZonedDateTime
 class TokenTest {
     @ParameterizedTest(name = "トークン取得が 21 時で 22 時 {0} 分 {1} 秒に実行した場合、{2} が返る")
     @CsvSource(
-        delimiter = '|', value = [
+        delimiter = '|',
+        value = [
             "55 |  0 | true",
             "54 | 59 | false",
         ]

@@ -2,16 +2,14 @@ package org.contourgara.garaphotospringboot.presentation
 
 import io.kotest.core.spec.style.WordSpec
 import io.restassured.module.mockmvc.RestAssuredMockMvc.*
-import io.restassured.module.mockmvc.kotlin.extensions.Given
-import io.restassured.module.mockmvc.kotlin.extensions.Then
-import io.restassured.module.mockmvc.kotlin.extensions.When
+import io.restassured.module.mockmvc.kotlin.extensions.*
+import org.contourgara.garaphotospringboot.TestUtils.getFile
 import org.contourgara.garaphotospringboot.application.dto.TweetYesterdayDto
+import org.contourgara.garaphotospringboot.application.param.UploadYesterdayParam
 import org.contourgara.garaphotospringboot.application.scenario.TweetYesterdayScenario
 import org.contourgara.garaphotospringboot.application.usecase.UploadYesterdayUseCase
-import org.contourgara.garaphotospringboot.TestUtils.getFile
 import org.hamcrest.Matchers.*
-import org.mockito.kotlin.doReturn
-import org.mockito.kotlin.whenever
+import org.mockito.kotlin.*
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpStatus
@@ -60,16 +58,21 @@ class TweetControllerTest(
     "yesterday アップロードエンドポイントに POST した場合" should {
         "レスポンスコード 204 が返る" {
             // setup
-            val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
+            val photo1 = getFile("photo/yesterday/20240422/20240422-190001-01.png")
+            val photo2 = getFile("photo/yesterday/20240422/20240422-190002-02.png")
 
             // execute & assert
             Given {
-                multiPart("photos", listOf(photo))
+                multiPart("photos", photo1)
+                multiPart("photos", photo2)
             } When {
                 post("/v1/tweet/yesterday/upload_media")
             } Then {
                 status(HttpStatus.NO_CONTENT)
             }
+
+            verify(uploadYesterdayUseCase, times(1))
+                .execute(any<UploadYesterdayParam>())
         }
     }
 })
