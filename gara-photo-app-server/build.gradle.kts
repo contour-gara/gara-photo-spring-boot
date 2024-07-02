@@ -65,6 +65,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
     testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
+    testImplementation("io.kotest:kotest-framework-datatest:${versions["kotest"]}")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:${versions["kotest-spring"]}")
     testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
     testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")

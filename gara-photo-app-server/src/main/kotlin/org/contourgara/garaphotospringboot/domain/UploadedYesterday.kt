@@ -1,6 +1,6 @@
 package org.contourgara.garaphotospringboot.domain
 
-data class PhotoYesterday(
+data class UploadedYesterday(
     val photos: List<UploadedPhoto>,
 ) {
     init {
@@ -8,17 +8,15 @@ data class PhotoYesterday(
         require(photos.size <= MAX_PHOTO_COUNT) { "Photos must have at least 4 photos" }
         require(isSameDate()) { "Photo must be taken same date" }
     }
-
-    fun getDate(): String {
-        return photos.last().fileName.substring(0, DATE_DIGIT)
+    private fun isSameDate(): Boolean {
+        return photos.map { it.getDate() }.toSet().size == 1
     }
 
-    private fun isSameDate(): Boolean {
-        return photos.map { it.fileName.substring(0, DATE_DIGIT) }.toSet().size == 1
+    fun getDate(): String {
+        return photos.first().getDate()
     }
 
     companion object {
         private const val MAX_PHOTO_COUNT = 4
-        private const val DATE_DIGIT = 8
     }
 }

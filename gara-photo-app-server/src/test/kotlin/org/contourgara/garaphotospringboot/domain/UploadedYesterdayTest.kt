@@ -6,11 +6,11 @@ import io.kotest.core.spec.style.WordSpec
 import io.kotest.matchers.shouldBe
 import org.contourgara.garaphotospringboot.TestUtils.getFile
 
-class PhotoYesterdayTest : WordSpec({
+class UploadedYesterdayTest : WordSpec({
     "写真の日付の文字列を返す" should {
         // setup
         val photo = getFile("photo/yesterday/20240422/20240422-190001-01.png")
-        val sut = PhotoYesterday(listOf(UploadedPhoto(photo.name, photo.readBytes())))
+        val sut = UploadedYesterday(listOf(UploadedPhoto(photo.name, photo.readBytes())))
 
         // execute & assert
         sut.getDate() shouldBe "20240422"
@@ -21,7 +21,7 @@ class PhotoYesterdayTest : WordSpec({
             "例外が返る" {
                 // execute & assert
                 shouldThrowExactly<IllegalArgumentException> {
-                    PhotoYesterday(emptyList())
+                    UploadedYesterday(emptyList())
                 }.message shouldBe "No photos yet"
             }
         }
@@ -34,7 +34,7 @@ class PhotoYesterdayTest : WordSpec({
 
                 // assert & execute
                 shouldThrow<IllegalArgumentException> {
-                    PhotoYesterday(listOf(uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto))
+                    UploadedYesterday(listOf(uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto, uploaderPhoto))
                 }.message shouldBe "Photos must have at least 4 photos"
             }
         }
@@ -47,7 +47,7 @@ class PhotoYesterdayTest : WordSpec({
 
                 // execute & assert
                 shouldThrow<IllegalArgumentException> {
-                    PhotoYesterday(
+                    UploadedYesterday(
                         listOf(
                             UploadedPhoto(photo20240619.name, photo20240619.readBytes()),
                             UploadedPhoto(photo20240620.name, photo20240620.readBytes())
