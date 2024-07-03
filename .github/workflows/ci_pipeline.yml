@@ -23,8 +23,24 @@ jobs:
           cache: 'gradle'
 
       - name: Run detekt
-        working-directory: gara-photo-app-server
-        run: gradle clean detektMain
+        run: gradle clean detekt
+
+  konsist_test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Run konsist test
+        working-directory: konsist-test
+        run: gradle clean test
 
   unit_test:
     runs-on: ubuntu-latest
@@ -39,7 +55,7 @@ jobs:
           java-version: '21'
           cache: 'gradle'
 
-      - name: Unit test
+      - name: Run unit test
         working-directory: gara-photo-app-server
         run: gradle clean test
 
@@ -60,6 +76,6 @@ jobs:
         working-directory: gara-photo-app-server
         run: gradle clean build -x test -x detekt
 
-      - name: Integration test
+      - name: Run integration test
         working-directory: integration-test
         run: gradle clean integrationTest

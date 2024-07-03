@@ -11,7 +11,7 @@ import java.time.ZonedDateTime
 
 @ActiveProfiles("test")
 @SpringBootTest
-class GaraPhotoYesterdayEnvironmentTest {
+class GaraPhotoEnvironmentTest {
     @Autowired
     lateinit var sut: GaraPhotoEnvironment
 
