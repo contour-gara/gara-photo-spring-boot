@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository
     havingValue = "jdbc-client",
     matchIfMissing = true,
 )
+@Suppress("ForbiddenComment")
 class TokenRepositoryImpl(
     private val jdbcClient: JdbcClient
 ) : TokenRepository {
@@ -27,6 +28,7 @@ class TokenRepositoryImpl(
     }
 
     override fun find(clientId: String): Token? {
+        // TODO: レコードがなかった場合の処理
         return jdbcClient.sql("SELECT access_token, refresh_token, date_time FROM token WHERE id = 1")
             .query(DataClassRowMapper(TokenEntity::class.java))
             .optional()
@@ -35,6 +37,7 @@ class TokenRepositoryImpl(
     }
 
     override fun update(token: Token) {
+        // TODO: レコードがなかった場合の処理
         val tokenEntity = TokenEntity.of(token)
         jdbcClient.sql("UPDATE token SET access_token = ?, refresh_token = ?, date_time = ? WHERE id = 1")
             .param(tokenEntity.accessToken)

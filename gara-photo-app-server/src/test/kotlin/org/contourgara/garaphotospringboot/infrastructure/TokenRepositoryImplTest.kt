@@ -1,14 +1,18 @@
 package org.contourgara.garaphotospringboot.infrastructure
 
 import com.github.database.rider.core.api.configuration.DBUnit
-import com.github.database.rider.core.api.dataset.DataSet
-import com.github.database.rider.core.api.dataset.ExpectedDataSet
 import com.github.database.rider.junit5.api.DBRider
-import org.assertj.core.api.Assertions.*
+import com.ninja_squad.dbsetup_kotlin.dbSetup
+import com.zaxxer.hikari.HikariDataSource
+import io.kotest.assertions.throwables.shouldThrowExactly
+import io.kotest.core.spec.style.WordSpec
+import io.kotest.matchers.nulls.shouldBeNull
+import io.kotest.matchers.shouldBe
+import org.assertj.db.api.Assertions.*
+import org.assertj.db.type.Changes
+import org.assertj.db.type.Table
 import org.contourgara.garaphotospringboot.domain.Token
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
-import org.junit.jupiter.api.Test
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.dao.DuplicateKeyException
 import java.time.LocalDateTime
@@ -18,75 +22,159 @@ import java.time.ZonedDateTime
 @SpringBootTest
 @DBUnit
 @DBRider
-class TokenRepositoryImplTest {
-    @Autowired
-    lateinit var sut: TokenRepository
-
-    @DataSet(value = ["datasets/setup/0-token.yml"])
-    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-    @Test
-    fun `トークン情報をテーブルに保存できる`() {
-        // execute
-        sut.insert(
-            Token(
-                "accessToken",
-                "refreshToken",
-                "clientId",
-                ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
-            )
-        )
+class TokenRepositoryImplTest(
+    private val sut: TokenRepository,
+    private val dataSource: HikariDataSource,
+) : WordSpec({
+    beforeEach {
+        dbSetup(dataSource) {
+            deleteAllFrom("token")
+        }.launch()
     }
 
-    @DataSet(value = ["datasets/setup/1-token.yml"])
-    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-    @Test
-    fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
-        // execute & assert
-        assertThatThrownBy {
-            sut.insert(Token("accessToken", "refreshToken", "clientId", ZonedDateTime.now()))
-        }.isInstanceOf(DuplicateKeyException::class.java)
+    "保存" When {
+        "レコードに重複がない" should {
+            "トークン情報をテーブルに保存できる" {
+                // setup
+                val changes = Changes(Table(dataSource, "token"))
+
+                // execute
+                changes.setStartPointNow()
+
+                sut.insert(
+                    Token(
+                        "accessToken",
+                        "refreshToken",
+                        "clientId",
+                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                    )
+                )
+
+                changes.setEndPointNow()
+
+                // assert
+                assertThat(changes)
+                    .hasNumberOfChanges(1)
+                    .change()
+                    .isCreation()
+                    .rowAtEndPoint()
+                    .value("id").isEqualTo("1")
+                    .value("access_token").isEqualTo("accessToken")
+                    .value("refresh_Token").isEqualTo("refreshToken")
+                    .value("date_time").isEqualTo("2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+            }
+        }
+
+        "レコードに重複がある" should {
+            "例外が返る" {
+                // setup
+                val changes = Changes(Table(dataSource, "token"))
+
+                dbSetup(dataSource) {
+                    insertInto("token") {
+                        columns("id", "access_token", "refresh_token", "date_time")
+                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                    }
+                }.launch()
+
+                // execute & assert
+                changes.setStartPointNow()
+
+                shouldThrowExactly<DuplicateKeyException> {
+                    sut.insert(Token("accessToken", "refreshToken", "clientId", ZonedDateTime.now()))
+                }
+
+                changes.setEndPointNow()
+
+                assertThat(changes).hasNumberOfChanges(0)
+            }
+        }
     }
 
-    @DataSet(value = ["datasets/setup/1-token.yml"])
-    @ExpectedDataSet(value = ["datasets/expected/1-token.yml"])
-    @Test
-    fun `トークン情報を取得できる`() {
-        // execute
-        val actual = sut.find("clientId")
+    "取得" When {
+        "レコードあり" should {
+            "トークン情報を取得できる" {
+                // setup
+                val changes = Changes(Table(dataSource, "token"))
 
-        // assert
-        val expected = Token(
-            "accessToken",
-            "refreshToken",
-            "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
-        )
-        assertThat(actual).isEqualTo(expected)
+                dbSetup(dataSource) {
+                    insertInto("token") {
+                        columns("id", "access_token", "refresh_token", "date_time")
+                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                    }
+                }.launch()
+
+                // execute & assert
+                changes.setStartPointNow()
+
+                sut.find("clientId") shouldBe Token(
+                    "accessToken",
+                    "refreshToken",
+                    "clientId",
+                    ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                )
+
+                changes.setEndPointNow()
+
+                assertThat(changes).hasNumberOfChanges(0)
+            }
+        }
+
+        "レコードなし" should {
+            "null が返る" {
+                // setup
+                val changes = Changes(Table(dataSource, "token"))
+
+                // execute & assert
+                changes.setStartPointNow()
+
+                sut.find("clientId").shouldBeNull()
+
+                changes.setEndPointNow()
+
+                assertThat(changes).hasNumberOfChanges(0)
+            }
+        }
     }
 
-    @DataSet(value = ["datasets/setup/0-token.yml"])
-    @ExpectedDataSet(value = ["datasets/expected/0-token.yml"])
-    @Test
-    fun `トークン情報を取得でレコードが無い場合、null が返る`() {
-        // execute
-        val actual = sut.find("clientId")
+    "更新" When {
+        "レコードがあある" should {
+            "トークン情報を更新できる" {
+                // setup
+                val changes = Changes(Table(dataSource, "token"))
 
-        // assert
-        assertThat(actual).isNull()
-    }
+                dbSetup(dataSource) {
+                    insertInto("token") {
+                        columns("id", "access_token", "refresh_token", "date_time")
+                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                    }
+                }.launch()
 
-    @DataSet(value = ["datasets/setup/1-token.yml"])
-    @ExpectedDataSet(value = ["datasets/expected/1-token-update.yml"])
-    @Test
-    fun `トークン情報を更新できる`() {
-        // execute
-        sut.update(
-            Token(
-                "accessToken2",
-                "refreshToken2",
-                "clientId",
-                ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
-            )
-        )
+                // execute
+                changes.setStartPointNow()
+
+                sut.update(
+                    Token(
+                        "accessToken2",
+                        "refreshToken2",
+                        "clientId",
+                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                    )
+                )
+
+                changes.setEndPointNow()
+
+                // assert
+                assertThat(changes)
+                    .hasNumberOfChanges(1)
+                    .change()
+                    .isModification()
+                    .rowAtEndPoint()
+                    .value("id").isEqualTo("1")
+                    .value("access_token").isEqualTo("accessToken2")
+                    .value("refresh_Token").isEqualTo("refreshToken2")
+                    .value("date_time").isEqualTo("2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+            }
+        }
     }
-}
+})

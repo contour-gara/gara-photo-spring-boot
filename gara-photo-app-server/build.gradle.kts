@@ -20,6 +20,8 @@ val versions by extra {
         "kotest" to "5.9.1",
         "kotest-spring" to "1.3.0",
         "detekt" to "1.23.6",
+        "assertj-db" to "2.0.2",
+        "DbSetup" to "2.1.0",
     )
 }
 
@@ -74,6 +76,8 @@ dependencies {
     testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
     testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
     testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
+    testImplementation("org.assertj:assertj-db:${versions["assertj-db"]}")
+    testImplementation("com.ninja-squad:DbSetup-kotlin:${versions["DbSetup"]}")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${versions["detekt"]}")
 }
 
