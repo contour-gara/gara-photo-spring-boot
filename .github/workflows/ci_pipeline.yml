@@ -5,6 +5,9 @@ on:
     branches:
       - '**'
 
+permissions:
+  packages: write
+
 env:
   TZ: 'Asia/Tokyo'
 
@@ -79,3 +82,63 @@ jobs:
       - name: Run integration test
         working-directory: integration-test
         run: gradle clean integrationTest
+
+  build_and_upload_jar_file:
+    needs:
+      - detekt
+      - konsist_test
+      - unit_test
+      - integration_test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Build jar file
+        working-directory: gara-photo-app-server
+        run: gradle clean build -x test
+
+      - name: Upload Dockerfile and jar file
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            gara-photo-app-server/Dockerfile
+            gara-photo-app-server/build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
+
+  build_and_push_docker_image:
+    needs: build_and_upload_jar_file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download Dockerfile and jar file
+        uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+#          path: |
+#            gara-photo-app-server/Dockerfile
+#            gara-photo-app-server/build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
+
+      - name: Login to GitHub container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build docker image
+        run: |
+          docker build \
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest \
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:$(echo $GITHUB_SHA | head -c7) .
+
+      - name: Push docker image
+        run: |
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:$(echo $GITHUB_SHA | head -c7)
