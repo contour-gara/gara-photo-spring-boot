@@ -1,9 +1,13 @@
-name: CI Pipeline
+name: CI CD Pipeline
 
 on:
   push:
     branches:
-      - '**'
+      - 'main'
+  pull_request:
+    types:
+      - opened
+      - synchronize
 
 permissions:
   packages: write
@@ -84,6 +88,7 @@ jobs:
         run: gradle clean integrationTest
 
   build_and_upload_jar_file:
+    if: ${{ github.event_name == 'push' }}
     needs:
       - detekt
       - konsist_test
