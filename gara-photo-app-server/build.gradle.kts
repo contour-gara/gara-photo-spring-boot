@@ -6,8 +6,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val versions by extra {
     mapOf(
         "java" to "21",
-        "kotlin" to "1.9.23",
-        "springBoot" to "3.2.5",
+        "kotlin" to "2.0.10",
+        "springBoot" to "3.3.3",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
         "jackson-module-kotlin" to "2.17.1",
@@ -64,6 +64,7 @@ dependencies {
     implementation(fileTree("lib"))
     runtimeOnly("org.postgresql:postgresql")
     runtimeOnly("org.flywaydb:flyway-core")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
     testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
@@ -79,6 +80,12 @@ dependencies {
     testImplementation("org.assertj:assertj-db:${versions["assertj-db"]}")
     testImplementation("com.ninja-squad:DbSetup-kotlin:${versions["DbSetup"]}")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${versions["detekt"]}")
+}
+
+buildscript {
+    dependencies {
+        classpath("org.flywaydb:flyway-database-postgresql:10.10.0")
+    }
 }
 
 tasks.withType<KotlinCompile> {

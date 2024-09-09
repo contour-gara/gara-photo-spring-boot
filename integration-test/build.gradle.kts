@@ -6,8 +6,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val versions by extra {
     mapOf(
         "java" to "21",
-        "kotlin" to "1.9.23",
-        "springBoot" to "3.2.5",
+        "kotlin" to "2.0.10",
+        "springBoot" to "3.3.3",
         "restAssured" to "5.4.0",
         "rider-junit5" to "1.42.0",
         "wiremock" to "3.6.0",
