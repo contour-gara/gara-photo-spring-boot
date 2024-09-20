@@ -33,6 +33,24 @@ env:
   TZ: 'Asia/Tokyo'
 
 jobs:
+  filter:
+    if: ${{ github.event_name == 'push' }}
+    runs-on: ubuntu-latest
+    outputs:
+      isDeploy: ${{ steps.filter.outputs.isDeploy }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Filter
+        id: filter
+        uses: dorny/paths-filter@v3.0.2
+        with:
+          filters: |
+            isDeploy:
+              - 'build.gradle.kts'
+              - 'gara-photo-app-server/**'
+
   detekt:
     runs-on: ubuntu-latest
     steps:
@@ -105,8 +123,9 @@ jobs:
         run: gradle clean integrationTest
 
   build_and_upload_jar_file:
-    if: ${{ github.event_name == 'push' }}
+    if: ${{ github.event_name == 'push' && needs.filter.outputs.isDeploy == 'true' }}
     needs:
+      - filter
       - detekt
       - konsist_test
       - unit_test
