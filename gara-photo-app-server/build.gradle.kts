@@ -6,7 +6,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 val versions by extra {
     mapOf(
         "java" to "21",
-        "kotlin" to "2.0.10",
         "springBoot" to "3.3.4",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
@@ -122,7 +121,7 @@ sonar {
 }
 
 jacoco {
-    toolVersion = "0.8.11"
+    toolVersion = "0.8.12"
 }
 
 tasks.jacocoTestReport {
