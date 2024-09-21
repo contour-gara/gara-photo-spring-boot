@@ -7,7 +7,7 @@ val versions by extra {
     mapOf(
         "java" to "21",
         "kotlin" to "2.0.10",
-        "springBoot" to "3.3.3",
+        "springBoot" to "3.3.4",
         "kotest" to "5.9.1",
         "kotest-spring" to "1.3.0",
         "detekt" to "1.23.6",

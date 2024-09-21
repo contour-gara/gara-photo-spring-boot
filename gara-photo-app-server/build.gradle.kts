@@ -7,7 +7,7 @@ val versions by extra {
     mapOf(
         "java" to "21",
         "kotlin" to "2.0.10",
-        "springBoot" to "3.3.3",
+        "springBoot" to "3.3.4",
         "restAssured" to "5.4.0",
         "mybatis" to "3.0.3",
         "jackson-module-kotlin" to "2.17.1",

@@ -158,6 +158,9 @@ jobs:
     needs: build_and_upload_jar_file
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
       - name: Download Dockerfile and jar file
         uses: actions/download-artifact@v4.1.8
         with:
