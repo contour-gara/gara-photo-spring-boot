@@ -73,7 +73,7 @@ jobs:
           cache: 'gradle'
 
       - name: Run detekt
-        run: gradle clean detekt
+        run: ./gradlew clean detekt
 
   konsist_test:
     runs-on: ubuntu-latest
@@ -90,7 +90,7 @@ jobs:
 
       - name: Run konsist test
         working-directory: konsist-test
-        run: gradle clean test
+        run: ../gradlew clean test
 
   unit_test:
     runs-on: ubuntu-latest
@@ -107,7 +107,7 @@ jobs:
 
       - name: Run unit test
         working-directory: gara-photo-app-server
-        run: gradle clean test
+        run: ../gradlew clean test
 
   integration_test:
     runs-on: ubuntu-latest
@@ -128,7 +128,7 @@ jobs:
 
       - name: Run integration test
         working-directory: integration-test
-        run: gradle clean integrationTest
+        run: ../gradlew clean integrationTest
 
   build_and_upload_jar_file:
     if: ${{ (github.event_name == 'push' && needs.filter.outputs.isDeploy == 'true') || inputs.isDeploy == 'true' }}
@@ -152,7 +152,7 @@ jobs:
 
       - name: Build jar file
         working-directory: gara-photo-app-server
-        run: gradle clean build -x test
+        run: ../gradlew clean build -x test
 
       - name: Upload Dockerfile and jar file
         uses: actions/upload-artifact@v4.4.0
