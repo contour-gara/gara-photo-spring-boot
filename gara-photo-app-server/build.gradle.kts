@@ -13,6 +13,7 @@ val versions by extra {
         "jackson-module-kotlin" to "2.17.1",
         "twitter4j-core" to "4.0.7",
         "twitter4j-v2" to "1.4.3",
+        "flyway" to "10.18.0",
         "h2" to "2.2.224",
         "mockito-kotlin" to "5.3.1",
         "rider-junit5" to "1.42.0",
@@ -63,8 +64,8 @@ dependencies {
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
     implementation(fileTree("lib"))
     runtimeOnly("org.postgresql:postgresql")
-    runtimeOnly("org.flywaydb:flyway-core")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql")
+    runtimeOnly("org.flywaydb:flyway-core:${versions["flyway"]}")
+    runtimeOnly("org.flywaydb:flyway-database-postgresql:${versions["flyway"]}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
     testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
@@ -84,7 +85,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.10.0")
+        classpath("org.flywaydb:flyway-database-postgresql:10.18.0")
     }
 }
 
