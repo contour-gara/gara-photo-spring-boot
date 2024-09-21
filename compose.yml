@@ -54,7 +54,7 @@ services:
       start_period: 30s
 
   sonarqube:
-    image: sonarqube:10.4.1-community
+    image: sonarqube:10.6.0-community
     ports:
     - "9000:9000"
     profiles: [ "local" ]
