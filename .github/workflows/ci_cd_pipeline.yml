@@ -36,13 +36,13 @@ on:
 
 permissions:
   packages: write
+  contents: write
 
 env:
   TZ: 'Asia/Tokyo'
 
 jobs:
   filter:
-    if: ${{ github.event_name == 'push' }}
     runs-on: ubuntu-latest
     outputs:
       isDeploy: ${{ steps.filter.outputs.isDeploy }}
@@ -51,6 +51,7 @@ jobs:
         uses: actions/checkout@v4.1.7
 
       - name: Filter
+        if: ${{ github.event_name == 'push' }}
         id: filter
         uses: dorny/paths-filter@v3.0.2
         with:
@@ -131,7 +132,7 @@ jobs:
         run: ../gradlew clean integrationTest
 
   build_and_upload_jar_file:
-    if: ${{ (github.event_name == 'push' && needs.filter.outputs.isDeploy == 'true') || inputs.isDeploy == 'true' }}
+    if: ${{ needs.filter.outputs.isDeploy == 'true' || inputs.isDeploy == 'true' }}
     needs:
       - filter
       - detekt
