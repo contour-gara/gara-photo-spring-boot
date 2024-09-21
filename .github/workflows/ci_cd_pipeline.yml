@@ -163,13 +163,27 @@ jobs:
             gara-photo-app-server/Dockerfile
             gara-photo-app-server/build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
 
-  build_and_push_docker_image:
+  create_git_tag:
     needs: build_and_upload_jar_file
     runs-on: ubuntu-latest
+    outputs:
+      tagName: ${{ steps.create_tag.outputs.tagName }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4.1.7
 
+      - name: Create git tag
+        id: create_tag
+        run: |
+          TAG_NAME=1.1.$(date +%Y%m%d%H%M%S)
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+          echo "tagName=$TAG_NAME" >> $GITHUB_OUTPUT
+
+  build_and_push_docker_image:
+    needs: create_git_tag
+    runs-on: ubuntu-latest
+    steps:
       - name: Download Dockerfile and jar file
         uses: actions/download-artifact@v4.1.8
         with:
@@ -182,19 +196,13 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Create git tag
-        run: |
-          echo "TAG_NAME=1.1.$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
-
       - name: Build docker image
         run: |
           docker build \
           --tag ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ env.TAG_NAME }} .
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ needs.create_git_tag.outputs.tagName }} .
 
       - name: Push docker image
         run: |
           docker push ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:latest
-          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ env.TAG_NAME }}
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ needs.create_git_tag.outputs.tagName }}
