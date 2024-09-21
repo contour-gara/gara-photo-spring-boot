@@ -173,13 +173,19 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Create git tag
+        run: |
+          echo "TAG_NAME=1.$(date +%Y%m%d.%H%M%S)" >> $GITHUB_ENV
+          git tag ${{ env.TAG_NAME }}
+          git push origin ${{ env.TAG_NAME }}
+
       - name: Build docker image
         run: |
           docker build \
           --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:$(echo $GITHUB_SHA | head -c7) .
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:${{ env.TAG_NAME }} .
 
       - name: Push docker image
         run: |
           docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest
-          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:$(echo $GITHUB_SHA | head -c7)
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:${{ env.TAG_NAME }}
