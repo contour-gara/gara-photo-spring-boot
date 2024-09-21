@@ -17,6 +17,6 @@ services:
       TWITTER_UPLOAD-BASE-URL: http://host.docker.internal:28080/
       TWITTER_OAUTH2-REST-BASE-URL: http://host.docker.internal:28080/
 
-  postgres:
+  mysql:
     environment:
-      POSTGRES_PASSWORD: password
+      MYSQL_PASSWORD: password

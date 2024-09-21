@@ -104,7 +104,7 @@
         'compose.yml',
       ],
       excludePackageNames: [
-        'postgres',
+        'mysql',
       ],
       matchUpdateTypes: [
         'major',
@@ -112,13 +112,13 @@
         'patch',
       ],
     },
-    // ポスグレはアップデートしない
+    // MySQL はアップデートしない
     {
       matchPaths: [
         'compose.yml',
       ],
       matchPackageNames: [
-        'postgres',
+        'mysql',
       ],
       matchUpdateTypes: [
         'major',

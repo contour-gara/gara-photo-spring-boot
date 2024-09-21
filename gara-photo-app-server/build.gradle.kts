@@ -62,9 +62,9 @@ dependencies {
     implementation("org.twitter4j:twitter4j-core:${versions["twitter4j-core"]}")
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
     implementation(fileTree("lib"))
-    runtimeOnly("org.postgresql:postgresql")
+    runtimeOnly("com.mysql:mysql-connector-j")
     runtimeOnly("org.flywaydb:flyway-core:${versions["flyway"]}")
-    runtimeOnly("org.flywaydb:flyway-database-postgresql:${versions["flyway"]}")
+    runtimeOnly("org.flywaydb:flyway-mysql:${versions["flyway"]}")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
     testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
@@ -84,7 +84,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-database-postgresql:10.18.0")
+        classpath("org.flywaydb:flyway-mysql:10.18.0")
     }
 }
 
