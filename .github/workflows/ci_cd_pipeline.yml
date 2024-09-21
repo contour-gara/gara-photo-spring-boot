@@ -7,9 +7,6 @@ on:
     paths-ignore:
       - '.github/CODEOWNERS'
       - '.gitignore'
-      - 'gradle/**'
-      - 'gradlew'
-      - 'gradle.bat'
       - 'LICENSE.md'
       - 'README.md'
   pull_request:
@@ -20,19 +17,17 @@ on:
     paths-ignore:
       - '.github/CODEOWNERS'
       - '.gitignore'
-      - 'gradle/**'
-      - 'gradlew'
-      - 'gradle.bat'
       - 'LICENSE.md'
       - 'README.md'
   workflow_dispatch:
     inputs:
       isDeploy:
+        description: 'デプロイするかどうか'
         type: choice
         required: true
         options:
-          - true
-          - false
+          - 'true'
+          - 'false'
 
 permissions:
   packages: write
