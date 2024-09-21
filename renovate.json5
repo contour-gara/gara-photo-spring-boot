@@ -1,0 +1,141 @@
+{
+  $schema: 'https://docs.renovatebot.com/renovate-schema.json',
+  extends: [
+    'config:recommended',
+  ],
+  timezone: 'Asia/Tokyo',
+  ignorePaths: [
+    'performance-test/**',
+  ],
+  schedule: 'on saturday',
+  baseBranches: [
+    'master',
+  ],
+  packageRules: [
+    // Gradle の依存ライブラリの SpringBoot 以外のアップデート
+    {
+      groupName: 'Gradle dependencies update',
+      matchPaths: [
+        'build.gradle.kts',
+        '**/build.gradle.kts',
+      ],
+      excludePackageNames: [
+        'org.springframework.boot',
+        'org.springframework.boot:spring-boot-dependencies:',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+      ],
+    },
+    // SpringBoot のアップデート
+    {
+      groupName: 'SpringBoot patch update',
+      matchPaths: [
+        'build.gradle.kts',
+        '**/build.gradle.kts',
+      ],
+      matchPackageNames: [
+        'org.springframework.boot',
+        'org.springframework.boot:spring-boot-dependencies:',
+      ],
+      matchUpdateTypes: [
+        'patch',
+      ],
+    },
+    // SpringBoot のマイナー以上のアップデートはしない
+    {
+      matchPaths: [
+        'build.gradle.kts',
+        '**/build.gradle.kts',
+      ],
+      matchPackageNames: [
+        'org.springframework.boot',
+        'org.springframework.boot:spring-boot-dependencies:',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+      ],
+      enabled: false,
+    },
+    // Gradle のアップデート
+    {
+      groupName: 'Gradle update',
+      matchPaths: [
+        'gradle/**',
+        'gradlew',
+        'gradlew.bat',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+      ],
+    },
+    // Amazon Corretto と Amazon Linux のアップデート
+    {
+      groupName: "Docker image used in the Dockerfile update",
+      matchPaths: [
+        'gara-photo-app-server/Dockerfile',
+      ],
+      matchUpdateTypes: [
+        'minor',
+        'patch',
+      ],
+    },
+    // Amazon Corretto と Amazon Linux はメジャーアップデートしない
+    {
+      matchPaths: [
+        'gara-photo-app-server/Dockerfile',
+      ],
+      matchUpdateTypes: [
+        'major',
+      ],
+      enabled: false,
+    },
+    // compose.yml のアップデート
+    {
+      groupName: "Docker image used in the compose.yml update",
+      matchPaths: [
+        'compose.yml',
+      ],
+      excludePackageNames: [
+        'postgres',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+      ],
+    },
+    // ポスグレはアップデートしない
+    {
+      matchPaths: [
+        'compose.yml',
+      ],
+      matchPackageNames: [
+        'postgres',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+      ],
+      enabled: false,
+    },
+    // GHA のカスタムアクションのアップデート
+    {
+      groupName: 'GHA custom actions update',
+      matchPaths: [
+        '.github/**',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
+      ],
+    },
+  ],
+}
