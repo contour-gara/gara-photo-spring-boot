@@ -8,8 +8,10 @@
     'performance-test/**',
   ],
   schedule: 'on saturday',
+  prConcurrentLimit: 0,
+  prHourlyLimit: 0,
   baseBranches: [
-    'master',
+    'main',
   ],
   packageRules: [
     // Gradle の依存ライブラリの SpringBoot 以外のアップデート
@@ -74,7 +76,7 @@
         'patch',
       ],
     },
-    // Amazon Corretto と Amazon Linux のアップデート
+    // Amazon Corretto と Debian のアップデート
     {
       groupName: "Docker image used in the Dockerfile update",
       matchPaths: [
@@ -85,7 +87,7 @@
         'patch',
       ],
     },
-    // Amazon Corretto と Amazon Linux はメジャーアップデートしない
+    // Amazon Corretto と Debian はメジャーアップデートしない
     {
       matchPaths: [
         'gara-photo-app-server/Dockerfile',
