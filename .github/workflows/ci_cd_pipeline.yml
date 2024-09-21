@@ -184,17 +184,17 @@ jobs:
 
       - name: Create git tag
         run: |
-          echo "TAG_NAME=1.$(date +%Y%m%d.%H%M%S)" >> $GITHUB_ENV
-          git tag ${{ env.TAG_NAME }}
-          git push origin ${{ env.TAG_NAME }}
+          echo "TAG_NAME=1.1.$(date +%Y%m%d%H%M%S)" >> $GITHUB_ENV
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
 
       - name: Build docker image
         run: |
           docker build \
-          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest \
-          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:${{ env.TAG_NAME }} .
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:latest \
+          --tag ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ env.TAG_NAME }} .
 
       - name: Push docker image
         run: |
-          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:latest
-          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-spring-boot:${{ env.TAG_NAME }}
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:latest
+          docker push ghcr.io/$GITHUB_ACTOR/gara-photo-app-server:${{ env.TAG_NAME }}
