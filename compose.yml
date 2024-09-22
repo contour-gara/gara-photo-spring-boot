@@ -32,7 +32,6 @@ services:
       TWITTER_CLIENT_ID: ${GARA_PHOTO_CLIENT_ID:-client-id-dummy}
       TWITTER_CLIENT_SECRET: ${GARA_PHOTO_CLIENT_SECRET:-client-secret-dummy}
       TWITTER_REDIRECT_URI: ${GARA_PHOTO_REDIRECT_URI:-http://localhost/dummy}
-      TZ: Asia/Tokyo
       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
   mysql:
@@ -41,9 +40,7 @@ services:
       MYSQL_USER: gara
       MYSQL_PASSWORD: ${GARA_PHOTO_DB_PASSWORD}
       MYSQL_DATABASE: gara_photo
-#      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_ROOT_PASSWORD: root
-      TZ: "Asia/Tokyo"
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     networks:
       - gara-photo-nw
     ports:
