@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.dao.DuplicateKeyException
+import java.time.LocalDateTime
 
 @DBRider
 @DBUnit
@@ -22,7 +23,7 @@ class TokenMapperTest {
     @Test
     fun `トークン情報をテーブルに保存できる`() {
         // setup
-        val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+        val tokenEntity = TokenEntity("accessToken", "refreshToken", LocalDateTime.of(2024, 4, 14, 19, 48, 34))
 
         // execute
         sut.insert(tokenEntity)
@@ -33,7 +34,7 @@ class TokenMapperTest {
     @Test
     fun `トークン情報の保存ですでにデータがある場合、例外が返る`() {
         // setup
-        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", LocalDateTime.of(2024, 4, 14, 19, 48, 34))
 
         // execute & assert
         assertThatThrownBy { sut.insert(tokenEntity) }.isInstanceOf(DuplicateKeyException::class.java)
@@ -47,7 +48,7 @@ class TokenMapperTest {
         val actual = sut.find()
 
         // assert
-        val expected = TokenEntity("accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+        val expected = TokenEntity("accessToken", "refreshToken", LocalDateTime.of(2024, 4, 14, 19, 48, 34))
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -67,7 +68,7 @@ class TokenMapperTest {
     @Test
     fun `トークン情報を更新できる`() {
         // setup
-        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+        val tokenEntity = TokenEntity("accessToken2", "refreshToken2", LocalDateTime.of(2024, 4, 14, 19, 48, 34))
 
         // execute
         sut.update(tokenEntity)

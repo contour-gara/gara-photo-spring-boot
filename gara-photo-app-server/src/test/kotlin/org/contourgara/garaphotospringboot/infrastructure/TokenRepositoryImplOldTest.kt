@@ -44,7 +44,7 @@ class TokenRepositoryImplOldTest {
     @Test
     fun `トークンが取得できる`() {
         // setup
-        val tokenEntity = TokenEntity("accessToken", "refreshToken", "2024-04-14T05:13:00.000+09:00[Asia/Tokyo]")
+        val tokenEntity = TokenEntity("accessToken", "refreshToken", LocalDateTime.of(2024, 4, 14, 5, 13, 0))
 
         doReturn(tokenEntity).whenever(tokenMapper).find()
 

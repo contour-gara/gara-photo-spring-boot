@@ -10,7 +10,10 @@ import io.kotest.matchers.nulls.shouldBeNull
 import io.kotest.matchers.shouldBe
 import org.assertj.db.api.Assertions.*
 import org.assertj.db.type.Changes
+import org.assertj.db.type.DateTimeValue
+import org.assertj.db.type.DateValue
 import org.assertj.db.type.Table
+import org.assertj.db.type.TimeValue
 import org.contourgara.garaphotospringboot.domain.Token
 import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.springframework.boot.test.context.SpringBootTest
@@ -46,7 +49,7 @@ class TokenRepositoryImplTest(
                         "accessToken",
                         "refreshToken",
                         "clientId",
-                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
                     )
                 )
 
@@ -61,7 +64,9 @@ class TokenRepositoryImplTest(
                     .value("id").isEqualTo("1")
                     .value("access_token").isEqualTo("accessToken")
                     .value("refresh_Token").isEqualTo("refreshToken")
-                    .value("date_time").isEqualTo("2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                    .value("date_time").isEqualTo(
+                        DateTimeValue.of(DateValue.of(2024, 4, 14), TimeValue.of(19, 48, 34))
+                    )
             }
         }
 
@@ -73,7 +78,7 @@ class TokenRepositoryImplTest(
                 dbSetup(dataSource) {
                     insertInto("token") {
                         columns("id", "access_token", "refresh_token", "date_time")
-                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                        values("1", "accessToken", "refreshToken", LocalDateTime.of(2024, 4, 14, 19, 48, 34))
                     }
                 }.launch()
 
@@ -100,7 +105,7 @@ class TokenRepositoryImplTest(
                 dbSetup(dataSource) {
                     insertInto("token") {
                         columns("id", "access_token", "refresh_token", "date_time")
-                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                        values("1", "accessToken", "refreshToken", "2024-04-14 19:48:34")
                     }
                 }.launch()
 
@@ -111,7 +116,7 @@ class TokenRepositoryImplTest(
                     "accessToken",
                     "refreshToken",
                     "clientId",
-                    ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                    ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
                 )
 
                 changes.setEndPointNow()
@@ -146,7 +151,7 @@ class TokenRepositoryImplTest(
                 dbSetup(dataSource) {
                     insertInto("token") {
                         columns("id", "access_token", "refresh_token", "date_time")
-                        values("1", "accessToken", "refreshToken", "2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                        values("1", "accessToken", "refreshToken", "2024-04-14 19:48:34")
                     }
                 }.launch()
 
@@ -158,7 +163,7 @@ class TokenRepositoryImplTest(
                         "accessToken2",
                         "refreshToken2",
                         "clientId",
-                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34, 0), ZoneId.systemDefault())
+                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
                     )
                 )
 
@@ -173,7 +178,9 @@ class TokenRepositoryImplTest(
                     .value("id").isEqualTo("1")
                     .value("access_token").isEqualTo("accessToken2")
                     .value("refresh_Token").isEqualTo("refreshToken2")
-                    .value("date_time").isEqualTo("2024-04-14T19:48:34+09:00[Asia/Tokyo]")
+                    .value("date_time").isEqualTo(
+                        DateTimeValue.of(DateValue.of(2024, 4, 14), TimeValue.of(19, 48, 34))
+                    )
             }
         }
     }
