@@ -17,6 +17,3 @@ spring:
 
 server:
   shutdown: graceful
-
-application:
-  repository: jdbc-client

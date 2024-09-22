@@ -10,3 +10,6 @@ spring:
   sql:
     init:
       platform: h2
+
+application:
+  repository: jdbc-client
