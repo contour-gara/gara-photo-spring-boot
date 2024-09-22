@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions.*
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.CsvSource
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class TokenTest {
     @ParameterizedTest(name = "トークン取得が 21 時で 22 時 {0} 分 {1} 秒に実行した場合、{2} が返る")
@@ -22,12 +20,11 @@ class TokenTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 21, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 21, 0, 0)
         )
 
         // execute
-        val actual =
-            sut.isInvalid(ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 22, minute, second), ZoneId.systemDefault()))
+        val actual = sut.isInvalid(LocalDateTime.of(2024, 4, 14, 22, minute, second))
 
         // assert
         assertThat(actual).isEqualTo(expected)

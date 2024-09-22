@@ -4,8 +4,6 @@ import org.assertj.core.api.Assertions.*
 import org.contourgara.garaphotospringboot.domain.Token
 import org.junit.jupiter.api.Test
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class TokenEntityTest {
     @Test
@@ -15,7 +13,7 @@ class TokenEntityTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 17, 20), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 5, 17, 20)
         )
 
         // execute
@@ -40,7 +38,7 @@ class TokenEntityTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 17, 20), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 5, 17, 20)
         )
         assertThat(actual).isEqualTo(expected)
     }

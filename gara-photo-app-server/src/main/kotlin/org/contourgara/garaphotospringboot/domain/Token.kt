@@ -1,15 +1,15 @@
 package org.contourgara.garaphotospringboot.domain
 
-import java.time.ZonedDateTime
+import java.time.LocalDateTime
 import java.time.temporal.ChronoUnit
 
 data class Token(
     val accessToken: String,
     val refreshToken: String,
     val clientId: String,
-    val dateTime: ZonedDateTime,
+    val dateTime: LocalDateTime,
 ) {
-    fun isInvalid(arg: ZonedDateTime): Boolean {
+    fun isInvalid(arg: LocalDateTime): Boolean {
         return ChronoUnit.SECONDS.between(dateTime, arg) >= TOKEN_EXPIRATION_SECONDS
     }
 

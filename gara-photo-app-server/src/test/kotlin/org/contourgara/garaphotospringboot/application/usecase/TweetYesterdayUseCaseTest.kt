@@ -15,8 +15,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class TweetYesterdayUseCaseTest {
     @InjectMocks
@@ -39,7 +37,7 @@ class TweetYesterdayUseCaseTest {
     @Test
     fun `ツイート ID が返る`() {
         // setup
-        val dateTime = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        val dateTime = LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         val media = Media(listOf(getFile("photo/yesterday/20240422/20240422-190001-01.png")))
 
         doReturn(dateTime).whenever(garaPhotoEnvironment).getCurrentDateTime()

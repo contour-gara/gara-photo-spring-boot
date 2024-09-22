@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -21,7 +19,7 @@ class GaraPhotoEnvironmentTest {
         val actual = sut.getCurrentDateTime()
 
         // assert
-        val expected = ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+        val expected = LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         assertThat(actual).isEqualTo(expected)
     }
 }

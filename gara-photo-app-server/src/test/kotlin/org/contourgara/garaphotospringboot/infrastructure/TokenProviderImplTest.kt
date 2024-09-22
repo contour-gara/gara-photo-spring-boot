@@ -13,8 +13,6 @@ import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.context.ActiveProfiles
 import twitter4j.TwitterException
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 @ActiveProfiles("test")
 @SpringBootTest
@@ -92,7 +90,7 @@ class TokenProviderImplTest {
             "access-token",
             "refresh-token",
             "client-id",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         )
         assertThat(actual).isEqualTo(expected)
     }
@@ -166,7 +164,7 @@ class TokenProviderImplTest {
                 "access-token",
                 "refresh-token",
                 "client-id",
-                ZonedDateTime.of(LocalDateTime.of(2024, 4, 20, 0, 0, 0), ZoneId.systemDefault())
+                LocalDateTime.of(2024, 4, 20, 0, 0, 0)
             )
         )
 
@@ -175,7 +173,7 @@ class TokenProviderImplTest {
             "access-token2",
             "refresh-token2",
             "client-id",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         )
         assertThat(actual).isEqualTo(expected)
     }
@@ -201,7 +199,7 @@ class TokenProviderImplTest {
                     "access-token",
                     "refresh-token",
                     "client-id",
-                    ZonedDateTime.of(LocalDateTime.of(2024, 4, 20, 0, 0, 0), ZoneId.systemDefault())
+                    LocalDateTime.of(2024, 4, 20, 0, 0, 0)
                 )
             )
         }.isInstanceOf(TwitterException::class.java)

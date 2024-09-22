@@ -19,8 +19,6 @@ import org.contourgara.garaphotospringboot.domain.infrastructure.TokenRepository
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.dao.DuplicateKeyException
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 @SpringBootTest
 @DBUnit
@@ -49,7 +47,7 @@ class TokenRepositoryImplTest(
                         "accessToken",
                         "refreshToken",
                         "clientId",
-                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
+                        LocalDateTime.of(2024, 4, 14, 19, 48, 34)
                     )
                 )
 
@@ -86,7 +84,7 @@ class TokenRepositoryImplTest(
                 changes.setStartPointNow()
 
                 shouldThrowExactly<DuplicateKeyException> {
-                    sut.insert(Token("accessToken", "refreshToken", "clientId", ZonedDateTime.now()))
+                    sut.insert(Token("accessToken", "refreshToken", "clientId", LocalDateTime.now()))
                 }
 
                 changes.setEndPointNow()
@@ -116,7 +114,7 @@ class TokenRepositoryImplTest(
                     "accessToken",
                     "refreshToken",
                     "clientId",
-                    ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
+                    LocalDateTime.of(2024, 4, 14, 19, 48, 34)
                 )
 
                 changes.setEndPointNow()
@@ -163,7 +161,7 @@ class TokenRepositoryImplTest(
                         "accessToken2",
                         "refreshToken2",
                         "clientId",
-                        ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 19, 48, 34), ZoneId.systemDefault())
+                        LocalDateTime.of(2024, 4, 14, 19, 48, 34)
                     )
                 )
 

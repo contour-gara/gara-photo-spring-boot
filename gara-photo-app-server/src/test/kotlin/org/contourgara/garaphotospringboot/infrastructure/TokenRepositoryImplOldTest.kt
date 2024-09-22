@@ -9,8 +9,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class TokenRepositoryImplOldTest {
     @InjectMocks
@@ -31,7 +29,7 @@ class TokenRepositoryImplOldTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 5, 13, 0)
         )
 
         // execute
@@ -56,7 +54,7 @@ class TokenRepositoryImplOldTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 5, 13, 0)
         )
         assertThat(actual).isEqualTo(expected)
     }
@@ -80,7 +78,7 @@ class TokenRepositoryImplOldTest {
             "accessToken2",
             "refreshToken2",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 5, 13, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 5, 13, 0)
         )
 
         // execute

@@ -13,8 +13,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class FetchTokenUseCaseTest {
     @InjectMocks
@@ -41,7 +39,7 @@ class FetchTokenUseCaseTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 14, 4, 10, 30), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 14, 4, 10, 30)
         )
 
         doReturn("clientId").whenever(twitterConfig).clientId

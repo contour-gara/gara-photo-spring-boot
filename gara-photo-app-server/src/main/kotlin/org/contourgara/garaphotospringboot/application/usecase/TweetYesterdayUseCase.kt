@@ -19,8 +19,7 @@ class TweetYesterdayUseCase(
         val media: Media = photoRepository.findForYesterday(
             """
                 file:///opt/photo/yesterday/
-                ${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).toLocalDateTime()
-                .format(DateTimeFormatter.BASIC_ISO_DATE)}
+                ${garaPhotoEnvironment.getCurrentDateTime().minusDays(1L).format(DateTimeFormatter.BASIC_ISO_DATE)}
             """.trimIndent().replace(System.lineSeparator(), "")
         )
         val tweetId: Long = twitterClient.tweetWithMedia(Tweet("yesterday", media), accessToken)

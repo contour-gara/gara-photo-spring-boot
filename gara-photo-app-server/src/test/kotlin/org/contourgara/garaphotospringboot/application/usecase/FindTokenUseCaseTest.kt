@@ -15,8 +15,6 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 import org.mockito.kotlin.*
 import java.time.LocalDateTime
-import java.time.ZoneId
-import java.time.ZonedDateTime
 
 class FindTokenUseCaseTest {
     @InjectMocks
@@ -56,14 +54,12 @@ class FindTokenUseCaseTest {
             "accessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         )
 
         doReturn("clientId").whenever(twitterConfig).clientId
         doReturn(token).whenever(tokenRepository).find("clientId")
-        doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 1, 0, 0), ZoneId.systemDefault())).whenever(
-            garaPhotoEnvironment
-        ).getCurrentDateTime()
+        doReturn(LocalDateTime.of(2024, 4, 23, 1, 0, 0)).whenever(garaPhotoEnvironment).getCurrentDateTime()
 
         // execute
         val actual = sut.execute()
@@ -80,20 +76,18 @@ class FindTokenUseCaseTest {
             "invalidAccessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 0, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 23, 0, 0, 0)
         )
         val validToken = Token(
             "validAccessToken",
             "refreshToken",
             "clientId",
-            ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault())
+            LocalDateTime.of(2024, 4, 23, 2, 0, 0)
         )
 
         doReturn("clientId").whenever(twitterConfig).clientId
         doReturn(invalidToken).whenever(tokenRepository).find("clientId")
-        doReturn(ZonedDateTime.of(LocalDateTime.of(2024, 4, 23, 2, 0, 0), ZoneId.systemDefault())).whenever(
-            garaPhotoEnvironment
-        ).getCurrentDateTime()
+        doReturn(LocalDateTime.of(2024, 4, 23, 2, 0, 0)).whenever(garaPhotoEnvironment).getCurrentDateTime()
         doReturn(validToken).whenever(tokenProvider).fetchTokenByRefreshToken(invalidToken)
 
         // execute
