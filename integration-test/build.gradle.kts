@@ -3,17 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val versions by extra {
-    mapOf(
-        "java" to "21",
-        "springBoot" to "3.3.4",
-        "restAssured" to "5.4.0",
-        "rider-junit5" to "1.42.0",
-        "wiremock" to "3.6.0",
-        "detekt" to "1.23.6",
-    )
-}
-
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
@@ -36,7 +25,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:${versions["springBoot"]}")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.4")
     }
 }
 
@@ -46,11 +35,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
-    testImplementation("io.rest-assured:kotlin-extensions:${versions["restAssured"]}")
-    testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
-    testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${versions["detekt"]}")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:kotlin-extensions:5.4.0")
+    testImplementation("com.github.database-rider:rider-junit5:1.42.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.6.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
 }
 
 val integrationTest = tasks.register<Test>("integrationTest") {
@@ -84,7 +73,7 @@ dockerCompose {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "${versions["java"]}"
+        jvmTarget = "21"
     }
 }
 

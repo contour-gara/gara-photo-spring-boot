@@ -3,28 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val versions by extra {
-    mapOf(
-        "java" to "21",
-        "springBoot" to "3.3.4",
-        "restAssured" to "5.4.0",
-        "mybatis" to "3.0.3",
-        "jackson-module-kotlin" to "2.17.1",
-        "twitter4j-core" to "4.0.7",
-        "twitter4j-v2" to "1.4.3",
-        "flyway" to "10.18.0",
-        "h2" to "2.2.224",
-        "mockito-kotlin" to "5.3.1",
-        "rider-junit5" to "1.42.0",
-        "wiremock" to "3.6.0",
-        "kotest" to "5.9.1",
-        "kotest-spring" to "1.3.0",
-        "detekt" to "1.23.6",
-        "assertj-db" to "2.0.2",
-        "DbSetup" to "2.1.0",
-    )
-}
-
 plugins {
     id("org.springframework.boot")
     id("io.spring.dependency-management")
@@ -48,7 +26,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:${versions["springBoot"]}")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.4")
     }
 }
 
@@ -57,29 +35,29 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
-    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:${versions["mybatis"]}")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:${versions["jackson-module-kotlin"]}")
-    implementation("org.twitter4j:twitter4j-core:${versions["twitter4j-core"]}")
-//    implementation("io.github.takke:jp.takke.twitter4j-v2:${versions["twitter4j-v2"]}")
+    implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.17.1")
+    implementation("org.twitter4j:twitter4j-core:4.0.7")
+//    implementation("io.github.takke:jp.takke.twitter4j-v2:1.4.3")
     implementation(fileTree("lib"))
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:${versions["flyway"]}")
-    runtimeOnly("org.flywaydb:flyway-mysql:${versions["flyway"]}")
+    runtimeOnly("org.flywaydb:flyway-core:10.18.0")
+    runtimeOnly("org.flywaydb:flyway-mysql:10.18.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.kotest:kotest-runner-junit5:${versions["kotest"]}")
-    testImplementation("io.kotest:kotest-assertions-core:${versions["kotest"]}")
-    testImplementation("io.kotest:kotest-framework-datatest:${versions["kotest"]}")
-    testImplementation("io.kotest.extensions:kotest-extensions-spring:${versions["kotest-spring"]}")
-    testImplementation("io.rest-assured:rest-assured:${versions["restAssured"]}")
-    testImplementation("io.rest-assured:spring-mock-mvc:${versions["restAssured"]}")
-    testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:${versions["restAssured"]}")
-    testImplementation("com.h2database:h2:${versions["h2"]}")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:${versions["mockito-kotlin"]}")
-    testImplementation("com.github.database-rider:rider-junit5:${versions["rider-junit5"]}")
-    testImplementation("org.wiremock:wiremock-jetty12:${versions["wiremock"]}")
-    testImplementation("org.assertj:assertj-db:${versions["assertj-db"]}")
-    testImplementation("com.ninja-squad:DbSetup-kotlin:${versions["DbSetup"]}")
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:${versions["detekt"]}")
+    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
+    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+    testImplementation("io.kotest:kotest-framework-datatest:5.9.1")
+    testImplementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
+    testImplementation("io.rest-assured:rest-assured:5.4.0")
+    testImplementation("io.rest-assured:spring-mock-mvc:5.4.0")
+    testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.4.0")
+    testImplementation("com.h2database:h2:2.2.224")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:5.3.1")
+    testImplementation("com.github.database-rider:rider-junit5:1.42.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.6.0")
+    testImplementation("org.assertj:assertj-db:2.0.2")
+    testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
 }
 
 buildscript {
@@ -91,7 +69,7 @@ buildscript {
 tasks.withType<KotlinCompile> {
     kotlinOptions {
         freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "${versions["java"]}"
+        jvmTarget = "21"
     }
 }
 
