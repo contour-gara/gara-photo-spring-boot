@@ -23,7 +23,8 @@
       ],
       excludePackageNames: [
         'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies:',
+        'org.springframework.boot:spring-boot-dependencies',
+        'org.twitter4j:twitter4j-core',
       ],
       matchUpdateTypes: [
         'major',
@@ -40,7 +41,7 @@
       ],
       matchPackageNames: [
         'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies:',
+        'org.springframework.boot:spring-boot-dependencies',
       ],
       matchUpdateTypes: [
         'patch',
@@ -54,11 +55,27 @@
       ],
       matchPackageNames: [
         'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies:',
+        'org.springframework.boot:spring-boot-dependencies',
       ],
       matchUpdateTypes: [
         'major',
         'minor',
+      ],
+      enabled: false,
+    },
+    // Twitter4j のアップデートはしない
+    {
+      matchPaths: [
+        'build.gradle.kts',
+        '**/build.gradle.kts',
+      ],
+      matchPackageNames: [
+        'org.twitter4j:twitter4j-core',
+      ],
+      matchUpdateTypes: [
+        'major',
+        'minor',
+        'patch',
       ],
       enabled: false,
     },
