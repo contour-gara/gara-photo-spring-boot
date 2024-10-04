@@ -35,11 +35,11 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     runtimeOnly("com.mysql:mysql-connector-j")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.rest-assured:rest-assured:5.4.0")
-    testImplementation("io.rest-assured:kotlin-extensions:5.4.0")
-    testImplementation("com.github.database-rider:rider-junit5:1.42.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.6.0")
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.6")
+    testImplementation("io.rest-assured:rest-assured:5.5.0")
+    testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
+    testImplementation("com.github.database-rider:rider-junit5:1.44.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.9.1")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
 }
 
 val integrationTest = tasks.register<Test>("integrationTest") {
