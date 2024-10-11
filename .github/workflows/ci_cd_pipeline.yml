@@ -43,7 +43,7 @@ jobs:
       isDeploy: ${{ steps.filter.outputs.isDeploy }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Filter
         if: ${{ github.event_name == 'push' }}
@@ -59,7 +59,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Java
         uses: actions/setup-java@v4.4.0
@@ -75,7 +75,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Java
         uses: actions/setup-java@v4.4.0
@@ -92,7 +92,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Java
         uses: actions/setup-java@v4.4.0
@@ -109,7 +109,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Java
         uses: actions/setup-java@v4.4.0
@@ -137,7 +137,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Set up Java
         uses: actions/setup-java@v4.4.0
@@ -151,7 +151,7 @@ jobs:
         run: ../gradlew clean build -x test
 
       - name: Upload Dockerfile and jar file
-        uses: actions/upload-artifact@v4.4.0
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: jar-and-Dockerfile
           path: |
@@ -165,7 +165,7 @@ jobs:
       tagName: ${{ steps.create_tag.outputs.tagName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.0
+        uses: actions/checkout@v4.2.1
 
       - name: Create git tag
         id: create_tag
