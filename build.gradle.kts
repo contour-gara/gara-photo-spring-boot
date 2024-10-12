@@ -6,5 +6,5 @@ plugins {
     id("org.sonarqube") version "5.1.0.4882"
     id("jacoco")
     id("io.gitlab.arturbosch.detekt") version "1.23.7"
-    id("com.avast.gradle.docker-compose") version "0.17.8"
+    id("com.avast.gradle.docker-compose") version "0.17.9"
 }
