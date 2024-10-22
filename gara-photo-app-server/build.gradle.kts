@@ -38,8 +38,8 @@ dependencies {
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:1.4.3")
     implementation(fileTree("lib"))
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:10.19.0")
-    runtimeOnly("org.flywaydb:flyway-mysql:10.19.0")
+    runtimeOnly("org.flywaydb:flyway-core:10.20.0")
+    runtimeOnly("org.flywaydb:flyway-mysql:10.20.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
@@ -51,7 +51,7 @@ dependencies {
     testImplementation("com.h2database:h2:2.3.232")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.9.1")
+    testImplementation("org.wiremock:wiremock-jetty12:3.9.2")
     testImplementation("org.assertj:assertj-db:2.0.2")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
@@ -59,7 +59,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:10.19.0")
+        classpath("org.flywaydb:flyway-mysql:10.20.0")
     }
 }
 
