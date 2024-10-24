@@ -43,7 +43,7 @@ jobs:
       isDeploy: ${{ steps.filter.outputs.isDeploy }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Filter
         if: ${{ github.event_name == 'push' }}
@@ -59,10 +59,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4.4.0
+        uses: actions/setup-java@v4.5.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -75,10 +75,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4.4.0
+        uses: actions/setup-java@v4.5.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -92,10 +92,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4.4.0
+        uses: actions/setup-java@v4.5.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -109,10 +109,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4.4.0
+        uses: actions/setup-java@v4.5.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -137,10 +137,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Set up Java
-        uses: actions/setup-java@v4.4.0
+        uses: actions/setup-java@v4.5.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -165,7 +165,7 @@ jobs:
       tagName: ${{ steps.create_tag.outputs.tagName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v4.2.1
+        uses: actions/checkout@v4.2.2
 
       - name: Create git tag
         id: create_tag
