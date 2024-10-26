@@ -23,7 +23,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.4")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.5")
     }
 }
 
@@ -38,8 +38,8 @@ dependencies {
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:1.4.3")
     implementation(fileTree("lib"))
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:10.20.0")
-    runtimeOnly("org.flywaydb:flyway-mysql:10.20.0")
+    runtimeOnly("org.flywaydb:flyway-core:10.20.1")
+    runtimeOnly("org.flywaydb:flyway-mysql:10.20.1")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
@@ -59,7 +59,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:10.20.0")
+        classpath("org.flywaydb:flyway-mysql:10.20.1")
     }
 }
 
