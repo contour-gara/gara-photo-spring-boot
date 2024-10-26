@@ -22,8 +22,6 @@
         '**/build.gradle.kts',
       ],
       excludePackageNames: [
-        'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies',
         'org.twitter4j:twitter4j-core',
       ],
       matchUpdateTypes: [
@@ -31,37 +29,6 @@
         'minor',
         'patch',
       ],
-    },
-    // SpringBoot のアップデート
-    {
-      groupName: 'SpringBoot patch update',
-      matchPaths: [
-        'build.gradle.kts',
-        '**/build.gradle.kts',
-      ],
-      matchPackageNames: [
-        'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies',
-      ],
-      matchUpdateTypes: [
-        'patch',
-      ],
-    },
-    // SpringBoot のマイナー以上のアップデートはしない
-    {
-      matchPaths: [
-        'build.gradle.kts',
-        '**/build.gradle.kts',
-      ],
-      matchPackageNames: [
-        'org.springframework.boot',
-        'org.springframework.boot:spring-boot-dependencies',
-      ],
-      matchUpdateTypes: [
-        'major',
-        'minor',
-      ],
-      enabled: false,
     },
     // Twitter4j のアップデートはしない
     {
