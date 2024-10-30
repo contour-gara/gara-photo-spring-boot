@@ -55,6 +55,10 @@ jobs:
               - 'build.gradle.kts'
               - 'gara-photo-app-server/**'
 
+      - name: Display in summary
+        run: |
+          echo "- Deploy: ${{ steps.filter.outputs.isDeploy }}" >> $GITHUB_STEP_SUMMARY
+
   detekt:
     runs-on: ubuntu-latest
     steps:
