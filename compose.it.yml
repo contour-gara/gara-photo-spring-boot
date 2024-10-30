@@ -14,8 +14,8 @@ services:
       TWITTER_CLIENT_ID: client-id-dummy
       TWITTER_CLIENT_SECRET: client-secret-dummy
       TWITTER_REDIRECT_URI: http://localhost/dummy
-      TWITTER_UPLOAD-BASE-URL: http://host.docker.internal:28080/
-      TWITTER_OAUTH2-REST-BASE-URL: http://host.docker.internal:28080/
+      TWITTER_UPLOAD_BASE_URL: http://host.docker.internal:28080/
+      TWITTER_OAUTH2_REST_BASE_URL: http://host.docker.internal:28080/
 
   mysql:
     environment:
