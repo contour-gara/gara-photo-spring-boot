@@ -1,4 +1,6 @@
 FROM amazoncorretto:21.0.5-al2023 AS build
+
+# カスタム JRE
 WORKDIR /jlink
 RUN jlink \
     --verbose \
@@ -9,6 +11,13 @@ RUN jlink \
     --add-modules java.base,java.compiler,java.desktop,java.instrument,java.net.http,java.prefs,java.rmi,java.scripting,java.security.jgss,java.security.sasl,java.sql.rowset,jdk.attach,jdk.jdi,jdk.jfr,jdk.management,jdk.unsupported,jdk.crypto.ec \
     --output jre-min
 
+# CDS
+WORKDIR /cds
+ARG JAR_FILE=build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
+COPY ${JAR_FILE} app.jar
+RUN java -Djarmode=tools -jar app.jar extract --destination app
+RUN java -XX:ArchiveClassesAtExit=app/app.jsa  -Dspring.context.exit=onRefresh -jar app/app.jar ; exit 0
+
 FROM debian:stable-20240513-slim
 WORKDIR /deployments
 RUN apt-get update -y && apt-get install -y curl
@@ -16,6 +25,11 @@ COPY --from=build /jlink/jre-min /opt/jre-min
 ENV JAVA_HOME=/opt/jre-min
 ENV PATH $JAVA_HOME/bin:$PATH
 ENV LANG C.UTF-8
-ARG JAR_FILE=build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java", "-jar", "app.jar"]
+ARG JAR_FILE=/cds/app/app.jar
+COPY --from=build ${JAR_FILE} app.jar
+ARG JSA_FILE=/cds/app/app.jsa
+COPY --from=build ${JSA_FILE} app.jsa
+ARG LIB=/cds/app/lib
+COPY --from=build ${LIB} lib
+
+ENTRYPOINT ["java", "-XX:SharedArchiveFile=app.jsa", "-jar", "app.jar"]
