@@ -35,7 +35,7 @@ services:
       JAVA_TOOL_OPTIONS: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
 
   mysql:
-    image: mysql:9.0.1-oraclelinux9
+    image: mysql:8.0.40-oraclelinux9
     environment:
       MYSQL_USER: gara
       MYSQL_PASSWORD: ${GARA_PHOTO_DB_PASSWORD}
