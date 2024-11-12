@@ -33,13 +33,13 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.3")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.0")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.18.1")
     implementation("org.twitter4j:twitter4j-core:4.0.7")
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:1.4.3")
     implementation(fileTree("lib"))
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:10.20.1")
-    runtimeOnly("org.flywaydb:flyway-mysql:10.20.1")
+    runtimeOnly("org.flywaydb:flyway-core:10.21.0")
+    runtimeOnly("org.flywaydb:flyway-mysql:10.21.0")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
@@ -59,7 +59,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:10.20.1")
+        classpath("org.flywaydb:flyway-mysql:10.21.0")
     }
 }
 
