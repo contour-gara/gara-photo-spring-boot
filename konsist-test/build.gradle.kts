@@ -23,10 +23,20 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.5")
     }
+
+    configurations
+        .matching { it.name == "detekt" }
+        .all {
+            resolutionStrategy.eachDependency {
+                if (requested.group == "org.jetbrains.kotlin") {
+                    useVersion(io.gitlab.arturbosch.detekt.getSupportedKotlinVersion())
+                }
+            }
+        }
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter-web")
+    testImplementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")

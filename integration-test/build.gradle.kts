@@ -24,6 +24,17 @@ dependencyManagement {
     imports {
         mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.5")
     }
+
+    configurations
+        .matching { it.name == "detekt" }
+        .all {
+            resolutionStrategy.eachDependency {
+                if (requested.group == "org.jetbrains.kotlin") {
+                    useVersion(io.gitlab.arturbosch.detekt.getSupportedKotlinVersion())
+                }
+            }
+        }
+
 }
 
 dependencies {
