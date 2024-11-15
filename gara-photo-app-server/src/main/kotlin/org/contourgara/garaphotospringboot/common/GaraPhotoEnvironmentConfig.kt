@@ -15,7 +15,7 @@ class GaraPhotoEnvironmentConfig {
         return Clock.system(ZoneId.of("Asia/Tokyo"))
     }
 
-    @Profile(value = ["test"])
+    @Profile(value = ["test", "cds"])
     @Bean
     fun fixedTimeClock(): Clock {
         return Clock.fixed(Instant.parse("2024-04-23T00:00:00+09:00"), ZoneId.of("Asia/Tokyo"))

@@ -16,7 +16,7 @@ WORKDIR /cds
 ARG JAR_FILE=build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
 COPY ${JAR_FILE} app.jar
 RUN java -Djarmode=tools -jar app.jar extract --destination app
-RUN java -XX:ArchiveClassesAtExit=app/app.jsa  -Dspring.context.exit=onRefresh -jar app/app.jar ; exit 0
+RUN java -Dspring.profiles.active=cds -Dspring.context.exit=onRefresh -XX:ArchiveClassesAtExit=app/app.jsa -jar app/app.jar
 
 FROM debian:bookworm-20241111-slim
 
