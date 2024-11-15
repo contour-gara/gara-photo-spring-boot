@@ -109,35 +109,12 @@ jobs:
         working-directory: gara-photo-app-server
         run: ../gradlew clean test
 
-  integration_test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4.2.2
-
-      - name: Set up Java
-        uses: actions/setup-java@v4.5.0
-        with:
-          distribution: 'corretto'
-          java-version: '21'
-          cache: 'gradle'
-
-      - name: Build
-        working-directory: gara-photo-app-server
-        run: gradle clean build -x test -x detekt
-
-      - name: Run integration test
-        working-directory: integration-test
-        run: ../gradlew clean integrationTest
-
   build_and_upload_jar_file:
-    if: ${{ needs.filter.outputs.isDeploy == 'true' || inputs.isDeploy == 'true' }}
     needs:
       - filter
       - detekt
       - konsist_test
       - unit_test
-      - integration_test
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -162,8 +139,33 @@ jobs:
             gara-photo-app-server/Dockerfile
             gara-photo-app-server/build/libs/gara-photo-app-server-0.0.1-SNAPSHOT.jar
 
-  create_git_tag:
+  integration_test:
     needs: build_and_upload_jar_file
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+
+      - name: Set up Java
+        uses: actions/setup-java@v4.5.0
+        with:
+          distribution: 'corretto'
+          java-version: '21'
+          cache: 'gradle'
+
+      - name: Download Dockerfile and jar file
+        uses: actions/download-artifact@v4.1.8
+        with:
+          name: jar-and-Dockerfile
+          path: gara-photo-app-server
+
+      - name: Run integration test
+        working-directory: integration-test
+        run: ../gradlew clean integrationTest
+
+  create_git_tag:
+    if: ${{ needs.filter.outputs.isDeploy == 'true' || inputs.isDeploy == 'true' }}
+    needs: integration_test
     runs-on: ubuntu-latest
     outputs:
       tagName: ${{ steps.create_tag.outputs.tagName }}
