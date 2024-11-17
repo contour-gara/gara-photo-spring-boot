@@ -1,0 +1,32 @@
+{
+  "request": {
+    "urlPath": "/tweets",
+    "method": "POST",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/json"
+      },
+      "Authorization": {
+        "matches": "OAuth oauth_consumer_key=\"api-key-dummy\",oauth_signature_method=\"HMAC-SHA1\",oauth_timestamp=\"[^\"]+\",oauth_nonce=\"[^\"]+\",oauth_version=\"1\\.0\",oauth_token=\"oauth1-access-token-dummy\",oauth_signature=\"[^\"]+\"${'$'}"
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalToJson": "{\"media\":{\"media_ids\":[\"710511363345354753\",\"710511363345354753\",\"710511363345354753\",\"710511363345354753\"]},\"text\":\"yesterday\"}"
+      }
+    ]
+  },
+  "response": {
+    "status": 201,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "jsonBody": {
+      "data": {
+        "edit_history_tweet_ids":["1778064547540353187"],
+        "id":"1778064547540353187",
+        "text":"tweet"
+      }
+    }
+  }
+}

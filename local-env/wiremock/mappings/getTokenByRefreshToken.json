@@ -1,0 +1,31 @@
+{
+  "request": {
+    "urlPath": "/oauth2/token",
+    "method": "POST",
+    "headers": {
+      "Content-Type": {
+        "equalTo": "application/x-www-form-urlencoded"
+      },
+      "Authorization": {
+        "equalTo": "Basic Y2xpZW50LWlkLWR1bW15OmNsaWVudC1zZWNyZXQtZHVtbXk="
+      }
+    },
+    "bodyPatterns": [
+      {
+        "equalTo": "grant_type=refresh_token&refresh_token=refresh-token&client_id=client-id-dummy"
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json; charset=utf-8"
+    },
+    "jsonBody": {
+      "token_type": "bearer",
+      "expires_in": 7200,
+      "access_token": "access-token2",
+      "scope":"tweet.write users.read tweet.read offline.access","refresh_token":"refresh-token2"
+    }
+  }
+}

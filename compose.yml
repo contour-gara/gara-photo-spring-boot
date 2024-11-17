@@ -23,7 +23,7 @@ services:
       SPRING_PROFILES_ACTIVE: prd
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/gara_photo
       SPRING_DATASOURCE_USERNAME: gara
-      SPRING_DATASOURCE_PASSWORD: ${GARA_PHOTO_DB_PASSWORD}
+      SPRING_DATASOURCE_PASSWORD: password
       APPLICATION_REPOSITORY: jdbc-client
       TWITTER_OAUTH1_ACCESS_TOKEN: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN:-oauth1-access-token-dummy}
       TWITTER_OAUTH1_ACCESS_TOKEN_SECRET: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN_SECRET:-oauth1-access-token-secret-dummy}
@@ -38,7 +38,7 @@ services:
     image: mysql:8.0.40-oraclelinux9
     environment:
       MYSQL_USER: gara
-      MYSQL_PASSWORD: ${GARA_PHOTO_DB_PASSWORD}
+      MYSQL_PASSWORD: password
       MYSQL_DATABASE: gara_photo
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     networks:
@@ -51,6 +51,16 @@ services:
       timeout: 5s
       retries: 3
       start_period: 30s
+
+  wiremock:
+    image: wiremock/wiremock:3.9.2-alpine
+    restart: always
+    ports:
+      - "28080:8080"
+    volumes:
+      - ./local-env/wiremock/__files:/home/wiremock/__files
+      - ./local-env/wiremock/mappings:/home/wiremock/mappings
+    profiles: [ "local" ]
 
   sonarqube:
     image: sonarqube:10.7.0-community
