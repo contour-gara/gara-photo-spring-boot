@@ -21,7 +21,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.3.5")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.0")
     }
 
     configurations
@@ -42,7 +42,7 @@ dependencies {
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
     testImplementation("io.kotest:kotest-framework-datatest:5.9.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
-    testImplementation("com.lemonappdev:konsist:0.16.1")
+    testImplementation("com.lemonappdev:konsist:0.17.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
 }
 
