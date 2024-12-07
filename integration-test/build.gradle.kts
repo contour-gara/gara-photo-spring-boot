@@ -46,7 +46,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.5.0")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.9.2")
+    testImplementation("org.wiremock:wiremock-jetty12:3.10.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
 }
 
