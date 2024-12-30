@@ -11,15 +11,15 @@ import org.contourgara.garaphotospringboot.application.usecase.UploadYesterdayUs
 import org.hamcrest.Matchers.*
 import org.mockito.kotlin.*
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.HttpStatus
+import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 
 @WebMvcTest(controllers = [TweetController::class])
 class TweetControllerTest(
     private val mockMvc: MockMvc,
-    @MockBean private val tweetYesterdayScenario: TweetYesterdayScenario,
-    @MockBean private val uploadYesterdayUseCase: UploadYesterdayUseCase,
+    @MockitoBean private val tweetYesterdayScenario: TweetYesterdayScenario,
+    @MockitoBean private val uploadYesterdayUseCase: UploadYesterdayUseCase,
 ) : WordSpec({
     beforeEach {
         mockMvc(mockMvc)
