@@ -18,7 +18,7 @@ COPY ${JAR_FILE} app.jar
 RUN java -Djarmode=tools -jar app.jar extract --destination app
 RUN java -Dspring.profiles.active=cds -Dspring.context.exit=onRefresh -XX:ArchiveClassesAtExit=app/app.jsa -jar app/app.jar
 
-FROM debian:bookworm-20241111-slim
+FROM debian:bookworm-20250113-slim
 
 WORKDIR /deployments
 RUN apt-get update -y && apt-get install -y curl
