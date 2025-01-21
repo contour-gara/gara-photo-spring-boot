@@ -1,0 +1,32 @@
+services:
+  app-server:
+    image: ghcr.io/contour-gara/gara-photo-app-server:latest
+    ports:
+      - "8080:8080"
+    networks:
+      - gara-photo-nw
+    healthcheck:
+      test: "curl -f http://localhost:8080/actuator/health || exit 1"
+      interval: 5s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+    volumes:
+      - ./photo:/opt/photo
+    environment:
+      SPRING_PROFILES_ACTIVE: prd
+      SPRING_DATASOURCE_URL: jdbc:mysql://gateway01.ap-northeast-1.prod.aws.tidbcloud.com:4000/gara_photo?sslMode=VERIFY_IDENTITY
+      SPRING_DATASOURCE_USERNAME: ${TIDB_USERNAME}
+      SPRING_DATASOURCE_PASSWORD: ${TIDB_PASSWORD}
+      APPLICATION_REPOSITORY: jdbc-client
+      TWITTER_OAUTH1_ACCESS_TOKEN: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN:-oauth1-access-token-dummy}
+      TWITTER_OAUTH1_ACCESS_TOKEN_SECRET: ${GARA_PHOTO_OAUTH1_ACCESS_TOKEN_SECRET:-oauth1-access-token-secret-dummy}
+      TWITTER_API_KEY: ${GARA_PHOTO_API_KEY:-api-key-dummy}
+      TWITTER_API_KEY_SECRET: ${GARA_PHOTO_API_KEY_SECRET:-api-key-secret-dummy}
+      TWITTER_CLIENT_ID: ${GARA_PHOTO_CLIENT_ID:-client-id-dummy}
+      TWITTER_CLIENT_SECRET: ${GARA_PHOTO_CLIENT_SECRET:-client-secret-dummy}
+      TWITTER_REDIRECT_URI: ${GARA_PHOTO_REDIRECT_URI:-http://localhost/dummy}
+
+networks:
+  gara-photo-nw:
+    driver: bridge
