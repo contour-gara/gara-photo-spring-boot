@@ -49,19 +49,19 @@ dependencies {
     implementation(fileTree("lib"))
     implementation("com.h2database:h2:2.3.232")
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:11.2.0")
-    runtimeOnly("org.flywaydb:flyway-mysql:11.2.0")
+    runtimeOnly("org.flywaydb:flyway-core:11.3.2")
+    runtimeOnly("org.flywaydb:flyway-mysql:11.3.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
     testImplementation("io.kotest:kotest-framework-datatest:5.9.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
-    testImplementation("io.rest-assured:rest-assured:5.5.0")
-    testImplementation("io.rest-assured:spring-mock-mvc:5.5.0")
-    testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.5.0")
+    testImplementation("io.rest-assured:rest-assured:5.5.1")
+    testImplementation("io.rest-assured:spring-mock-mvc:5.5.1")
+    testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.5.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.10.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.12.0")
     testImplementation("org.assertj:assertj-db:3.0.0")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
@@ -69,7 +69,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:11.2.0")
+        classpath("org.flywaydb:flyway-mysql:11.3.2")
     }
 }
 
