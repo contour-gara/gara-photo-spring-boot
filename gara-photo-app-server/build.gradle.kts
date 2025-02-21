@@ -23,7 +23,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.2")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.4.3")
     }
 
     configurations
@@ -49,8 +49,8 @@ dependencies {
     implementation(fileTree("lib"))
     implementation("com.h2database:h2:2.3.232")
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:11.3.2")
-    runtimeOnly("org.flywaydb:flyway-mysql:11.3.2")
+    runtimeOnly("org.flywaydb:flyway-core:11.3.3")
+    runtimeOnly("org.flywaydb:flyway-mysql:11.3.3")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
@@ -64,12 +64,12 @@ dependencies {
     testImplementation("org.wiremock:wiremock-jetty12:3.12.0")
     testImplementation("org.assertj:assertj-db:3.0.0")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
-    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.7")
+    detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
 }
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:11.3.2")
+        classpath("org.flywaydb:flyway-mysql:11.3.3")
     }
 }
 
