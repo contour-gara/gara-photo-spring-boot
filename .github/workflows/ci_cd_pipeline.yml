@@ -132,7 +132,7 @@ jobs:
         run: ../gradlew clean build -x test
 
       - name: Upload Dockerfile and jar file
-        uses: actions/upload-artifact@v4.6.0
+        uses: actions/upload-artifact@v4.6.1
         with:
           name: jar-and-Dockerfile
           path: |
@@ -154,7 +154,7 @@ jobs:
           cache: 'gradle'
 
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.1.9
         with:
           name: jar-and-Dockerfile
           path: gara-photo-app-server
@@ -186,7 +186,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v4.1.8
+        uses: actions/download-artifact@v4.1.9
         with:
           name: jar-and-Dockerfile
 
