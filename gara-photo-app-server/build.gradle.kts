@@ -61,7 +61,7 @@ dependencies {
     testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.5.1")
     testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.12.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.12.1")
     testImplementation("org.assertj:assertj-db:3.0.0")
     testImplementation("com.ninja-squad:DbSetup-kotlin:2.1.0")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
