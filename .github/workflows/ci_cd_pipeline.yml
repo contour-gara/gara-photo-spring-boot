@@ -154,7 +154,7 @@ jobs:
           cache: 'gradle'
 
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v4.2.1
+        uses: actions/download-artifact@v4.3.0
         with:
           name: jar-and-Dockerfile
           path: gara-photo-app-server
@@ -186,7 +186,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v4.2.1
+        uses: actions/download-artifact@v4.3.0
         with:
           name: jar-and-Dockerfile
 
