@@ -22,7 +22,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.0")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.3")
     }
 
     configurations
@@ -46,7 +46,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.5.5")
     testImplementation("io.rest-assured:kotlin-extensions:5.5.5")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
-    testImplementation("org.wiremock:wiremock-jetty12:3.13.0")
+    testImplementation("org.wiremock:wiremock-jetty12:3.13.1")
     detektPlugins("io.gitlab.arturbosch.detekt:detekt-formatting:1.23.8")
 }
 
