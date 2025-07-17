@@ -1,4 +1,4 @@
-FROM amazoncorretto:21.0.7-al2023 AS build
+FROM amazoncorretto:21.0.8-al2023 AS build
 
 # カスタム JRE
 WORKDIR /jlink
