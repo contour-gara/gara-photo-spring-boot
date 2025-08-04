@@ -22,7 +22,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.3")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.4")
     }
 
     configurations
