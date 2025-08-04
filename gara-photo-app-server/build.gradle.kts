@@ -59,7 +59,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.5.5")
     testImplementation("io.rest-assured:spring-mock-mvc:5.5.5")
     testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.5.5")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:5.4.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.0.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
     testImplementation("org.wiremock:wiremock-jetty12:3.13.1")
     testImplementation("org.assertj:assertj-db:3.0.0")
