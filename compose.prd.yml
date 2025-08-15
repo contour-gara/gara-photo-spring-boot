@@ -2,7 +2,7 @@ services:
   app-server:
     image: ghcr.io/contour-gara/gara-photo-app-server:latest
     ports:
-      - "8080:8080"
+      - "18080:8080"
     networks:
       - gara-photo-nw
     healthcheck:
