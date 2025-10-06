@@ -23,7 +23,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.5")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.6")
     }
 
     configurations
@@ -43,14 +43,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-jdbc")
     implementation("org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.5")
-    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.19.2")
+    implementation("com.fasterxml.jackson.module:jackson-module-kotlin:2.20.0")
     implementation("org.twitter4j:twitter4j-core:4.0.7")
 //    implementation("io.github.takke:jp.takke.twitter4j-v2:1.4.3")
     implementation(fileTree("lib"))
-    implementation("com.h2database:h2:2.3.232")
+    implementation("com.h2database:h2:2.4.240")
     runtimeOnly("com.mysql:mysql-connector-j")
-    runtimeOnly("org.flywaydb:flyway-core:11.11.2")
-    runtimeOnly("org.flywaydb:flyway-mysql:11.11.2")
+    runtimeOnly("org.flywaydb:flyway-core:11.13.2")
+    runtimeOnly("org.flywaydb:flyway-mysql:11.13.2")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
     testImplementation("io.kotest:kotest-assertions-core:5.9.1")
@@ -59,7 +59,7 @@ dependencies {
     testImplementation("io.rest-assured:rest-assured:5.5.6")
     testImplementation("io.rest-assured:spring-mock-mvc:5.5.6")
     testImplementation("io.rest-assured:spring-mock-mvc-kotlin-extensions:5.5.6")
-    testImplementation("org.mockito.kotlin:mockito-kotlin:6.0.0")
+    testImplementation("org.mockito.kotlin:mockito-kotlin:6.1.0")
     testImplementation("com.github.database-rider:rider-junit5:1.44.0")
     testImplementation("org.wiremock:wiremock-jetty12:3.13.1")
     testImplementation("org.assertj:assertj-db:3.0.0")
@@ -69,7 +69,7 @@ dependencies {
 
 buildscript {
     dependencies {
-        classpath("org.flywaydb:flyway-mysql:11.11.2")
+        classpath("org.flywaydb:flyway-mysql:11.13.2")
     }
 }
 
