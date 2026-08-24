@@ -43,12 +43,12 @@ jobs:
       isDeploy: ${{ steps.filter.outputs.isDeploy }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Filter
         if: ${{ github.event_name == 'push' }}
         id: filter
-        uses: dorny/paths-filter@v3.0.2
+        uses: dorny/paths-filter@v4.0.3
         with:
           filters: |
             isDeploy:
@@ -63,10 +63,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Set up Java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v6.0.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -79,10 +79,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Set up Java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v6.0.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -96,10 +96,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Set up Java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v6.0.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -118,10 +118,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Set up Java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v6.0.0
         with:
           distribution: 'corretto'
           java-version: '21'
@@ -132,7 +132,7 @@ jobs:
         run: ../gradlew clean build -x test
 
       - name: Upload Dockerfile and jar file
-        uses: actions/upload-artifact@v5.0.0
+        uses: actions/upload-artifact@v7.0.1
         with:
           name: jar-and-Dockerfile
           path: |
@@ -144,17 +144,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Set up Java
-        uses: actions/setup-java@v5.0.0
+        uses: actions/setup-java@v6.0.0
         with:
           distribution: 'corretto'
           java-version: '21'
           cache: 'gradle'
 
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: jar-and-Dockerfile
           path: gara-photo-app-server
@@ -171,7 +171,7 @@ jobs:
       tagName: ${{ steps.create_tag.outputs.tagName }}
     steps:
       - name: Checkout
-        uses: actions/checkout@v5.0.0
+        uses: actions/checkout@v7.0.1
 
       - name: Create git tag
         id: create_tag
@@ -186,12 +186,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download Dockerfile and jar file
-        uses: actions/download-artifact@v6.0.0
+        uses: actions/download-artifact@v8.0.1
         with:
           name: jar-and-Dockerfile
 
       - name: Login to GitHub container registry
-        uses: docker/login-action@v3.6.0
+        uses: docker/login-action@v4.6.0
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
