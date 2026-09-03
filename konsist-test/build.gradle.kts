@@ -21,7 +21,7 @@ repositories {
 
 dependencyManagement {
     imports {
-        mavenBom("org.springframework.boot:spring-boot-dependencies:3.5.7")
+        mavenBom("org.springframework.boot:spring-boot-dependencies:4.1.1")
     }
 
     configurations
@@ -38,8 +38,8 @@ dependencyManagement {
 dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-web")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
-    testImplementation("io.kotest:kotest-runner-junit5:5.9.1")
-    testImplementation("io.kotest:kotest-assertions-core:5.9.1")
+    testImplementation("io.kotest:kotest-runner-junit5:6.2.4")
+    testImplementation("io.kotest:kotest-assertions-core:6.2.4")
     testImplementation("io.kotest:kotest-framework-datatest:5.9.1")
     testImplementation("io.kotest.extensions:kotest-extensions-spring:1.3.0")
     testImplementation("com.lemonappdev:konsist:0.17.3")
